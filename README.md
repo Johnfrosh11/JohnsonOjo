@@ -36,7 +36,7 @@ In the `PROJECTS` list there's a commented-out E-commerce template. Copy it once
 
 ## 2. Host it on GitHub Pages (free)
 
-This repo is `Johnfrosh11/JohnsonOjo`, so the site lives at **https://johnfrosh11.github.io/JohnsonOjo/**.
+Live at **https://smilespaysolutions.com** (custom domain set via the `CNAME` file; DNS at Namecheap).
 
 1. Go to **Settings → Pages**, set Source to **Deploy from a branch**, branch **main**, folder **/ (root)**, Save.
 2. Every push to `main` redeploys in 1–2 minutes.
