@@ -8,7 +8,19 @@
 <meta property="og:title" content="Johnson Ojo — Senior Backend Engineer">
 <meta property="og:description" content="Backend systems for banking, e-commerce and SaaS products that can't afford to break.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/profile.jpg">
+<meta property="og:image" content="https://smilespaysolutions.com/assets/profile.jpg">
+<meta property="og:url" content="https://smilespaysolutions.com/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://smilespaysolutions.com/">
+<meta name="keywords" content="backend engineer Nigeria, .NET developer Lagos, e-commerce developer, fintech backend, payment integration, ASP.NET Core freelancer, Azure developer, hire backend engineer">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Johnson Ojo Oluwaseyi","jobTitle":"Senior Backend Engineer",
+ "url":"https://smilespaysolutions.com/","image":"https://smilespaysolutions.com/assets/profile.jpg",
+ "email":"mailto:Johnsonojooluwaseyi@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Lagos","addressCountry":"NG"},
+ "worksFor":{"@type":"Organization","name":"SmilesPay Solutions","url":"https://smilespaysolutions.com/"},
+ "sameAs":["https://www.linkedin.com/in/johnsonojoleadbackendengineer","https://github.com/Johnfrosh11"],
+ "knowsAbout":["ASP.NET Core","C#","SQL Server","Azure","Microservices","Payments","E-commerce","Fintech"]}
+</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b0d10'/><text x='16' y='21' font-family='monospace' font-size='13' font-weight='700' fill='%23ff7a1a' text-anchor='middle'>JO</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,6 +142,89 @@ const EXPERIENCE = [
   { when: "04/2023 — 05/2024", role: "Associate Developer",    org: "Decagon" },
   { when: "2021 — 2023",    role: "Backend Software Engineer", org: "Rotbun Incorporation" }
 ];
+
+/* Teams and platforms you've built for (shown under the hero) */
+const BUILT_FOR = ["Lotus Bank", "Money Master PSB", "BankOne · Qore", "Uridium Technology", "Wragby Solutions", "Decagon"];
+
+/* Certification verification links (Microsoft Learn / Credly). Leave "" to show as plain text. */
+const CERT_LINKS = {
+  "Certified Scrum Developer (CSD)": "",
+  "Google Data Analytics Professional": "",
+  "Microsoft Azure Developer Associate": "",
+  "Microsoft DevOps Engineer Expert (AZ-400)": ""
+};
+
+/* TESTIMONIALS — the section stays hidden until you add at least one REAL quote.
+   Best sources: LinkedIn recommendations, former managers, clients. Ask them first. */
+const TESTIMONIALS = [
+  /* {
+    quote: "Johnson took our broken payment flow and had it stable within a week...",
+    name: "Full Name",
+    title: "Head of Engineering",
+    company: "Company Name",
+    link: "https://www.linkedin.com/in/their-profile"   // optional — lets clients verify
+  }, */
+];
+
+/* Case studies — opened from the "Read case study" button on a project card (matched by title) */
+const CASES = {
+  "Ahead Digital Banking Platform": {
+    client: "Lotus Bank · live digital banking platform",
+    role: "Senior Backend Engineer — owner of 5 microservices",
+    problem: "A live banking platform with real customers was hitting identity-verification outages, card-issuance failures, investment-calculation bugs and an open penetration-test (VAPT) finding set.",
+    did: [
+      "Traced a production BVN/NIN verification outage to its root cause through log analysis and fixed it",
+      "Redesigned SmileID biometric liveness checks into a stateless, mobile-owned flow",
+      "Fixed Blusalt card-issuance failures and built a self-healing recovery flow for orphaned cardholders",
+      "Enforced JWT validation on card endpoints and fixed Mudarabah profit-ratio and liquidation logic",
+      "Built Beneficiary V2 end to end",
+      "Closed the staff-auth VAPT findings: token hashing, audit persistence and injection fixes"
+    ],
+    result: "Verification and card issuance stabilised, investment logic corrected, and a full security audit finding set closed on a live bank."
+  },
+  "wBiz HR — Enterprise HRMS": {
+    client: "Wragby Business Solutions · multi-tenant SaaS",
+    role: "Backend lead",
+    problem: "Organisations needed one secure system for HR, payroll and approvals instead of spreadsheets, with each company's data strictly isolated.",
+    did: [
+      "Architected a multi-tenant platform with JWT-scoped tenant isolation on Azure SQL",
+      "Built JWT (RS256) auth, Azure AD single sign-on and hierarchical RBAC with 200+ permissions",
+      "Delivered 17 HR modules and 350+ APIs: payroll, recruitment, performance, leave, disciplinary",
+      "Engineered a Nigerian payroll engine (PAYE, pension, NHIS) with payslips and approval workflows",
+      "Integrated GTBank GAPS for bulk salary payments with signed requests and audit trails",
+      "Added OWASP-grade security: rate limiting, security headers, SHA-512 signing, full audit logging"
+    ],
+    result: "A complete HR and payroll platform companies can run end to end, from hiring to paying salaries into bank accounts."
+  },
+  "Agent Wallet & Transfer Platform": {
+    client: "Money Master PSB · agent banking",
+    role: "Backend engineer",
+    problem: "Agents needed secure wallets to move money (P2P, inter-bank, cash-out) with correct fees and a full audit trail for compliance.",
+    did: [
+      "Built a 4-layer Clean Architecture .NET 9 backend following SOLID principles",
+      "Implemented PIN security with PBKDF2-SHA256, lockout and constant-time comparison",
+      "Added OTP verification over SMS, email and voice call",
+      "Integrated BankOne core banking and NIP for real-time lookups and inter-bank transfers",
+      "Engineered a fee engine supporting flat, percentage and capped charges per transaction type",
+      "Added Serilog request/response logging for observability and compliance"
+    ],
+    result: "Agents can manage wallets and send money across banks securely, with every transaction auditable."
+  },
+  "Digital Banking & Investment Platform": {
+    client: "Uridium Technology · fintech",
+    role: "Backend engineer",
+    problem: "One platform had to combine digital banking, stock trading and investments, and stay reliable as each part scaled.",
+    did: [
+      "Built 11 microservices behind an Ocelot API gateway, each with its own database",
+      "Designed event-driven communication with Kafka",
+      "Developed onboarding with BVN/NIN and facial biometrics",
+      "Integrated real-time NGX stock trading via Zanibal, plus transfers and bill payments via CoralPay",
+      "Implemented JWT, MFA, biometric login and RBAC with 45+ permissions",
+      "Shipped on Docker and Azure Container Apps with Azure DevOps CI/CD and centralised logging"
+    ],
+    result: "Banking, trading and investing on one loosely coupled platform, deployable and observable in the cloud."
+  }
+};
 </script>
 
 <style>
@@ -321,6 +416,84 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
 .foot nav{display:flex;gap:20px}
 .foot a:hover{color:var(--ink)}
 
+/* built-for strip */
+.built{padding:0 0 56px}
+.built-in{display:flex;align-items:center;gap:20px 36px;flex-wrap:wrap}
+.built-in .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.built-in b{font-size:17px;font-weight:600;color:var(--ink-2);letter-spacing:-.01em;white-space:nowrap}
+
+/* why */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.why .card h3{font-size:18px}
+.why .ic{width:40px;height:40px;border-radius:10px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);display:grid;place-items:center;margin-bottom:20px}
+.why .ic svg{width:20px;height:20px}
+
+/* about */
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px}
+.about-photo{border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1;background:var(--bg-2);border:1px solid var(--line)}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about .card p{color:var(--ink-2);margin-bottom:14px}
+.about .card p strong{color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+.facts div{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--bg-2)}
+.facts span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.facts b{font-size:15px;font-weight:600}
+.inds{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.inds span{font-size:13.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2)}
+
+/* case link + modal */
+.case-btn{font-family:var(--mono);font-size:12.5px;color:var(--accent);background:none;border:0;cursor:pointer;padding:0;text-align:left}
+.case-btn:hover{text-decoration:underline}
+dialog.case{max-width:720px;width:calc(100% - 32px);max-height:88vh;border:1px solid var(--line-2);border-radius:20px;
+  background:var(--panel);color:var(--ink);padding:0;margin:auto}
+dialog.case::backdrop{background:rgba(5,6,8,.7);backdrop-filter:blur(4px)}
+.case-in{padding:36px;overflow:auto}
+.case-in h3{font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;line-height:1.15;margin:10px 0 6px}
+.case-in .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);margin-bottom:24px}
+.case-in h4{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:22px 0 8px}
+.case-in p,.case-in li{color:var(--ink-2);font-size:15.5px}
+.case-in ul{padding-left:18px;display:grid;gap:6px}
+.case-x{position:sticky;top:0;float:right;margin:-16px -16px 0 0}
+.case-cta{margin-top:28px;padding-top:22px;border-top:1px solid var(--line);display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+
+/* testimonials */
+.tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.tq{font-size:17px;line-height:1.55;margin-bottom:22px}
+.tq::before{content:"\201C";display:block;font-size:48px;line-height:.6;color:var(--accent);font-weight:800;margin-bottom:10px}
+.tw b{display:block;font-size:15px}
+.tw small{color:var(--ink-3);font-size:13.5px}
+
+/* faq */
+.faq{max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;gap:16px;font-size:18px;font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:22px;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--ink-2);padding:0 0 22px;max-width:720px}
+
+/* brief form */
+.brief{max-width:720px;margin:36px auto 0;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.brief label{display:grid;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.brief .full{grid-column:1/-1}
+.brief input,.brief select,.brief textarea{font:inherit;font-family:var(--sans);font-size:15px;text-transform:none;letter-spacing:0;color:var(--ink);
+  background:var(--bg);border:1px solid var(--line-2);border-radius:10px;padding:12px 14px;width:100%}
+.brief textarea{min-height:110px;resize:vertical}
+.brief input:focus,.brief select:focus,.brief textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.brief .acts{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.or{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:36px}
+
+/* floating whatsapp */
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:60;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;
+  display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .2s}
+.wa-float:hover{transform:scale(1.07)}
+.wa-float svg{width:28px;height:28px}
+.cert-a{color:inherit;border-bottom:1px dashed var(--ink-3)}
+.cert-a:hover{color:var(--accent);border-color:var(--accent)}
+
+@media (max-width:980px){.why{grid-template-columns:1fr 1fr}.about{grid-template-columns:1fr}.about-photo{max-width:320px}}
+@media (max-width:760px){.why,.brief{grid-template-columns:1fr}.case-in{padding:24px}.facts{grid-template-columns:1fr 1fr}}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
@@ -364,8 +537,8 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
   <div class="wrap nav">
     <a href="#top" class="brand"><span class="brand-mark">JO</span><span id="brandName">Johnson Ojo</span></a>
     <nav class="links" id="links">
-      <a href="#services">Services</a><a href="#process">Process</a><a href="#work">Work</a>
-      <a href="#experience">Experience</a><a href="#contact">Contact</a>
+      <a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a>
+      <a href="#process">Process</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
     </nav>
     <div class="nav-r">
       <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
@@ -415,6 +588,8 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
     </div>
   </div>
 
+  <div class="built"><div class="wrap built-in rv"><span class="lbl">Built for</span><span id="builtFor" style="display:contents"></span></div></div>
+
   <div class="strip"><div class="strip-track" id="strip"></div></div>
 
   <!-- WHO -->
@@ -428,6 +603,26 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
         <div class="card rv"><span class="num">01 / launching</span><h3>You're launching an online store or platform</h3><p>Catalogue, cart, checkout, payments and an admin your team can actually run, built to handle sale-day traffic.</p></div>
         <div class="card rv"><span class="num">02 / breaking</span><h3>Your product is slow, buggy or failing audits</h3><p>Failed payments, outages nobody can trace, security findings piling up. I find the root cause and close it.</p></div>
         <div class="card rv"><span class="num">03 / scaling</span><h3>You're moving money or sensitive data</h3><p>Banking-grade auth, audit trails and payment integrations, from someone who builds them for regulated banks.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="eyebrow">// why work with me</span><h2>What you can count on</h2></div>
+        <p>The same standards I work to inside regulated banks, applied to your product.</p>
+      </div>
+      <div class="why">
+        <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></div>
+          <h3>Direct access to the engineer</h3><p>You talk to the person writing your code. No account managers, no relay of contractors.</p></div>
+        <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg></div>
+          <h3>Bank-grade security by default</h3><p>Encryption, audit trails and access control built in from day one, not patched on after a breach.</p></div>
+        <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+          <h3>Fixed scope, clear milestones</h3><p>A written quote before work starts and progress you can see at every milestone. No surprise invoices.</p></div>
+        <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+          <h3>Documented handover</h3><p>Clean code, API docs and a proper handover, so your team (or the next engineer) is never stuck.</p></div>
       </div>
     </div>
   </section>
@@ -484,6 +679,41 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" style="padding-top:0" hidden>
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="eyebrow">// what people say</span><h2>In their words</h2></div>
+      </div>
+      <div class="tests" id="tests"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="eyebrow">// about</span><h2>Hi, I'm Johnson.</h2></div>
+        <p>Founder of SmilesPay Solutions and a senior backend engineer.</p>
+      </div>
+      <div class="about">
+        <div class="about-photo rv" id="aboutPhoto"></div>
+        <div class="card rv">
+          <p>I've spent the last six years building the systems that sit behind money: <strong>bank accounts, wallets, cards, payroll and payments</strong>. I've done it for a live digital bank, a payment service bank, a core banking platform used by 500+ institutions, and SaaS products used by whole companies.</p>
+          <p>That's the standard I bring to every client project, whether it's an online store that has to take payments safely on sale day, or a fintech MVP that has to pass a security audit before launch.</p>
+          <p>I started out in IT support, which taught me something I still work by: <strong>the job isn't done until the person using it is happy</strong>. So I communicate in plain language, show progress early, and document everything.</p>
+          <div class="facts">
+            <div><span>Based in</span><b>Lagos, Nigeria</b></div>
+            <div><span>Works with</span><b>Clients worldwide</b></div>
+            <div><span>Experience</span><b>6+ years</b></div>
+            <div><span>Education</span><b>B.Sc. Computer Science</b></div>
+          </div>
+          <div class="inds"><span>Banking</span><span>Fintech & payments</span><span>E-commerce</span><span>Investments</span><span>HR & payroll</span><span>Logistics</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- EXPERIENCE -->
   <section id="experience" style="padding-top:0">
     <div class="wrap">
@@ -501,10 +731,10 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
             <span>Microservices</span><span>Clean Architecture</span><span>DDD</span><span>JWT / RBAC</span><span>REST APIs</span><span>Swagger</span>
           </div>
           <div class="certs">
-            <div>Certified Scrum Developer (CSD)<em>certified</em></div>
-            <div>Google Data Analytics Professional<em>certified</em></div>
-            <div>Microsoft Azure Developer Associate<em>certified</em></div>
-            <div>Microsoft DevOps Engineer Expert (AZ-400)<em>certified</em></div>
+            <div><span data-cert>Microsoft Azure Developer Associate</span><em>certified</em></div>
+            <div><span data-cert>Microsoft DevOps Engineer Expert (AZ-400)</span><em>certified</em></div>
+            <div><span data-cert>Certified Scrum Developer (CSD)</span><em>certified</em></div>
+            <div><span data-cert>Google Data Analytics Professional</span><em>certified</em></div>
           </div>
           <div style="margin-top:24px" id="cvWrap"></div>
         </div>
@@ -535,6 +765,26 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="eyebrow">// faq</span><h2>Questions clients ask</h2></div>
+        <p>Something else on your mind? Ask me directly on WhatsApp.</p>
+      </div>
+      <div class="faq rv">
+        <details><summary>How much will my project cost?</summary><p>Every project gets a fixed quote after a short scope call, broken into milestones. You see the full price before any work starts, and you pay as milestones are delivered, not all upfront.</p></details>
+        <details><summary>How long does it take?</summary><p>It depends on scope. After our call you get a written timeline with dated milestones, and regular demo links along the way so you can see it taking shape.</p></details>
+        <details><summary>Can you build the full website, not just the backend?</summary><p>Yes. I deliver complete web applications end to end. My specialty is the hard part underneath: payments, security, data and integrations that have to work every time.</p></details>
+        <details><summary>Can you take over or fix an existing product?</summary><p>Yes. Product rescue is a big part of what I do. I start with an audit of the codebase and production logs, tell you plainly what's wrong, then fix it in priority order.</p></details>
+        <details><summary>Which payment providers can you integrate?</summary><p>I've integrated bank and payment rails including NIP inter-bank transfers, CoralPay, GTBank GAPS bulk payments and core banking systems. For online stores I set up the gateway that fits your market, such as Paystack, Flutterwave or Stripe.</p></details>
+        <details><summary>Will you sign an NDA? Who owns the code?</summary><p>Yes, I'm happy to sign an NDA, and much of my work is confidential. You own the code and everything built for you once the project is paid in full.</p></details>
+        <details><summary>Do you work with clients outside Nigeria?</summary><p>Yes. I work remotely from Lagos (WAT, UTC+1), which overlaps fully with UK and European working hours and partly with the US.</p></details>
+        <details><summary>What happens after launch?</summary><p>You get documentation and a proper handover, plus a support window after delivery for fixes. Ongoing maintenance and new features can be agreed separately.</p></details>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact" style="padding-top:0">
     <div class="wrap">
@@ -551,10 +801,40 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
             Send an email</a>
           <a class="btn btn-ghost" id="bookBtn" target="_blank" rel="noopener" style="display:none">Book a call</a>
         </div>
+        <p class="or">— or send a quick project brief —</p>
+        <form class="brief" id="brief">
+          <label>Your name<input name="name" required autocomplete="name"></label>
+          <label>Company (optional)<input name="company" autocomplete="organization"></label>
+          <label>What do you need?
+            <select name="type">
+              <option>An online store / e-commerce site</option>
+              <option>A fintech or payments product</option>
+              <option>A SaaS or business system</option>
+              <option>Fix or improve an existing product</option>
+              <option>Something else</option>
+            </select></label>
+          <label>When do you need it?
+            <select name="when">
+              <option>As soon as possible</option>
+              <option>Within 1–3 months</option>
+              <option>Flexible</option>
+            </select></label>
+          <label class="full">Tell me about it<textarea name="msg" placeholder="What are you building or what's broken? Any links help."></textarea></label>
+          <div class="acts">
+            <button class="btn btn-primary" type="submit" data-via="wa">Send via WhatsApp</button>
+            <button class="btn btn-ghost" type="submit" data-via="mail">Send via email</button>
+          </div>
+        </form>
       </div>
     </div>
   </section>
 </main>
+
+<dialog class="case" id="caseDlg"><div class="case-in" id="caseBody"></div></dialog>
+
+<a class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5v-.5c0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.8.6-.1 1.8-.7 2-1.5.2-.7.2-1.3.2-1.5-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8m8.4-18.2A11.8 11.8 0 0 0 1.7 17.9L0 24l6.3-1.7A11.8 11.8 0 0 0 23.8 12c0-3.2-1.2-6.1-3.4-8.4"/></svg>
+</a>
 
 <footer>
   <div class="wrap foot">
@@ -637,6 +917,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
         <h3>${esc(p.title)}</h3>
         <p class="scope">${esc(p.scope)}</p>
         <div class="outcome">${esc(p.outcome)}</div>
+        ${CASES[p.title] ? `<button class="case-btn" data-case="${esc(p.title)}">Read case study →</button>` : ""}
         <div class="proj-foot">
           <div class="stack">${(p.stack||[]).map(s=>`<span>${esc(s)}</span>`).join("")}</div>
           ${p.url
@@ -650,6 +931,64 @@ footer{border-top:1px solid var(--line);padding:32px 0;position:relative;z-index
     active = b.dataset.c; drawFilters(); drawWork();
   });
   drawFilters(); drawWork();
+
+  // built for
+  $("#builtFor").innerHTML = BUILT_FOR.map(b => `<b>${esc(b)}</b>`).join("");
+
+  // about photo
+  const ap = new Image(); ap.alt = P.name; ap.onload = () => $("#aboutPhoto").append(ap); ap.src = P.photo;
+
+  // cert links
+  document.querySelectorAll("[data-cert]").forEach(el => {
+    const u = CERT_LINKS[el.textContent.trim()];
+    if (u) el.innerHTML = `<a class="cert-a" href="${esc(u)}" target="_blank" rel="noopener">${esc(el.textContent)} ↗</a>`;
+  });
+
+  // testimonials (hidden until real ones exist)
+  if (TESTIMONIALS.length){
+    $("#testimonials").hidden = false;
+    $("#tests").innerHTML = TESTIMONIALS.map(t => `
+      <figure class="card rv in"><blockquote class="tq">${esc(t.quote)}</blockquote>
+        <figcaption class="tw"><b>${t.link?`<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)} ↗</a>`:esc(t.name)}</b>
+        <small>${esc(t.title)}${t.company?`, ${esc(t.company)}`:""}</small></figcaption></figure>`).join("");
+  }
+
+  // case study modal
+  const dlg = $("#caseDlg");
+  $("#workGrid").addEventListener("click", e => {
+    const b = e.target.closest("[data-case]"); if (!b) return;
+    const c = CASES[b.dataset.case], pr = PROJECTS.find(x => x.title === b.dataset.case);
+    $("#caseBody").innerHTML = `
+      <button class="icon-btn case-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <span class="eyebrow">// case study · ${esc(pr.category)}</span>
+      <h3>${esc(pr.title)}</h3>
+      <div class="meta">${esc(c.client)}<br>${esc(c.role)}</div>
+      <h4>The problem</h4><p>${esc(c.problem)}</p>
+      <h4>What I did</h4><ul>${c.did.map(d=>`<li>${esc(d)}</li>`).join("")}</ul>
+      <h4>The result</h4><p>${esc(c.result)}</p>
+      <h4>Stack</h4><p>${(pr.stack||[]).map(esc).join(" · ")}</p>
+      <div class="case-cta"><span class="muted">Need something like this?</span>
+        <a class="btn btn-primary btn-sm" href="#contact" data-close>Start a project →</a></div>`;
+    dlg.showModal();
+  });
+  dlg.addEventListener("click", e => { if (e.target === dlg || e.target.closest("[data-close]")) dlg.close(); });
+
+  // floating whatsapp
+  const waBase = `https://wa.me/${P.whatsapp}`;
+  $("#waFloat").href = `${waBase}?text=${encodeURIComponent("Hi Johnson, I saw your portfolio and I'd like to talk about a project.")}`;
+
+  // project brief form
+  let via = "wa";
+  $("#brief").addEventListener("click", e => { const b = e.target.closest("[data-via]"); if (b) via = b.dataset.via; });
+  $("#brief").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const txt = `Hi Johnson, I found you on smilespaysolutions.com.\n\n` +
+      `Name: ${f.get("name")}\n` + (f.get("company") ? `Company: ${f.get("company")}\n` : "") +
+      `Need: ${f.get("type")}\nTimeline: ${f.get("when")}\n\n${f.get("msg") || ""}`;
+    if (via === "mail") location.href = `mailto:${P.email}?subject=${encodeURIComponent("Project brief: " + f.get("type"))}&body=${encodeURIComponent(txt)}`;
+    else window.open(`${waBase}?text=${encodeURIComponent(txt)}`, "_blank", "noopener");
+  });
 
   // reveal on scroll
   const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }), {threshold:.12});
