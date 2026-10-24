@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Differential Equations Notebook</title>
+<meta name="description" content="Step-by-step ODE notes in a handwritten-notebook style: first-order methods, second-order linear equations, Cauchy–Euler and the D-operator, with worked examples and practice questions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Kalam:wght@300;400;700&display=swap">
+<style>*, *::before, *::after { box-sizing: border-box; } body { margin: 0; }</style>
+<style>
+/* Layout: one long sheet of maths quad-ruled paper with a red margin; blue ink, red pen for key results, green for checks. */
+:root {
+  --paper: #fbfaf4;
+  --grid: rgba(60, 110, 170, 0.13);
+  --margin: rgba(205, 60, 60, 0.55);
+  --ink: #1d3a8a;
+  --ink-soft: #4a5f9c;
+  --red: #c0322b;
+  --green: #1f7a46;
+  --pencil: #6b6b72;
+  --hl: rgba(255, 228, 92, 0.55);
+  --box-bg: rgba(255, 255, 255, 0.55);
+  --hand: "Kalam", "Segoe Print", "Comic Sans MS", cursive;
+  --title: "Caveat", "Kalam", "Segoe Print", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #18202b; --grid: rgba(150, 190, 240, 0.08); --margin: rgba(240, 110, 110, 0.45);
+    --ink: #cfe0ff; --ink-soft: #9fb4dc; --red: #ff8a80; --green: #7fd8a4; --pencil: #a2a8b4;
+    --hl: rgba(255, 214, 64, 0.22); --box-bg: rgba(255, 255, 255, 0.03); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #18202b; --grid: rgba(150, 190, 240, 0.08); --margin: rgba(240, 110, 110, 0.45);
+  --ink: #cfe0ff; --ink-soft: #9fb4dc; --red: #ff8a80; --green: #7fd8a4; --pencil: #a2a8b4;
+  --hl: rgba(255, 214, 64, 0.22); --box-bg: rgba(255, 255, 255, 0.03); color-scheme: dark;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: 1.12rem;
+  line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.sheet {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding-block: 2rem 4rem;
+  padding-left: 2.2rem;
+  border-left: 2px solid var(--margin);
+  position: relative;
+}
+@media (max-width: 560px) { .sheet { padding-left: 1rem; } body { font-size: 1.04rem; } }
+h1, h2, h3, h4 { font-family: var(--title); font-weight: 700; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.6rem, 8vw, 3.6rem); color: var(--ink); }
+h2 { font-size: clamp(2.1rem, 6vw, 2.7rem); color: var(--red); margin-top: 3.2rem; }
+h2 .num { display: inline-block; border: 2.5px solid var(--red); border-radius: 50% 45% 55% 48%; padding: 0 .55rem; margin-right: .4rem; }
+h3 { font-size: 1.95rem; color: var(--ink); margin-top: 2.4rem; }
+h3 .num { color: var(--red); margin-right: .35rem; }
+h4 { font-size: 1.5rem; color: var(--ink-soft); margin-top: 1.4rem; }
+p { margin: .7rem 0; max-width: 65ch; }
+ul, ol { margin: .5rem 0; padding-left: 1.4rem; }
+li { margin: .25rem 0; }
+a { color: var(--ink); }
+a:focus-visible, summary:focus-visible { outline: 2px dashed var(--red); outline-offset: 3px; }
+.u { text-decoration: underline wavy var(--red); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.hl { background: linear-gradient(100deg, transparent 2%, var(--hl) 6%, var(--hl) 94%, transparent 98%); padding: 0 .2rem; }
+.red { color: var(--red); }
+.green { color: var(--green); }
+.pencil { color: var(--pencil); }
+.date { font-family: var(--title); color: var(--pencil); font-size: 1.35rem; }
+.lede { font-size: 1.2rem; }
+.box {
+  border: 2.5px solid var(--red);
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  padding: .8rem 1.2rem;
+  margin: 1.1rem 0;
+  background: var(--box-bg);
+  overflow-x: auto;
+}
+.box .tag { font-family: var(--title); font-size: 1.35rem; color: var(--red); font-weight: 700; }
+.eg {
+  margin: 1.3rem 0;
+  padding: .3rem 0 .3rem 1rem;
+  border-left: 3px double var(--ink-soft);
+  overflow-x: auto;
+}
+.eg > .tag {
+  font-family: var(--title); font-weight: 700; font-size: 1.45rem; color: var(--ink);
+  text-decoration: underline; text-underline-offset: 5px;
+}
+.step { margin: .45rem 0; }
+.step b { color: var(--red); font-weight: 700; }
+.check { color: var(--green); }
+.note {
+  color: var(--pencil);
+  font-style: italic;
+  border: 1.5px dashed var(--pencil);
+  border-radius: 12px 4px 14px 6px;
+  padding: .5rem .9rem;
+  margin: 1rem 0;
+  transform: rotate(-.4deg);
+}
+.contents { margin-top: 1.4rem; }
+.contents ol { list-style: none; padding-left: 0; }
+.contents > ol > li { margin-top: .7rem; }
+.contents > ol > li > a { font-family: var(--title); font-size: 1.55rem; font-weight: 700; color: var(--red); text-decoration: none; }
+.contents ol ol { padding-left: 1.6rem; }
+.contents ol ol a { text-decoration: none; border-bottom: 1px dotted var(--ink-soft); }
+.tbl-wrap { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; font-size: 1.02rem; min-width: 30rem; }
+th, td { border: 1.5px solid var(--ink-soft); padding: .35rem .7rem; text-align: left; vertical-align: top; }
+th { font-family: var(--title); font-size: 1.3rem; color: var(--red); }
+details.practice {
+  margin: 1.6rem 0;
+  border: 2px solid var(--green);
+  border-radius: 14px 30px 12px 28px / 26px 12px 30px 14px;
+  padding: .6rem 1.1rem;
+  overflow-x: auto;
+}
+details.practice summary { cursor: pointer; font-family: var(--title); font-size: 1.55rem; font-weight: 700; color: var(--green); }
+details.practice ol { padding-left: 1.4rem; }
+.ans { color: var(--green); }
+.flow { list-style: none; padding-left: 0; }
+.flow li { padding-left: 1.6rem; position: relative; }
+.flow li::before { content: "→"; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+hr.scribble { border: 0; height: 12px; margin: 2.5rem 0 0; background: radial-gradient(circle at 6px 6px, var(--ink-soft) 1.3px, transparent 1.6px) 0 0 / 22px 12px repeat-x; opacity: .6; }
+mjx-container { color: inherit; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: .15rem 0; }
+.foot { margin-top: 3rem; color: var(--pencil); font-family: var(--title); font-size: 1.35rem; }
+</style>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] },
+  svg: { fontCache: "global" }
+};
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<main class="sheet">
+
+<p class="date">MTH notes · Ordinary Differential Equations</p>
+<h1>Differential Equations</h1>
+<p class="lede">Step-by-step notes following the book's contents. Each topic has the idea, the method in numbered steps, worked examples, and practice questions with answers at the end of each chapter.</p>
+<p class="pencil">Tip: try every worked example yourself first, then compare with my lines.</p>
+
+<nav class="contents" aria-label="Contents">
+<ol>
+  <li><a href="#ch1">1 · Introduction to Differential Equations</a>
+    <ol>
+      <li><a href="#s1-1">1.1 Basic Concepts</a></li>
+      <li><a href="#s1-2">1.2 Classification of ODEs</a></li>
+      <li><a href="#s1-3">1.3 Examples from Science and Engineering</a></li>
+      <li><a href="#s1-4">1.4 Formation of Differential Equations</a></li>
+    </ol></li>
+  <li><a href="#ch2">2 · Solution of First Order DEs</a>
+    <ol>
+      <li><a href="#s2-1">2.1 Direct Integration</a></li>
+      <li><a href="#s2-2">2.2 Variable Separable Equations</a></li>
+      <li><a href="#s2-3">2.3 Homogeneous Equations</a></li>
+      <li><a href="#s2-4">2.4 Exact Equations</a></li>
+      <li><a href="#s2-5">2.5 Linear Equations</a></li>
+      <li><a href="#s2-6">2.6 Bernoulli's Equation</a></li>
+      <li><a href="#s2-7">2.7 Reducible Equations</a></li>
+      <li><a href="#s2-8">2.8 Applications</a></li>
+    </ol></li>
+  <li><a href="#ch3">3 · Second Order DEs</a>
+    <ol>
+      <li><a href="#s3-1">3.1 Constant Coefficients</a></li>
+      <li><a href="#s3-2">3.2 Non-Homogeneous Equations (3.2.1 Undetermined Coefficients, 3.2.2 Variation of Parameters)</a></li>
+      <li><a href="#s3-3">3.3 Cauchy–Euler Equations</a></li>
+      <li><a href="#s3-4">3.4 Differential Operator</a></li>
+    </ol></li>
+</ol>
+</nav>
+
+<!-- ======================= CHAPTER 1 ======================= -->
+<hr class="scribble">
+<h2 id="ch1"><span class="num">1</span>Introduction to Differential Equations</h2>
+
+<h3 id="s1-1"><span class="num">1.1</span>Basic Concepts</h3>
+<p>A <span class="u">differential equation (DE)</span> is an equation that contains derivatives of an unknown function.</p>
+<p>Examples:
+\[ \frac{dy}{dx} = 3x^2, \qquad y'' + 4y = 0, \qquad \frac{\partial u}{\partial t} = k\frac{\partial^2 u}{\partial x^2} \]</p>
+<ul>
+  <li><b>ODE</b> (ordinary DE): one independent variable, so only ordinary derivatives like \(dy/dx\). <span class="pencil">This whole course.</span></li>
+  <li><b>PDE</b> (partial DE): two or more independent variables, so partial derivatives like \(\partial u/\partial t\).</li>
+</ul>
+
+<h4>Order and degree</h4>
+<div class="box">
+  <span class="tag">Definitions</span>
+  <p><b>Order</b> = the order of the highest derivative in the equation.</p>
+  <p><b>Degree</b> = the power of that highest derivative, <i>after</i> the equation has been cleared of radicals and fractions in the derivatives.</p>
+</div>
+
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>\( y'' + 3y' + 2y = 0 \): highest derivative is \(y''\), power 1. <span class="red">Order 2, degree 1.</span></p>
+  <p>\( (y'')^3 + (y')^5 + y = x \): highest derivative \(y''\), raised to power 3. <span class="red">Order 2, degree 3.</span> <span class="pencil">(The 5 on \(y'\) doesn't matter.)</span></p>
+  <p>\( \sqrt{1 + (y')^2} = y'' \): first square both sides to remove the root:
+  \[ 1 + (y')^2 = (y'')^2 \]
+  <span class="red">Order 2, degree 2.</span></p>
+</div>
+
+<h4>Solutions</h4>
+<ul>
+  <li>A <b>solution</b> is a function \(y = \phi(x)\) that makes the equation true when substituted in.</li>
+  <li><b>General solution</b>: contains arbitrary constants (\(n\) constants for an \(n\)th-order ODE).</li>
+  <li><b>Particular solution</b>: constants fixed by given conditions.</li>
+  <li><b>Singular solution</b>: a solution that cannot be got from the general solution by choosing constants.</li>
+  <li><b>Initial value problem (IVP)</b>: DE + conditions at one point, e.g. \(y(0) = 1,\ y'(0) = 2\).</li>
+</ul>
+
+<div class="eg">
+  <span class="tag">Example 2 · verify a solution</span>
+  <p>Show that \(y = e^{-x}\) solves \(y'' + 3y' + 2y = 0\).</p>
+  <p class="step"><b>Step 1.</b> Differentiate: \(y' = -e^{-x}\), \(y'' = e^{-x}\).</p>
+  <p class="step"><b>Step 2.</b> Substitute: \(e^{-x} + 3(-e^{-x}) + 2e^{-x} = (1 - 3 + 2)e^{-x} = 0\). <span class="check">✓ It is a solution.</span></p>
+</div>
+
+<h3 id="s1-2"><span class="num">1.2</span>Classification of ODEs</h3>
+<p>An \(n\)th-order ODE is <span class="u">linear</span> if it can be written as</p>
+\[ a_n(x)\,y^{(n)} + a_{n-1}(x)\,y^{(n-1)} + \cdots + a_1(x)\,y' + a_0(x)\,y = g(x). \]
+<div class="box">
+  <span class="tag">Linear means</span>
+  <ol>
+    <li>\(y\) and all its derivatives appear to power 1 only,</li>
+    <li>no products like \(y\,y'\) or \((y')^2\),</li>
+    <li>no functions of \(y\) like \(\sin y\), \(e^y\), \(\sqrt{y}\),</li>
+    <li>the coefficients \(a_k\) depend on \(x\) only.</li>
+  </ol>
+  <p>Otherwise it is <b>non-linear</b>.</p>
+</div>
+<p>More labels you'll see:</p>
+<ul>
+  <li><b>Homogeneous (linear)</b>: \(g(x) = 0\). <b>Non-homogeneous</b>: \(g(x) \ne 0\).</li>
+  <li><b>Constant coefficients</b>: every \(a_k\) is a number. <b>Variable coefficients</b>: some \(a_k\) depend on \(x\).</li>
+  <li><b>Autonomous</b>: \(x\) does not appear explicitly, e.g. \(y' = y(1 - y)\).</li>
+</ul>
+<div class="eg">
+  <span class="tag">Example · classify</span>
+  <div class="tbl-wrap"><table>
+    <tr><th>Equation</th><th>Order</th><th>Linear?</th><th>Reason</th></tr>
+    <tr><td>\(y'' + x y = \sin x\)</td><td>2</td><td class="green">linear, non-homog.</td><td>\(x\) in a coefficient is fine</td></tr>
+    <tr><td>\(y\,y' = x\)</td><td>1</td><td class="red">non-linear</td><td>product \(y\,y'\)</td></tr>
+    <tr><td>\(y'' + \sin y = 0\)</td><td>2</td><td class="red">non-linear</td><td>\(\sin y\) (pendulum)</td></tr>
+    <tr><td>\(x^2 y'' - 2xy' + 2y = 0\)</td><td>2</td><td class="green">linear, homog.</td><td>variable coefficients</td></tr>
+    <tr><td>\(y''' + (y')^2 = 0\)</td><td>3</td><td class="red">non-linear</td><td>\((y')^2\)</td></tr>
+  </table></div>
+</div>
+
+<h3 id="s1-3"><span class="num">1.3</span>Examples from Science and Engineering</h3>
+<p>DEs appear whenever a <span class="hl">rate of change</span> depends on the current state.</p>
+<div class="tbl-wrap"><table>
+  <tr><th>Model</th><th>Equation</th><th>Meaning</th></tr>
+  <tr><td>Population growth</td><td>\(\dfrac{dP}{dt} = kP\)</td><td>growth rate ∝ population</td></tr>
+  <tr><td>Radioactive decay</td><td>\(\dfrac{dN}{dt} = -\lambda N\)</td><td>decay rate ∝ amount left</td></tr>
+  <tr><td>Newton's law of cooling</td><td>\(\dfrac{dT}{dt} = -k(T - T_s)\)</td><td>cooling rate ∝ temperature difference</td></tr>
+  <tr><td>Logistic growth</td><td>\(\dfrac{dP}{dt} = rP\left(1 - \dfrac{P}{K}\right)\)</td><td>growth limited by capacity \(K\)</td></tr>
+  <tr><td>RL circuit</td><td>\(L\dfrac{di}{dt} + Ri = E(t)\)</td><td>Kirchhoff's voltage law</td></tr>
+  <tr><td>Spring–mass system</td><td>\(m x'' + c x' + k x = F(t)\)</td><td>Newton's 2nd law</td></tr>
+  <tr><td>Simple pendulum</td><td>\(\theta'' + \dfrac{g}{l}\sin\theta = 0\)</td><td>non-linear; \(\sin\theta \approx \theta\) for small swings</td></tr>
+</table></div>
+<p class="pencil">We solve several of these in 2.8.</p>
+
+<h3 id="s1-4"><span class="num">1.4</span>Formation of Differential Equations</h3>
+<p>Given a family of curves with arbitrary constants, we form its DE by <span class="u">eliminating the constants</span>.</p>
+<div class="box">
+  <span class="tag">Method</span>
+  <ol>
+    <li>Count the arbitrary constants, say \(n\).</li>
+    <li>Differentiate the equation \(n\) times.</li>
+    <li>Use the \(n + 1\) equations to eliminate all constants.</li>
+  </ol>
+  <p>Result: a DE of <b>order \(n\)</b>.</p>
+</div>
+
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>Form the DE of \(y = Ax + A^2\).</p>
+  <p class="step"><b>Step 1.</b> One constant, so differentiate once: \(y' = A\).</p>
+  <p class="step"><b>Step 2.</b> Replace \(A\) by \(y'\): \[ \boxed{\,y = x y' + (y')^2\,} \]</p>
+  <p class="pencil">(This is a Clairaut equation, order 1.)</p>
+</div>
+
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>Form the DE of \(y = Ae^{2x} + Be^{-x}\).</p>
+  <p class="step"><b>Step 1.</b> Two constants, so differentiate twice:
+  \[ y' = 2Ae^{2x} - Be^{-x}, \qquad y'' = 4Ae^{2x} + Be^{-x}. \]</p>
+  <p class="step"><b>Step 2.</b> Subtract: \(y'' - y' = 2Ae^{2x} + 2Be^{-x} = 2y\).</p>
+  <p class="step"><b>Step 3.</b> \[ \boxed{\,y'' - y' - 2y = 0\,} \]</p>
+  <p class="check">Check: roots of \(m^2 - m - 2 = 0\) are \(2, -1\), which match \(e^{2x}, e^{-x}\). ✓ (You will see why in 3.1.)</p>
+</div>
+
+<div class="eg">
+  <span class="tag">Example 3</span>
+  <p>Form the DE of all circles centred at the origin, \(x^2 + y^2 = r^2\).</p>
+  <p class="step"><b>Step 1.</b> One constant \(r\). Differentiate: \(2x + 2y\,y' = 0\).</p>
+  <p class="step"><b>Step 2.</b> \[ \boxed{\,x + y\dfrac{dy}{dx} = 0\,} \]</p>
+</div>
+
+<details class="practice">
+  <summary>Practice · Chapter 1 (tap for questions and answers)</summary>
+  <ol>
+    <li>State the order and degree of \((y''')^2 + 3(y')^4 - y = 0\). <br><span class="ans">Answer: order 3, degree 2.</span></li>
+    <li>Form the DE of \(y = A\cos x + B\sin x\). <br><span class="ans">Answer: \(y'' + y = 0\).</span></li>
+    <li>Verify that \(y = xe^x\) solves \(y'' - 2y' + y = 0\). <br><span class="ans">\(y' = (1+x)e^x,\ y'' = (2+x)e^x\); \((2 + x) - 2(1 + x) + x = 0\). ✓</span></li>
+    <li>Is \(y\,y'' + x = 0\) linear? <br><span class="ans">No, because of the product \(y\,y''\).</span></li>
+    <li>Form the DE of \(y = Ce^{3x}\). <br><span class="ans">\(y' = 3y\).</span></li>
+  </ol>
+</details>
+
+<!-- ======================= CHAPTER 2 ======================= -->
+<hr class="scribble">
+<h2 id="ch2"><span class="num">2</span>Solution of First Order Differential Equations</h2>
+<p>A first-order ODE has the form \(\dfrac{dy}{dx} = f(x, y)\), or \(M(x,y)\,dx + N(x,y)\,dy = 0\).</p>
+<div class="box">
+  <span class="tag">Which method? Check in this order</span>
+  <ul class="flow">
+    <li>Only \(x\) on the right, \(y' = f(x)\)? Use <b>direct integration</b> (2.1).</li>
+    <li>Can you split it as \(g(x)\,h(y)\)? Use <b>separation of variables</b> (2.2).</li>
+    <li>Is it a function of \(y/x\) only? Use <b>homogeneous</b>, \(y = vx\) (2.3).</li>
+    <li>Is \(M_y = N_x\)? Use <b>exact</b> (2.4).</li>
+    <li>Is it \(y' + P(x)y = Q(x)\)? Use <b>linear</b>, integrating factor (2.5).</li>
+    <li>Is it \(y' + P(x)y = Q(x)y^n\)? Use <b>Bernoulli</b> (2.6).</li>
+    <li>None of these? Try a substitution that <b>reduces</b> it (2.7).</li>
+  </ul>
+</div>
+
+<h3 id="s2-1"><span class="num">2.1</span>Direct Integration</h3>
+<p>If \(\dfrac{dy}{dx} = f(x)\), integrate both sides: \(y = \displaystyle\int f(x)\,dx + C\).</p>
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>Solve \(\dfrac{dy}{dx} = 3x^2 + e^x\), \(y(0) = 2\).</p>
+  <p class="step"><b>Step 1.</b> Integrate: \(y = x^3 + e^x + C\).</p>
+  <p class="step"><b>Step 2.</b> Use \(y(0) = 2\): \(2 = 0 + 1 + C \Rightarrow C = 1\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = x^3 + e^x + 1}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2 · second order</span>
+  <p>Solve \(y'' = 6x\).</p>
+  <p class="step"><b>Step 1.</b> Integrate once: \(y' = 3x^2 + C_1\).</p>
+  <p class="step"><b>Step 2.</b> Integrate again: \(\boxed{y = x^3 + C_1x + C_2}\)</p>
+  <p class="pencil">Two integrations give two constants, matching order 2.</p>
+</div>
+
+<h3 id="s2-2"><span class="num">2.2</span>Variable Separable Equations</h3>
+<div class="box">
+  <span class="tag">Form</span>
+  \[ \frac{dy}{dx} = g(x)\,h(y) \]
+  <ol>
+    <li>Separate: \(\dfrac{dy}{h(y)} = g(x)\,dx\) (all \(y\) on the left, all \(x\) on the right).</li>
+    <li>Integrate both sides; put <b>one</b> constant \(C\) on one side.</li>
+    <li>Solve for \(y\) if you can.</li>
+  </ol>
+</div>
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>Solve \(\dfrac{dy}{dx} = xy\).</p>
+  <p class="step"><b>Step 1.</b> \(\dfrac{dy}{y} = x\,dx\)</p>
+  <p class="step"><b>Step 2.</b> \(\ln|y| = \dfrac{x^2}{2} + C\)</p>
+  <p class="step"><b>Step 3.</b> \(|y| = e^{C}e^{x^2/2}\), so \(\boxed{y = Ae^{x^2/2}}\) with \(A = \pm e^C\).</p>
+  <p class="pencil">\(y = 0\) is also a solution (it was lost when dividing by \(y\)); it is covered by \(A = 0\).</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>Solve \(\dfrac{dy}{dx} = \dfrac{1 + y^2}{1 + x^2}\).</p>
+  <p class="step"><b>Step 1.</b> \(\dfrac{dy}{1 + y^2} = \dfrac{dx}{1 + x^2}\)</p>
+  <p class="step"><b>Step 2.</b> \(\boxed{\tan^{-1} y = \tan^{-1} x + C}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3 · IVP</span>
+  <p>Solve \(\dfrac{dy}{dx} = -\dfrac{x}{y}\), \(y(0) = 3\).</p>
+  <p class="step"><b>Step 1.</b> \(y\,dy = -x\,dx\)</p>
+  <p class="step"><b>Step 2.</b> \(\dfrac{y^2}{2} = -\dfrac{x^2}{2} + C \Rightarrow x^2 + y^2 = 2C\)</p>
+  <p class="step"><b>Step 3.</b> At \((0, 3)\): \(9 = 2C\). <b>Answer</b> \(\boxed{x^2 + y^2 = 9}\), a circle of radius 3.</p>
+</div>
+
+<h3 id="s2-3"><span class="num">2.3</span>Homogeneous Differential Equations</h3>
+<p>\(f(x,y)\) is <span class="u">homogeneous of degree \(n\)</span> if \(f(tx, ty) = t^n f(x,y)\). The equation \(\dfrac{dy}{dx} = f(x,y)\) is homogeneous if \(f(tx,ty) = f(x,y)\), i.e. \(f\) is really a function of \(\dfrac{y}{x}\).</p>
+<div class="box">
+  <span class="tag">Method: put \(y = vx\)</span>
+  <ol>
+    <li>Let \(y = vx\), so \(\dfrac{dy}{dx} = v + x\dfrac{dv}{dx}\).</li>
+    <li>Substitute. The \(x\)'s cancel on the right side.</li>
+    <li>The result is <b>separable</b> in \(v\) and \(x\). Solve it.</li>
+    <li>Put back \(v = \dfrac{y}{x}\).</li>
+  </ol>
+</div>
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>Solve \(\dfrac{dy}{dx} = \dfrac{x^2 + y^2}{xy}\).</p>
+  <p class="step"><b>Check.</b> \(\dfrac{t^2x^2 + t^2y^2}{t^2xy} = \dfrac{x^2 + y^2}{xy}\), so it is homogeneous. ✓</p>
+  <p class="step"><b>Step 1.</b> \(y = vx\): \(\ v + x\dfrac{dv}{dx} = \dfrac{x^2 + v^2x^2}{vx^2} = \dfrac{1 + v^2}{v} = \dfrac{1}{v} + v\)</p>
+  <p class="step"><b>Step 2.</b> \(x\dfrac{dv}{dx} = \dfrac{1}{v} \Rightarrow v\,dv = \dfrac{dx}{x}\)</p>
+  <p class="step"><b>Step 3.</b> \(\dfrac{v^2}{2} = \ln|x| + C\)</p>
+  <p class="step"><b>Step 4.</b> \(v = y/x\): \(\boxed{y^2 = 2x^2\left(\ln|x| + C\right)}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>Solve \(\dfrac{dy}{dx} = \dfrac{x + y}{x}\).</p>
+  <p class="step"><b>Step 1.</b> \(v + xv' = 1 + v \Rightarrow xv' = 1\)</p>
+  <p class="step"><b>Step 2.</b> \(dv = \dfrac{dx}{x} \Rightarrow v = \ln|x| + C\)</p>
+  <p class="step"><b>Step 3.</b> \(\boxed{y = x\ln|x| + Cx}\)</p>
+  <p class="pencil">This one is also linear (\(y' - y/x = 1\)). Many equations fit more than one method.</p>
+</div>
+
+<h3 id="s2-4"><span class="num">2.4</span>Exact Differential Equations</h3>
+<p>\(M\,dx + N\,dy = 0\) is <span class="u">exact</span> if there is a function \(F(x,y)\) with \(dF = M\,dx + N\,dy\). The solution is then \(F(x,y) = C\).</p>
+<div class="box">
+  <span class="tag">Test and method</span>
+  \[ \text{Exact} \iff \frac{\partial M}{\partial y} = \frac{\partial N}{\partial x} \]
+  <ol>
+    <li>Check \(M_y = N_x\).</li>
+    <li>Integrate \(M\) with respect to \(x\) (holding \(y\) constant): \(F = \int M\,dx + g(y)\).</li>
+    <li>Differentiate \(F\) with respect to \(y\) and set it equal to \(N\). This gives \(g'(y)\).</li>
+    <li>Integrate to get \(g(y)\). Write \(F(x,y) = C\).</li>
+  </ol>
+</div>
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>Solve \((2xy + 3)\,dx + (x^2 + 4y)\,dy = 0\).</p>
+  <p class="step"><b>Step 1.</b> \(M_y = 2x,\ N_x = 2x\). Equal, so exact. ✓</p>
+  <p class="step"><b>Step 2.</b> \(F = \int (2xy + 3)\,dx = x^2y + 3x + g(y)\)</p>
+  <p class="step"><b>Step 3.</b> \(F_y = x^2 + g'(y) = x^2 + 4y \Rightarrow g'(y) = 4y\)</p>
+  <p class="step"><b>Step 4.</b> \(g(y) = 2y^2\). <b>Answer</b> \(\boxed{x^2y + 3x + 2y^2 = C}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>Solve \((e^x\sin y + 2x)\,dx + e^x\cos y\,dy = 0\).</p>
+  <p class="step"><b>Step 1.</b> \(M_y = e^x\cos y = N_x\). Exact. ✓</p>
+  <p class="step"><b>Step 2.</b> \(F = e^x\sin y + x^2 + g(y)\)</p>
+  <p class="step"><b>Step 3.</b> \(F_y = e^x\cos y + g'(y) = e^x\cos y \Rightarrow g' = 0\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{e^x\sin y + x^2 = C}\)</p>
+</div>
+<h4>Not exact? Use an integrating factor \(\mu\)</h4>
+<div class="box">
+  <span class="tag">Two common cases</span>
+  <p>If \(\dfrac{M_y - N_x}{N} = f(x)\) (depends on \(x\) only), then \(\mu = e^{\int f(x)\,dx}\).</p>
+  <p>If \(\dfrac{N_x - M_y}{M} = g(y)\) (depends on \(y\) only), then \(\mu = e^{\int g(y)\,dy}\).</p>
+  <p>Multiply the whole equation by \(\mu\). It becomes exact.</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3</span>
+  <p>Solve \((3xy + y^2)\,dx + (x^2 + xy)\,dy = 0\).</p>
+  <p class="step"><b>Step 1.</b> \(M_y = 3x + 2y,\ N_x = 2x + y\). Not equal, so not exact.</p>
+  <p class="step"><b>Step 2.</b> \(\dfrac{M_y - N_x}{N} = \dfrac{x + y}{x(x + y)} = \dfrac{1}{x}\), a function of \(x\) only. So \(\mu = e^{\int dx/x} = x\).</p>
+  <p class="step"><b>Step 3.</b> Multiply by \(x\): \((3x^2y + xy^2)\,dx + (x^3 + x^2y)\,dy = 0\). Now \(M_y = 3x^2 + 2xy = N_x\). ✓</p>
+  <p class="step"><b>Step 4.</b> \(F = x^3y + \dfrac{x^2y^2}{2} + g(y)\); \(F_y = x^3 + x^2y + g' \Rightarrow g' = 0\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{x^3y + \tfrac{1}{2}x^2y^2 = C}\)</p>
+</div>
+
+<h3 id="s2-5"><span class="num">2.5</span>Linear Differential Equations</h3>
+<div class="box">
+  <span class="tag">Standard form</span>
+  \[ \frac{dy}{dx} + P(x)\,y = Q(x) \]
+  <ol>
+    <li>Make the coefficient of \(y'\) equal to 1 (divide through if needed).</li>
+    <li>Integrating factor: \(\mu(x) = e^{\int P(x)\,dx}\).</li>
+    <li>Multiply through. The left side becomes \(\dfrac{d}{dx}(\mu y)\).</li>
+    <li>Integrate: \(\mu y = \displaystyle\int \mu Q\,dx + C\), then divide by \(\mu\).</li>
+  </ol>
+  \[ y = \frac{1}{\mu}\left(\int \mu\,Q\,dx + C\right) \]
+</div>
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>Solve \(y' + 2y = e^{-x}\).</p>
+  <p class="step"><b>Step 1.</b> \(P = 2\), \(\mu = e^{2x}\).</p>
+  <p class="step"><b>Step 2.</b> \(\dfrac{d}{dx}\left(e^{2x}y\right) = e^{2x}e^{-x} = e^{x}\)</p>
+  <p class="step"><b>Step 3.</b> \(e^{2x}y = e^x + C\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = e^{-x} + Ce^{-2x}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>Solve \(xy' + y = x^3\), \(x > 0\).</p>
+  <p class="step"><b>Step 1.</b> Divide by \(x\): \(y' + \dfrac{1}{x}y = x^2\). \(\mu = e^{\ln x} = x\).</p>
+  <p class="step"><b>Step 2.</b> \(\dfrac{d}{dx}(xy) = x^3 \Rightarrow xy = \dfrac{x^4}{4} + C\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = \dfrac{x^3}{4} + \dfrac{C}{x}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3 · IVP</span>
+  <p>Solve \(y' - y = 2x\), \(y(0) = 1\).</p>
+  <p class="step"><b>Step 1.</b> \(\mu = e^{-x}\): \(\dfrac{d}{dx}(e^{-x}y) = 2xe^{-x}\)</p>
+  <p class="step"><b>Step 2.</b> By parts, \(\int 2xe^{-x}dx = -2xe^{-x} - 2e^{-x}\). So \(e^{-x}y = -2xe^{-x} - 2e^{-x} + C\).</p>
+  <p class="step"><b>Step 3.</b> \(y = -2x - 2 + Ce^{x}\). Then \(y(0) = 1 \Rightarrow -2 + C = 1 \Rightarrow C = 3\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = 3e^{x} - 2x - 2}\)</p>
+  <p class="check">Check: \(y' - y = (3e^x - 2) - (3e^x - 2x - 2) = 2x\). ✓</p>
+</div>
+
+<h3 id="s2-6"><span class="num">2.6</span>Bernoulli's Differential Equation</h3>
+<div class="box">
+  <span class="tag">Form</span>
+  \[ \frac{dy}{dx} + P(x)\,y = Q(x)\,y^n, \qquad n \ne 0, 1 \]
+  <ol>
+    <li>Substitute \(v = y^{1-n}\).</li>
+    <li>Then the equation becomes <b>linear</b> in \(v\):
+    \[ \frac{dv}{dx} + (1 - n)P(x)\,v = (1 - n)Q(x) \]</li>
+    <li>Solve with an integrating factor (2.5), then put \(y = v^{1/(1-n)}\).</li>
+  </ol>
+  <p class="pencil">Why? Divide by \(y^n\): \(y^{-n}y' + Py^{1-n} = Q\), and \(v' = (1-n)y^{-n}y'\).</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>Solve \(y' + y = xy^2\).</p>
+  <p class="step"><b>Step 1.</b> \(n = 2\), so \(v = y^{-1}\). The equation becomes \(v' - v = -x\).</p>
+  <p class="step"><b>Step 2.</b> \(\mu = e^{-x}\): \(\dfrac{d}{dx}(e^{-x}v) = -xe^{-x}\)</p>
+  <p class="step"><b>Step 3.</b> \(\int -xe^{-x}dx = xe^{-x} + e^{-x}\), so \(e^{-x}v = xe^{-x} + e^{-x} + C\) and \(v = x + 1 + Ce^{x}\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = \dfrac{1}{x + 1 + Ce^{x}}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>Solve \(x y' + y = x^2y^2\).</p>
+  <p class="step"><b>Step 1.</b> Divide by \(x\): \(y' + \dfrac{1}{x}y = x\,y^2\). \(n = 2\), \(v = y^{-1}\):
+  \[ v' - \frac{1}{x}v = -x \]</p>
+  <p class="step"><b>Step 2.</b> \(\mu = e^{-\ln x} = \dfrac{1}{x}\): \(\dfrac{d}{dx}\left(\dfrac{v}{x}\right) = -1 \Rightarrow \dfrac{v}{x} = -x + C\)</p>
+  <p class="step"><b>Step 3.</b> \(v = -x^2 + Cx\). <b>Answer</b> \(\boxed{y = \dfrac{1}{Cx - x^2}}\)</p>
+</div>
+
+<h3 id="s2-7"><span class="num">2.7</span>Reducible Equations</h3>
+<p>These are equations that a <span class="u">substitution</span> turns into one of the types above.</p>
+
+<h4>(a) \(\dfrac{dy}{dx} = \dfrac{a_1x + b_1y + c_1}{a_2x + b_2y + c_2}\)</h4>
+<div class="box">
+  <span class="tag">Two cases</span>
+  <p><b>Case 1:</b> \(\dfrac{a_1}{a_2} \ne \dfrac{b_1}{b_2}\) (lines cross). Solve \(a_1h + b_1k + c_1 = 0,\ a_2h + b_2k + c_2 = 0\). Put \(x = X + h,\ y = Y + k\). The result is <b>homogeneous</b> in \(X, Y\).</p>
+  <p><b>Case 2:</b> \(\dfrac{a_1}{a_2} = \dfrac{b_1}{b_2}\) (parallel lines). Put \(z = a_1x + b_1y\). The result is <b>separable</b>.</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 1 · Case 1</span>
+  <p>Solve \(\dfrac{dy}{dx} = \dfrac{x + y - 2}{x - y}\).</p>
+  <p class="step"><b>Step 1.</b> \(h + k - 2 = 0,\ h - k = 0 \Rightarrow h = k = 1\). Put \(x = X + 1,\ y = Y + 1\):
+  \[ \frac{dY}{dX} = \frac{X + Y}{X - Y} \]</p>
+  <p class="step"><b>Step 2.</b> \(Y = vX\): \(\ v + Xv' = \dfrac{1 + v}{1 - v} \Rightarrow Xv' = \dfrac{1 + v^2}{1 - v}\)</p>
+  <p class="step"><b>Step 3.</b> Separate: \(\dfrac{1 - v}{1 + v^2}dv = \dfrac{dX}{X}\), so
+  \[ \tan^{-1}v - \tfrac{1}{2}\ln(1 + v^2) = \ln|X| + C \]</p>
+  <p class="step"><b>Step 4.</b> \(\ln|X| + \tfrac12\ln(1 + v^2) = \tfrac12\ln(X^2 + Y^2)\). With \(X = x - 1,\ Y = y - 1\):
+  \[ \boxed{\tan^{-1}\!\left(\frac{y - 1}{x - 1}\right) = \tfrac{1}{2}\ln\!\left[(x - 1)^2 + (y - 1)^2\right] + C} \]</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2 · Case 2</span>
+  <p>Solve \(\dfrac{dy}{dx} = \dfrac{x + y + 1}{x + y - 1}\).</p>
+  <p class="step"><b>Step 1.</b> Put \(z = x + y\), so \(\dfrac{dz}{dx} = 1 + \dfrac{dy}{dx} = 1 + \dfrac{z + 1}{z - 1} = \dfrac{2z}{z - 1}\).</p>
+  <p class="step"><b>Step 2.</b> \(\dfrac{z - 1}{2z}dz = dx \Rightarrow \dfrac{1}{2}\left(z - \ln|z|\right) = x + C\)</p>
+  <p class="step"><b>Step 3.</b> \(x + y - \ln|x + y| = 2x + 2C\), so \(\boxed{y - x - \ln|x + y| = K}\)</p>
+</div>
+
+<h4>(b) Second-order equations reducible to first order</h4>
+<div class="box">
+  <span class="tag">Two tricks with \(p = y'\)</span>
+  <p><b>\(y\) missing</b>, i.e. \(F(x, y', y'') = 0\): put \(y' = p\), \(y'' = \dfrac{dp}{dx}\).</p>
+  <p><b>\(x\) missing</b>, i.e. \(F(y, y', y'') = 0\): put \(y' = p\), \(y'' = p\dfrac{dp}{dy}\) (chain rule).</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3 · \(y\) missing</span>
+  <p>Solve \(xy'' - y' = 0\).</p>
+  <p class="step"><b>Step 1.</b> \(p = y'\): \(x\dfrac{dp}{dx} = p \Rightarrow \dfrac{dp}{p} = \dfrac{dx}{x} \Rightarrow p = C_1x\)</p>
+  <p class="step"><b>Step 2.</b> \(y' = C_1x \Rightarrow \boxed{y = \tfrac{C_1}{2}x^2 + C_2}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 4 · \(x\) missing</span>
+  <p>Solve \(y\,y'' = (y')^2\).</p>
+  <p class="step"><b>Step 1.</b> \(y' = p,\ y'' = p\dfrac{dp}{dy}\): \(\ y\,p\dfrac{dp}{dy} = p^2 \Rightarrow \dfrac{dp}{p} = \dfrac{dy}{y}\)</p>
+  <p class="step"><b>Step 2.</b> \(p = C_1y\), i.e. \(\dfrac{dy}{dx} = C_1y\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_2e^{C_1x}}\)</p>
+</div>
+
+<h3 id="s2-8"><span class="num">2.8</span>Applications of First Order Equations</h3>
+
+<h4>(i) Growth and decay: \(\dfrac{dN}{dt} = kN\)</h4>
+<p>Separable: \(\boxed{N(t) = N_0e^{kt}}\). Growth if \(k > 0\), decay if \(k < 0\).</p>
+<div class="eg">
+  <span class="tag">Example 1 · half-life</span>
+  <p>A substance has half-life 5 years. How much of 100 g is left after 12 years?</p>
+  <p class="step"><b>Step 1.</b> Half-life: \(\tfrac12 = e^{5k} \Rightarrow k = -\dfrac{\ln 2}{5}\).</p>
+  <p class="step"><b>Step 2.</b> \(N(12) = 100e^{-12\ln 2/5} = 100\cdot 2^{-2.4}\)</p>
+  <p class="step"><b>Answer.</b> \(N(12) \approx 100 \times 0.1895 \approx \boxed{18.9\ \text{g}}\)</p>
+</div>
+
+<h4>(ii) Newton's law of cooling: \(\dfrac{dT}{dt} = -k(T - T_s)\)</h4>
+<p>Separable: \(\boxed{T(t) = T_s + (T_0 - T_s)e^{-kt}}\).</p>
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>Tea at \(90^\circ\)C is left in a \(20^\circ\)C room. After 10 min it is \(60^\circ\)C. When will it reach \(40^\circ\)C?</p>
+  <p class="step"><b>Step 1.</b> \(T = 20 + 70e^{-kt}\).</p>
+  <p class="step"><b>Step 2.</b> \(60 = 20 + 70e^{-10k} \Rightarrow e^{-10k} = \tfrac47 \Rightarrow k = \tfrac{1}{10}\ln\tfrac74 \approx 0.0560\).</p>
+  <p class="step"><b>Step 3.</b> \(40 = 20 + 70e^{-kt} \Rightarrow e^{-kt} = \tfrac27 \Rightarrow t = \dfrac{\ln 3.5}{k}\)</p>
+  <p class="step"><b>Answer.</b> \(t \approx \dfrac{1.2528}{0.0560} \approx \boxed{22.4\ \text{min}}\)</p>
+</div>
+
+<h4>(iii) RL circuit: \(L\dfrac{di}{dt} + Ri = E\)</h4>
+<div class="eg">
+  <span class="tag">Example 3</span>
+  <p>Constant \(E\), \(i(0) = 0\). Find \(i(t)\).</p>
+  <p class="step"><b>Step 1.</b> Linear: \(i' + \dfrac{R}{L}i = \dfrac{E}{L}\), \(\mu = e^{Rt/L}\).</p>
+  <p class="step"><b>Step 2.</b> \(e^{Rt/L}i = \dfrac{E}{R}e^{Rt/L} + C\), and \(i(0) = 0 \Rightarrow C = -\dfrac{E}{R}\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{i(t) = \dfrac{E}{R}\left(1 - e^{-Rt/L}\right)}\). As \(t \to \infty\), \(i \to E/R\) (Ohm's law).</p>
+</div>
+
+<h4>(iv) Orthogonal trajectories</h4>
+<p>Curves that cut every member of a family at right angles. <span class="hl">Method: find the family's DE \(y' = f(x,y)\), replace \(y'\) by \(-\dfrac{1}{y'}\), and solve.</span></p>
+<div class="eg">
+  <span class="tag">Example 4</span>
+  <p>Find the orthogonal trajectories of \(y = cx^2\).</p>
+  <p class="step"><b>Step 1.</b> \(y' = 2cx\) and \(c = y/x^2\), so \(y' = \dfrac{2y}{x}\).</p>
+  <p class="step"><b>Step 2.</b> Replace: \(y' = -\dfrac{x}{2y}\), so \(2y\,dy = -x\,dx\).</p>
+  <p class="step"><b>Answer.</b> \(y^2 = -\dfrac{x^2}{2} + C\), i.e. \(\boxed{x^2 + 2y^2 = K}\), a family of ellipses.</p>
+</div>
+
+<details class="practice">
+  <summary>Practice · Chapter 2 (tap for questions and answers)</summary>
+  <ol>
+    <li>\(\dfrac{dy}{dx} = e^{x - y}\) <br><span class="ans">Separable: \(e^y = e^x + C\).</span></li>
+    <li>\((x^2 + y^2)\,dx - 2xy\,dy = 0\) <br><span class="ans">Homogeneous: \(x^2 - y^2 = Cx\).</span></li>
+    <li>\((2x + y)\,dx + (x + 2y)\,dy = 0\) <br><span class="ans">Exact: \(x^2 + xy + y^2 = C\).</span></li>
+    <li>\(y' + y\tan x = \sec x\) <br><span class="ans">Linear, \(\mu = \sec x\): \(y = \sin x + C\cos x\).</span></li>
+    <li>\(y' - y = e^x y^2\) <br><span class="ans">Bernoulli, \(v = 1/y\): \(y = \dfrac{1}{Ce^{-x} - \tfrac12 e^{x}}\).</span></li>
+    <li>A population doubles in 30 years. When does it triple? <br><span class="ans">\(t = 30\dfrac{\ln 3}{\ln 2} \approx 47.5\) years.</span></li>
+    <li>Orthogonal trajectories of \(xy = c\). <br><span class="ans">\(y' = -y/x\) becomes \(y' = x/y\): \(y^2 - x^2 = K\).</span></li>
+  </ol>
+</details>
+
+<!-- ======================= CHAPTER 3 ======================= -->
+<hr class="scribble">
+<h2 id="ch3"><span class="num">3</span>Second Order Differential Equations</h2>
+<p>General linear second-order ODE:</p>
+\[ a(x)\,y'' + b(x)\,y' + c(x)\,y = g(x) \]
+<div class="box">
+  <span class="tag">Key facts</span>
+  <ul>
+    <li>The homogeneous equation (\(g = 0\)) has two <b>linearly independent</b> solutions \(y_1, y_2\). Its general solution is \(y_c = C_1y_1 + C_2y_2\) (the <b>complementary function</b>).</li>
+    <li>Independence test, the <b>Wronskian</b>: \(W(y_1, y_2) = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix} = y_1y_2' - y_1'y_2 \ne 0\).</li>
+    <li>For \(g \ne 0\): \(\boxed{y = y_c + y_p}\), where \(y_p\) is any <b>particular integral</b>.</li>
+  </ul>
+</div>
+
+<h3 id="s3-1"><span class="num">3.1</span>Linear Differential Equations with Constant Coefficients</h3>
+<p>\(ay'' + by' + cy = 0\) with \(a, b, c\) constants. Try \(y = e^{mx}\): then \(y' = me^{mx},\ y'' = m^2e^{mx}\), and</p>
+\[ e^{mx}(am^2 + bm + c) = 0 \quad\Rightarrow\quad \boxed{am^2 + bm + c = 0} \]
+<p>This is the <span class="u">auxiliary (characteristic) equation</span>. Everything depends on its roots.</p>
+<div class="box">
+  <span class="tag">The three cases</span>
+  <div class="tbl-wrap"><table>
+    <tr><th>Roots</th><th>Complementary function \(y_c\)</th></tr>
+    <tr><td>Real, distinct \(m_1 \ne m_2\)</td><td>\(C_1e^{m_1x} + C_2e^{m_2x}\)</td></tr>
+    <tr><td>Real, repeated \(m_1 = m_2 = m\)</td><td>\((C_1 + C_2x)e^{mx}\)</td></tr>
+    <tr><td>Complex \(\alpha \pm i\beta\)</td><td>\(e^{\alpha x}(C_1\cos\beta x + C_2\sin\beta x)\)</td></tr>
+  </table></div>
+</div>
+<div class="eg">
+  <span class="tag">Example 1 · distinct</span>
+  <p>\(y'' - 5y' + 6y = 0\)</p>
+  <p class="step"><b>Step 1.</b> \(m^2 - 5m + 6 = (m - 2)(m - 3) = 0 \Rightarrow m = 2, 3\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1e^{2x} + C_2e^{3x}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2 · repeated</span>
+  <p>\(y'' - 4y' + 4y = 0\)</p>
+  <p class="step"><b>Step 1.</b> \((m - 2)^2 = 0 \Rightarrow m = 2, 2\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = (C_1 + C_2x)e^{2x}}\)</p>
+  <p class="pencil">The extra \(x\) is needed because \(e^{2x}\) twice is not two independent solutions.</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3 · complex</span>
+  <p>\(y'' + 2y' + 5y = 0\)</p>
+  <p class="step"><b>Step 1.</b> \(m = \dfrac{-2 \pm \sqrt{4 - 20}}{2} = -1 \pm 2i\), so \(\alpha = -1,\ \beta = 2\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = e^{-x}(C_1\cos 2x + C_2\sin 2x)}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 4 · IVP</span>
+  <p>\(y'' + 4y = 0,\ y(0) = 1,\ y'(0) = 2\)</p>
+  <p class="step"><b>Step 1.</b> \(m^2 + 4 = 0 \Rightarrow m = \pm 2i\), so \(y = C_1\cos 2x + C_2\sin 2x\).</p>
+  <p class="step"><b>Step 2.</b> \(y(0) = C_1 = 1\). \(y' = -2C_1\sin 2x + 2C_2\cos 2x\), so \(y'(0) = 2C_2 = 2 \Rightarrow C_2 = 1\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = \cos 2x + \sin 2x}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 5 · higher order (same idea)</span>
+  <p>\(y''' - 6y'' + 11y' - 6y = 0\)</p>
+  <p class="step"><b>Step 1.</b> \(m^3 - 6m^2 + 11m - 6 = 0\). Try \(m = 1\): \(1 - 6 + 11 - 6 = 0\) ✓. Factor: \((m - 1)(m - 2)(m - 3) = 0\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1e^{x} + C_2e^{2x} + C_3e^{3x}}\)</p>
+</div>
+
+<h3 id="s3-2"><span class="num">3.2</span>Non-Homogeneous Equations</h3>
+<p>\(ay'' + by' + cy = g(x)\), \(g \ne 0\). Always work in this order:</p>
+<div class="box">
+  <span class="tag">Plan</span>
+  <ol>
+    <li>Find \(y_c\) from the auxiliary equation (3.1).</li>
+    <li>Find one particular integral \(y_p\) (3.2.1, 3.2.2 or 3.4).</li>
+    <li>Write \(y = y_c + y_p\). Apply initial conditions <b>last</b>, to the full \(y\).</li>
+  </ol>
+</div>
+
+<h4 id="s3-2-1">3.2.1 Method of Undetermined Coefficients</h4>
+<p>Works when \(g(x)\) is a polynomial, exponential, sine/cosine, or sums and products of these. <span class="hl">Guess a \(y_p\) of the same shape with unknown constants, substitute, and match coefficients.</span></p>
+<div class="tbl-wrap"><table>
+  <tr><th>\(g(x)\)</th><th>Trial \(y_p\)</th></tr>
+  <tr><td>\(k\) (constant)</td><td>\(A\)</td></tr>
+  <tr><td>polynomial of degree \(n\)</td><td>\(A_nx^n + \cdots + A_1x + A_0\)</td></tr>
+  <tr><td>\(ke^{ax}\)</td><td>\(Ae^{ax}\)</td></tr>
+  <tr><td>\(k\cos\beta x\) or \(k\sin\beta x\)</td><td>\(A\cos\beta x + B\sin\beta x\) (always both)</td></tr>
+  <tr><td>\(e^{ax}\times\) polynomial</td><td>\(e^{ax}(A_nx^n + \cdots + A_0)\)</td></tr>
+  <tr><td>\(e^{ax}\cos\beta x\)</td><td>\(e^{ax}(A\cos\beta x + B\sin\beta x)\)</td></tr>
+</table></div>
+<div class="box">
+  <span class="tag">Modification rule ⚠</span>
+  <p>If any term of your trial \(y_p\) already appears in \(y_c\), multiply the trial by \(x\). If it still clashes (repeated root), multiply by \(x^2\).</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 1 · polynomial</span>
+  <p>\(y'' - 3y' + 2y = 4x\)</p>
+  <p class="step"><b>Step 1.</b> \(m^2 - 3m + 2 = 0 \Rightarrow m = 1, 2\). \(y_c = C_1e^x + C_2e^{2x}\).</p>
+  <p class="step"><b>Step 2.</b> Trial \(y_p = Ax + B\): \(y_p' = A,\ y_p'' = 0\).</p>
+  <p class="step"><b>Step 3.</b> \(0 - 3A + 2(Ax + B) = 4x \Rightarrow 2Ax + (2B - 3A) = 4x\).</p>
+  <p class="step"><b>Step 4.</b> Match: \(2A = 4 \Rightarrow A = 2\); \(2B - 3A = 0 \Rightarrow B = 3\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1e^x + C_2e^{2x} + 2x + 3}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2 · exponential</span>
+  <p>\(y'' + y' - 2y = e^{3x}\)</p>
+  <p class="step"><b>Step 1.</b> \((m + 2)(m - 1) = 0\): \(y_c = C_1e^{x} + C_2e^{-2x}\).</p>
+  <p class="step"><b>Step 2.</b> \(y_p = Ae^{3x}\): \(9A + 3A - 2A = 10A = 1 \Rightarrow A = \tfrac{1}{10}\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1e^{x} + C_2e^{-2x} + \tfrac{1}{10}e^{3x}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3 · trig</span>
+  <p>\(y'' + 4y = 3\sin x\)</p>
+  <p class="step"><b>Step 1.</b> \(m = \pm 2i\): \(y_c = C_1\cos 2x + C_2\sin 2x\).</p>
+  <p class="step"><b>Step 2.</b> \(y_p = A\cos x + B\sin x\), \(y_p'' = -A\cos x - B\sin x\).</p>
+  <p class="step"><b>Step 3.</b> \(3A\cos x + 3B\sin x = 3\sin x \Rightarrow A = 0,\ B = 1\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1\cos 2x + C_2\sin 2x + \sin x}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 4 · modification rule</span>
+  <p>\(y'' - 3y' + 2y = e^{x}\)</p>
+  <p class="step"><b>Step 1.</b> \(y_c = C_1e^x + C_2e^{2x}\). The trial \(Ae^x\) is <span class="red">already in \(y_c\)</span>, so use \(y_p = Axe^x\).</p>
+  <p class="step"><b>Step 2.</b> \(y_p' = A(1 + x)e^x,\ y_p'' = A(2 + x)e^x\).</p>
+  <p class="step"><b>Step 3.</b> \(A\big[(2 + x) - 3(1 + x) + 2x\big]e^x = -Ae^x = e^x \Rightarrow A = -1\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1e^x + C_2e^{2x} - xe^{x}}\)</p>
+</div>
+
+<h4 id="s3-2-2">3.2.2 Variation of Parameters</h4>
+<p>Works for <span class="u">any</span> \(g(x)\), e.g. \(\sec x\), \(\tan x\), \(\ln x\), \(e^x/x\), where undetermined coefficients fails.</p>
+<div class="box">
+  <span class="tag">Formula</span>
+  <p>First write the equation as \(y'' + P(x)y' + Q(x)y = f(x)\) (coefficient of \(y''\) must be 1). With \(y_c = C_1y_1 + C_2y_2\) and \(W = y_1y_2' - y_1'y_2\):</p>
+  \[ y_p = u_1y_1 + u_2y_2, \qquad u_1 = -\int \frac{y_2\,f}{W}\,dx, \qquad u_2 = \int \frac{y_1\,f}{W}\,dx \]
+</div>
+<div class="eg">
+  <span class="tag">Example 1</span>
+  <p>\(y'' + y = \sec x\)</p>
+  <p class="step"><b>Step 1.</b> \(y_1 = \cos x,\ y_2 = \sin x\). \(W = \cos x\cos x - (-\sin x)\sin x = 1\).</p>
+  <p class="step"><b>Step 2.</b> \(u_1 = -\int \sin x\sec x\,dx = -\int\tan x\,dx = \ln|\cos x|\)</p>
+  <p class="step"><b>Step 3.</b> \(u_2 = \int \cos x\sec x\,dx = \int 1\,dx = x\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1\cos x + C_2\sin x + \cos x\ln|\cos x| + x\sin x}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2</span>
+  <p>\(y'' - 2y' + y = \dfrac{e^x}{x}\)</p>
+  <p class="step"><b>Step 1.</b> \((m - 1)^2 = 0\): \(y_1 = e^x,\ y_2 = xe^x\).
+  \(W = e^x(1 + x)e^x - e^x\cdot xe^x = e^{2x}\).</p>
+  <p class="step"><b>Step 2.</b> \(u_1 = -\int \dfrac{xe^x\cdot e^x/x}{e^{2x}}dx = -\int 1\,dx = -x\)</p>
+  <p class="step"><b>Step 3.</b> \(u_2 = \int \dfrac{e^x\cdot e^x/x}{e^{2x}}dx = \int\dfrac{dx}{x} = \ln|x|\)</p>
+  <p class="step"><b>Step 4.</b> \(y_p = -xe^x + xe^x\ln|x|\). The \(-xe^x\) part is already in \(y_c\), so drop it.</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = (C_1 + C_2x)e^x + xe^x\ln|x|}\)</p>
+</div>
+
+<h3 id="s3-3"><span class="num">3.3</span>Cauchy–Euler Equations</h3>
+<div class="box">
+  <span class="tag">Form</span>
+  \[ ax^2y'' + bxy' + cy = 0 \qquad (x > 0) \]
+  <p>The power of \(x\) matches the order of the derivative. Try \(y = x^m\): \(y' = mx^{m-1},\ y'' = m(m-1)x^{m-2}\). Then</p>
+  \[ \boxed{am(m - 1) + bm + c = 0} \]
+  <div class="tbl-wrap"><table>
+    <tr><th>Roots</th><th>Solution</th></tr>
+    <tr><td>Real, distinct \(m_1, m_2\)</td><td>\(C_1x^{m_1} + C_2x^{m_2}\)</td></tr>
+    <tr><td>Repeated \(m\)</td><td>\(x^m(C_1 + C_2\ln x)\)</td></tr>
+    <tr><td>Complex \(\alpha \pm i\beta\)</td><td>\(x^\alpha\big[C_1\cos(\beta\ln x) + C_2\sin(\beta\ln x)\big]\)</td></tr>
+  </table></div>
+</div>
+<p class="note">Compare with 3.1: \(e^{mx}\) becomes \(x^m\), and \(x\) becomes \(\ln x\). That's because \(x = e^t\) turns an Euler equation into a constant-coefficient one.</p>
+<div class="eg">
+  <span class="tag">Example 1 · distinct</span>
+  <p>\(x^2y'' - 2xy' - 4y = 0\)</p>
+  <p class="step"><b>Step 1.</b> \(m(m - 1) - 2m - 4 = m^2 - 3m - 4 = (m - 4)(m + 1) = 0\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1x^4 + C_2x^{-1}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2 · repeated</span>
+  <p>\(x^2y'' + 5xy' + 4y = 0\)</p>
+  <p class="step"><b>Step 1.</b> \(m^2 - m + 5m + 4 = m^2 + 4m + 4 = (m + 2)^2 = 0\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = x^{-2}(C_1 + C_2\ln x)}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3 · complex</span>
+  <p>\(x^2y'' + xy' + 9y = 0\)</p>
+  <p class="step"><b>Step 1.</b> \(m^2 - m + m + 9 = m^2 + 9 = 0 \Rightarrow m = \pm 3i\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1\cos(3\ln x) + C_2\sin(3\ln x)}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 4 · non-homogeneous, using \(x = e^t\)</span>
+  <p>\(x^2y'' - 2xy' + 2y = x^3\)</p>
+  <p class="step"><b>Step 1.</b> Put \(x = e^t\), \(D = \dfrac{d}{dt}\). Then \(xy' = Dy\) and \(x^2y'' = D(D - 1)y\).</p>
+  <p class="step"><b>Step 2.</b> \(\big[D(D - 1) - 2D + 2\big]y = e^{3t}\), i.e. \((D^2 - 3D + 2)y = e^{3t}\).</p>
+  <p class="step"><b>Step 3.</b> \(y_c = C_1e^{t} + C_2e^{2t}\). \(y_p = Ae^{3t}\): \((9 - 9 + 2)A = 1 \Rightarrow A = \tfrac12\).</p>
+  <p class="step"><b>Step 4.</b> Back to \(x\) (\(e^t = x\)): \(\boxed{y = C_1x + C_2x^2 + \tfrac{1}{2}x^3}\)</p>
+  <p class="check">Check \(y_p = \tfrac12x^3\): \(x^2(3x) - 2x\left(\tfrac32x^2\right) + x^3 = x^3\). ✓</p>
+</div>
+
+<h3 id="s3-4"><span class="num">3.4</span>Differential Operator</h3>
+<p>Let \(D = \dfrac{d}{dx}\), so \(Dy = y',\ D^2y = y''\), and so on. Then \(ay'' + by' + cy = g\) is written as</p>
+\[ f(D)\,y = g(x), \qquad f(D) = aD^2 + bD + c. \]
+<p>Constant-coefficient operators factor like polynomials and commute: \((D - 2)(D - 3) = (D - 3)(D - 2) = D^2 - 5D + 6\). The particular integral is written \(y_p = \dfrac{1}{f(D)}g(x)\), where \(\dfrac1D\) means "integrate".</p>
+
+<div class="box">
+  <span class="tag">Short-cut rules for \(y_p = \dfrac{1}{f(D)}g(x)\)</span>
+  <p><b>1. Exponential.</b> \(\dfrac{1}{f(D)}e^{ax} = \dfrac{e^{ax}}{f(a)}\), if \(f(a) \ne 0\).<br>
+  If \(f(a) = 0\) with \(f(D) = (D - a)^k\phi(D)\), \(\phi(a) \ne 0\): \(\dfrac{1}{f(D)}e^{ax} = \dfrac{x^k e^{ax}}{k!\,\phi(a)}\).</p>
+  <p><b>2. Sine / cosine.</b> Replace \(D^2\) by \(-a^2\): \(\dfrac{1}{f(D^2)}\sin ax = \dfrac{\sin ax}{f(-a^2)}\) (same for \(\cos\)), if \(f(-a^2) \ne 0\).<br>
+  Failing case: \(\dfrac{1}{D^2 + a^2}\sin ax = -\dfrac{x\cos ax}{2a}\), \(\ \dfrac{1}{D^2 + a^2}\cos ax = \dfrac{x\sin ax}{2a}\).</p>
+  <p><b>3. Polynomial \(x^n\).</b> Write \(\dfrac{1}{f(D)} = [1 \pm \phi(D)]^{-1}\), expand by the binomial series up to \(D^n\), and apply to \(x^n\).</p>
+  <p><b>4. Exponential shift.</b> \(\dfrac{1}{f(D)}\big(e^{ax}V\big) = e^{ax}\dfrac{1}{f(D + a)}V\).</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 1 · rule 1</span>
+  <p>\((D^2 - 3D + 2)y = e^{3x}\)</p>
+  <p class="step"><b>Step 1.</b> \(y_c\): \((m - 1)(m - 2) = 0\), so \(y_c = C_1e^x + C_2e^{2x}\).</p>
+  <p class="step"><b>Step 2.</b> \(y_p = \dfrac{e^{3x}}{9 - 9 + 2} = \dfrac{e^{3x}}{2}\)</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = C_1e^x + C_2e^{2x} + \tfrac12e^{3x}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 2 · rule 1, failing case</span>
+  <p>\((D^2 - 3D + 2)y = e^{x}\) <span class="pencil">(same as Example 4 of 3.2.1)</span></p>
+  <p class="step"><b>Step 1.</b> \(f(1) = 0\). Write \(f(D) = (D - 1)(D - 2)\), so \(k = 1,\ \phi(D) = D - 2,\ \phi(1) = -1\).</p>
+  <p class="step"><b>Step 2.</b> \(y_p = \dfrac{x e^x}{1!\,(-1)} = -xe^x\). <span class="check">Same answer as before. ✓</span></p>
+</div>
+<div class="eg">
+  <span class="tag">Example 3 · rule 2</span>
+  <p>\((D^2 + 4)y = \sin 3x\): \(\ y_p = \dfrac{\sin 3x}{-9 + 4} = \boxed{-\tfrac15\sin 3x}\)</p>
+  <p>\((D^2 + 4)y = \cos 2x\): \(f(-4) = 0\), failing case: \(\ y_p = \boxed{\dfrac{x\sin 2x}{4}}\)</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 4 · rule 3</span>
+  <p>\((D^2 + D)y = x^2\)</p>
+  <p class="step"><b>Step 1.</b> \(\dfrac{1}{D(1 + D)}x^2 = \dfrac1D(1 + D)^{-1}x^2 = \dfrac1D(1 - D + D^2 - \cdots)x^2\)</p>
+  <p class="step"><b>Step 2.</b> \((1 - D + D^2)x^2 = x^2 - 2x + 2\). <span class="pencil">(Stop at \(D^2\): higher powers give 0.)</span></p>
+  <p class="step"><b>Step 3.</b> \(\dfrac1D\) means integrate: \(y_p = \dfrac{x^3}{3} - x^2 + 2x\).</p>
+  <p class="step"><b>Answer.</b> \(y_c = C_1 + C_2e^{-x}\), so \(\boxed{y = C_1 + C_2e^{-x} + \tfrac{x^3}{3} - x^2 + 2x}\)</p>
+  <p class="check">Check: \(y_p' = x^2 - 2x + 2,\ y_p'' = 2x - 2\), sum \(= x^2\). ✓</p>
+</div>
+<div class="eg">
+  <span class="tag">Example 5 · rule 4</span>
+  <p>\((D - 1)^2y = xe^{x}\)</p>
+  <p class="step"><b>Step 1.</b> \(y_p = \dfrac{1}{(D - 1)^2}e^{x}x = e^{x}\dfrac{1}{(D + 1 - 1)^2}x = e^{x}\dfrac{1}{D^2}x\)</p>
+  <p class="step"><b>Step 2.</b> Integrate twice: \(\dfrac{1}{D^2}x = \dfrac{x^3}{6}\).</p>
+  <p class="step"><b>Answer.</b> \(\boxed{y = (C_1 + C_2x)e^x + \tfrac16x^3e^x}\)</p>
+</div>
+
+<details class="practice">
+  <summary>Practice · Chapter 3 (tap for questions and answers)</summary>
+  <ol>
+    <li>\(y'' + 6y' + 9y = 0\) <br><span class="ans">\(y = (C_1 + C_2x)e^{-3x}\)</span></li>
+    <li>\(y'' - 2y' + 5y = 0\) <br><span class="ans">\(y = e^{x}(C_1\cos 2x + C_2\sin 2x)\)</span></li>
+    <li>\(y'' - y = 2e^{x}\) <br><span class="ans">Modification rule, \(y_p = Axe^x\), \(A = 1\): \(y = C_1e^x + C_2e^{-x} + xe^x\)</span></li>
+    <li>\(y'' + y = \tan x\) (variation of parameters) <br><span class="ans">\(y = C_1\cos x + C_2\sin x - \cos x\ln|\sec x + \tan x|\)</span></li>
+    <li>\(x^2y'' - 3xy' + 4y = 0\) <br><span class="ans">\((m - 2)^2 = 0\): \(y = x^2(C_1 + C_2\ln x)\)</span></li>
+    <li>\((D^2 - 5D + 6)y = e^{4x}\) <br><span class="ans">\(y = C_1e^{2x} + C_2e^{3x} + \tfrac12e^{4x}\)</span></li>
+    <li>\((D^2 + 9)y = \sin 3x\) <br><span class="ans">\(y = C_1\cos 3x + C_2\sin 3x - \tfrac{x}{6}\cos 3x\)</span></li>
+    <li>Find \(W(e^{2x}, e^{3x})\). <br><span class="ans">\(e^{2x}\cdot 3e^{3x} - 2e^{2x}\cdot e^{3x} = e^{5x} \ne 0\), so they are independent.</span></li>
+  </ol>
+</details>
+
+<p class="foot">End of notes. Next step: work through the practice sets without looking, then check. ✎</p>
+</main>
+
+</body>
+</html>
