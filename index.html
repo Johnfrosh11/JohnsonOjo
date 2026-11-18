@@ -60,6 +60,7 @@ const PROJECTS = [
     scope: "Product catalogue · Cart & checkout · Paystack payments · Admin dashboard",
     outcome: "What changed for the client (e.g. live in 4 weeks, 1,200 orders in month one)",
     url: "https://the-live-store.com",
+    image: "assets/store-screenshot.jpg",   // optional: a screenshot of the store
     stack: ["ASP.NET Core", "SQL Server", "Azure"]
   },
   ------------------------------------------------------------------ */
@@ -67,6 +68,7 @@ const PROJECTS = [
     category: "Fintech",
     tag: "Live platform",
     title: "Ahead Digital Banking Platform",
+    image: "https://images.unsplash.com/photo-1677058054899-75c533d57048",
     scope: "5 microservices · Onboarding/KYC · Cards · Islamic investment · Transactions · Staff auth",
     outcome: "Owned end to end on a live bank — closed a full VAPT finding set",
     url: "",
@@ -76,6 +78,7 @@ const PROJECTS = [
     category: "Fintech",
     tag: "New build",
     title: "Agent Wallet & Transfer Platform",
+    image: "https://images.unsplash.com/photo-1533234944761-2f5337579079",
     scope: "Wallets · P2P & NIP inter-bank transfers · Multi-channel OTP · Fee engine",
     outcome: "PBKDF2 PIN security with lockout and timing-attack protection",
     url: "",
@@ -85,6 +88,7 @@ const PROJECTS = [
     category: "Fintech",
     tag: "New build",
     title: "Digital Banking & Investment Platform",
+    image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f",
     scope: "11 microservices · API gateway · Stock trading (NGX) · Bill payments · Biometric onboarding",
     outcome: "Event-driven on Kafka, shipped on Azure Container Apps",
     url: "",
@@ -94,6 +98,7 @@ const PROJECTS = [
     category: "SaaS",
     tag: "New build",
     title: "wBiz HR — Enterprise HRMS",
+    image: "https://images.unsplash.com/photo-1573164574511-73c773193279",
     scope: "17 HR modules · 1,000+ API endpoints · Nigerian payroll (PAYE, pension, NHIS) · Bulk salary via GTBank",
     outcome: "Multi-tenant SaaS with 200+ granular permissions",
     url: "",
@@ -103,6 +108,7 @@ const PROJECTS = [
     category: "Logistics",
     tag: "New build",
     title: "E-Waybill System",
+    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492",
     scope: "Multi-tenant waybill creation · Approval workflows · Depot & site tracking",
     outcome: "Replaced paper waybills across multiple depots",
     url: "",
@@ -112,6 +118,7 @@ const PROJECTS = [
     category: "Fintech",
     tag: "Core banking",
     title: "BankOne Core Banking — Cheque & Customer APIs",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
     scope: "Cheque lifecycle & clearing · Customer onboarding, KYC, dedup, segmentation",
     outcome: "Used by 500+ financial institutions in 8 African countries",
     url: "",
@@ -121,6 +128,7 @@ const PROJECTS = [
     category: "SME Tools",
     tag: "Freelance",
     title: "Invoicing & Inventory Systems",
+    image: "https://images.unsplash.com/photo-1687422808311-a776f467a468",
     scope: "Backend systems for SMEs · Invoicing · Stock management",
     outcome: "Automated manual bookkeeping and sped up transactions",
     url: "",
@@ -130,6 +138,7 @@ const PROJECTS = [
     category: "Web",
     tag: "Team build",
     title: "Reward Your Teachers",
+    image: "https://images.unsplash.com/photo-1604145559206-e3bce0040e2d",
     scope: "Students send appreciation gifts to teachers via integrated payments",
     outcome: "Delivered in an Agile, cross-functional team",
     url: "",
@@ -231,6 +240,15 @@ const FOCUS = {
   "Cloud & data": "Reliable hosting on Azure, automated releases, fast databases and architecture that scales as you grow.",
   "Secure & support": "Pass security audits, rescue failing systems and keep everything running with ongoing support and expert advice."
 };
+
+/* Background photo for each focus area (free photos from Unsplash; swap for your own any time) */
+const FOCUS_IMAGES = {
+  "Build": "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+  "Integrate": "https://images.unsplash.com/photo-1677058870677-8f50eb20aff5",
+  "Cloud & data": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31",
+  "Secure & support": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7"
+};
+const ECOSYSTEM_IMAGE = "https://images.unsplash.com/photo-1653566031535-bcf33e1c2893";
 
 /* Industries you serve (shown as a strip under services) */
 const INDUSTRIES = ["Banking & fintech", "Retail & e-commerce", "HR & payroll", "Logistics", "Education", "SMEs & startups"];
@@ -781,6 +799,23 @@ dialog.case[open]{animation:pop .22s ease-out}
   .stories svg.net{height:250px}
   .node{font-size:11.5px;padding:6px 10px}
 }
+.fbg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center}
+.fbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,22,.55) 0%,rgba(8,12,22,.78) 45%,rgba(8,12,22,.95) 100%),linear-gradient(90deg,rgba(8,12,22,.5),transparent 70%)}
+.fbg.swap{animation:fadein .6s ease both}
+@keyframes fadein{from{opacity:0;transform:scale(1.03)}}
+.fview{background:#0a0f1a}
+.fcard{background:rgba(10,15,26,.45)}
+.ebg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center 30%;filter:grayscale(1) contrast(1.05)}
+.ebg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,13,20,.94) 0%,rgba(10,13,20,.78) 50%,rgba(10,13,20,.45) 100%)}
+.eco{background:#0c111b}
+.eco .grid-bg{opacity:.06}
+.row{grid-template-columns:170px 1.1fr 1fr auto}
+.thumb{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:var(--surface)}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.row:hover .thumb img{transform:scale(1.06)}
+.thumb span{position:absolute;left:8px;bottom:8px;background:var(--bg);color:var(--accent);font-size:12px;font-weight:700;padding:3px 9px;border-radius:6px}
+@media (max-width:1080px){ .row{grid-template-columns:150px 1fr;gap:6px 22px} .row > div:nth-child(n+3){grid-column:2} .thumb{grid-row:span 3;align-self:start} }
+@media (max-width:680px){ .row{grid-template-columns:96px 1fr;gap:4px 14px} .thumb{aspect-ratio:1} .thumb span{display:none} .row h3{font-size:17.5px} }
 </style>
 </head>
 <body>
@@ -880,7 +915,7 @@ dialog.case[open]{animation:pop .22s ease-out}
         <p class="sub">15 services across the full journey: build, integrate, scale and secure. Pick an area, then tap any service for details.</p></div>
       <div class="focus rv" id="focus">
         <div class="ftabs" id="ftabs"></div>
-        <div class="fview" id="fview"><div class="grid-bg"></div><div id="fviewIn" style="display:flex;flex-direction:column;flex:1"></div></div>
+        <div class="fview" id="fview"><div class="fbg" id="fbg"></div><div class="grid-bg"></div><div id="fviewIn" style="display:flex;flex-direction:column;flex:1"></div></div>
       </div>
       <div class="inds rv"><span class="lb">Industries I build for</span><div class="chips" id="inds"></div></div>
     </div>
@@ -889,7 +924,7 @@ dialog.case[open]{animation:pop .22s ease-out}
   <!-- ECOSYSTEM -->
   <section class="sec" id="stack" style="padding-top:0">
     <div class="wrap">
-      <div class="frame rv"><div class="eco"><div class="glow"></div><div class="grid-bg"></div>
+      <div class="frame rv"><div class="eco"><div class="ebg" id="ebg"></div><div class="glow"></div><div class="grid-bg"></div>
         <div class="in on-dark"><span class="label">My technology ecosystem</span><h2>Built on proven, enterprise-grade technology</h2>
           <p class="sub">The same tools banks and fintechs trust, chosen to fit your project, not the other way round.</p></div>
         <div class="strip"><div class="marq"><div class="track" id="tech"></div></div></div>
@@ -1072,7 +1107,7 @@ dialog.case[open]{animation:pop .22s ease-out}
         </div>
       </div>
     </div>
-    <div class="fbot"><span id="copy"></span><span>Built and hosted on GitHub Pages</span></div>
+    <div class="fbot"><span id="copy"></span><span>Photos from <a href="https://unsplash.com" target="_blank" rel="noopener" style="text-decoration:underline">Unsplash</a> · Hosted on GitHub Pages</span></div>
   </div>
 </footer>
 
@@ -1129,6 +1164,7 @@ dialog.case[open]{animation:pop .22s ease-out}
   const loop = (el, items) => { const h = items.map(t => `<b>${esc(t)}</b>`).join(""); el.innerHTML = h + h; };
   loop($("#builtFor"), BUILT_FOR);
   loop($("#tech"), TECH);
+  if (typeof ECOSYSTEM_IMAGE !== "undefined" && ECOSYSTEM_IMAGE) $("#ebg").style.backgroundImage = `url("${(ECOSYSTEM_IMAGE.includes('unsplash') ? ECOSYSTEM_IMAGE + '?w=1800&q=70&auto=format&fit=crop' : ECOSYSTEM_IMAGE)}")`;
 
   /* icons */
   const ICON_PATHS = {
@@ -1149,6 +1185,7 @@ dialog.case[open]{animation:pop .22s ease-out}
     compass:'<circle cx="12" cy="12" r="10"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5z"/>'
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[k]||ICON_PATHS.web}</svg>`;
+  const pic = (u, w) => !u ? "" : /images\.unsplash\.com/.test(u) ? `${u}?w=${w}&q=72&auto=format&fit=crop` : u;
   const chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>';
   const groups = [...new Set(SERVICES.map(s => s.group))];
 
@@ -1195,6 +1232,8 @@ dialog.case[open]{animation:pop .22s ease-out}
     $("#ftabs").innerHTML = groups.map((g,i) => `<button class="ftab ${i===fi?"on":""}" data-i="${i}" style="--dur:${DUR}ms">
       <div class="t">${esc(g)}${chev}</div><div class="d"><div><p>${esc(FOC[g]||"")}</p></div></div><div class="bar"><i></i></div></button>`).join("");
     const g = groups[fi], list = SERVICES.filter(s => s.group===g);
+    const fbg = $("#fbg"); const u = typeof FOCUS_IMAGES !== "undefined" && FOCUS_IMAGES[g];
+    fbg.style.backgroundImage = u ? `url("${pic(u,1400)}")` : ""; fbg.classList.remove("swap"); void fbg.offsetWidth; fbg.classList.add("swap");
     $("#fviewIn").innerHTML = `<div class="swap" style="display:flex;flex-direction:column;flex:1"><h3>${esc(g)} · ${list.length} services</h3>
       <p class="big">${esc(FOC[g]||"")}</p>
       <div class="fcards">${list.map(s => `<button class="fcard" data-svc="${esc(slug(s.title))}" data-g="${esc(g)}"><span class="ic">${icon(s.icon)}</span><b>${esc(s.title)}</b><span>${esc((s.tags||[]).slice(0,3).join(" · "))}</span></button>`).join("")}</div></div>`;
@@ -1205,6 +1244,7 @@ dialog.case[open]{animation:pop .22s ease-out}
   $("#focus").addEventListener("mouseenter", () => clearInterval(fTimer));
   $("#focus").addEventListener("mouseleave", startF);
   drawFocus(); startF();
+  if (typeof FOCUS_IMAGES !== "undefined") Object.values(FOCUS_IMAGES).forEach(u => { const i = new Image(); i.src = pic(u,1400); });
 
   /* work list */
   const cats = ["All", ...new Set(PROJECTS.map(p => p.category))].sort((a,b) => (a==="All"?0:a==="E-commerce"?1:2) - (b==="All"?0:b==="E-commerce"?1:2));
@@ -1218,7 +1258,7 @@ dialog.case[open]{animation:pop .22s ease-out}
     const mb = $("#moreWork"); mb.hidden = full.length <= 4; mb.textContent = showAll ? "Show fewer projects" : `Show all ${full.length} projects`;
     $("#rows").innerHTML = list.length ? list.map(p => `
       <article class="row">
-        <div class="cat">${esc(p.category)}</div>
+        <div class="thumb">${p.image ? `<img src="${esc(pic(p.image,480))}" alt="" loading="lazy">` : ""}<span>${esc(p.category)}</span></div>
         <div><h3>${esc(p.title)}</h3><p class="scope">${esc(dots(p.scope))}</p></div>
         <div><p class="res">${esc(p.outcome)}</p><p class="stack">${(p.stack||[]).map(esc).join(", ")}</p></div>
         <div class="act">
