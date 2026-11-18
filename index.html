@@ -78,7 +78,7 @@ const PROJECTS = [
     category: "Fintech",
     tag: "New build",
     title: "Agent Wallet & Transfer Platform",
-    image: "https://images.unsplash.com/photo-1533234944761-2f5337579079",
+    image: "https://images.unsplash.com/photo-1610839123817-236de748e5c9",
     scope: "Wallets · P2P & NIP inter-bank transfers · Multi-channel OTP · Fee engine",
     outcome: "PBKDF2 PIN security with lockout and timing-attack protection",
     url: "",
@@ -138,7 +138,7 @@ const PROJECTS = [
     category: "Web",
     tag: "Team build",
     title: "Reward Your Teachers",
-    image: "https://images.unsplash.com/photo-1604145559206-e3bce0040e2d",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
     scope: "Students send appreciation gifts to teachers via integrated payments",
     outcome: "Delivered in an Agile, cross-functional team",
     url: "",
@@ -244,11 +244,12 @@ const FOCUS = {
 /* Background photo for each focus area (free photos from Unsplash; swap for your own any time) */
 const FOCUS_IMAGES = {
   "Build": "https://images.unsplash.com/photo-1531482615713-2afd69097998",
-  "Integrate": "https://images.unsplash.com/photo-1677058870677-8f50eb20aff5",
+  "Integrate": "https://images.unsplash.com/photo-1533234944761-2f5337579079",
   "Cloud & data": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31",
   "Secure & support": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7"
 };
-const ECOSYSTEM_IMAGE = "https://images.unsplash.com/photo-1653566031535-bcf33e1c2893";
+const COMMIT_IMAGE = "https://images.unsplash.com/photo-1604145559206-e3bce0040e2d";  // photo in the stats section
+const ECOSYSTEM_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b";
 
 /* Industries you serve (shown as a strip under services) */
 const INDUSTRIES = ["Banking & fintech", "Retail & e-commerce", "HR & payroll", "Logistics", "Education", "SMEs & startups"];
@@ -1156,7 +1157,7 @@ dialog.case[open]{animation:pop .22s ease-out}
   const img = new Image(); img.alt = `Portrait of ${P.name}`;
   img.onload = () => {
     const ph = $("#photo"); ph.innerHTML = ""; ph.append(img);
-    const c = img.cloneNode(); c.alt = ""; $("#cphoto").append(c);
+    
   };
   img.src = P.photo;
 
@@ -1186,6 +1187,7 @@ dialog.case[open]{animation:pop .22s ease-out}
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[k]||ICON_PATHS.web}</svg>`;
   const pic = (u, w) => !u ? "" : /images\.unsplash\.com/.test(u) ? `${u}?w=${w}&q=72&auto=format&fit=crop` : u;
+  if (typeof COMMIT_IMAGE !== "undefined" && COMMIT_IMAGE) $("#cphoto").innerHTML = `<img src="${pic(COMMIT_IMAGE,900)}" alt="Software engineer at work" loading="lazy">`;
   const chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>';
   const groups = [...new Set(SERVICES.map(s => s.group))];
 
