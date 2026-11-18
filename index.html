@@ -60,33 +60,40 @@ const PROFILE = {
    Leave url "" for NDA / internal work — it shows a lock badge instead.
    Categories become filter tabs automatically.                              */
 const PROJECTS = [
-  /* ---- E-COMMERCE: copy this block once per store you built ----
+  /* ---- To add a store or app you built, copy this block ----
   {
     category: "E-commerce",
     tag: "New build",
     title: "Store name",
-    scope: "Product catalogue · Cart & checkout · Paystack payments · Admin dashboard",
+    scope: "Product catalogue · Cart & checkout · Payments · Admin dashboard",
     outcome: "What changed for the client (e.g. live in 4 weeks, 1,200 orders in month one)",
     url: "https://the-live-store.com",
-    image: "assets/store-screenshot.jpg",   // optional: a screenshot of the store
+    image: "assets/work/store-screenshot.jpg",   // optional: a REAL screenshot of the work
     stack: ["ASP.NET Core", "SQL Server", "Azure"]
   },
   ------------------------------------------------------------------ */
   {
+    category: "E-commerce",
+    tag: "Live demo",
+    title: "Adire & Co. — Demo Online Store",
+    scope: "Catalogue & search · Cart · Lagos delivery zones · Checkout · Order tracking · Admin view",
+    outcome: "A working store you can click through right now: add to cart, check out, see the order",
+    url: "demo/store/",
+    stack: ["JavaScript", "Payments-ready checkout", "Mobile-first"]
+  },
+  {
     category: "Fintech",
     tag: "Live platform",
-    title: "Ahead Digital Banking Platform",
-    image: "https://images.unsplash.com/photo-1677058054899-75c533d57048",
+    title: "Digital Banking Platform for a Commercial Bank",
     scope: "5 microservices · Onboarding/KYC · Cards · Islamic investment · Transactions · Staff auth",
-    outcome: "Owned end to end on a live bank — closed a full VAPT finding set",
+    outcome: "Owned 5 core services end to end on a live bank's mobile banking platform",
     url: "",
-    stack: [".NET", "SQL Server", "Azure", "SmileID", "Blusalt"]
+    stack: [".NET", "SQL Server", "Azure", "Biometric KYC"]
   },
   {
     category: "Fintech",
     tag: "New build",
     title: "Agent Wallet & Transfer Platform",
-    image: "https://images.unsplash.com/photo-1610839123817-236de748e5c9",
     scope: "Wallets · P2P & NIP inter-bank transfers · Multi-channel OTP · Fee engine",
     outcome: "PBKDF2 PIN security with lockout and timing-attack protection",
     url: "",
@@ -96,7 +103,6 @@ const PROJECTS = [
     category: "Fintech",
     tag: "New build",
     title: "Digital Banking & Investment Platform",
-    image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f",
     scope: "11 microservices · API gateway · Stock trading (NGX) · Bill payments · Biometric onboarding",
     outcome: "Event-driven on Kafka, shipped on Azure Container Apps",
     url: "",
@@ -105,9 +111,8 @@ const PROJECTS = [
   {
     category: "SaaS",
     tag: "New build",
-    title: "wBiz HR — Enterprise HRMS",
-    image: "https://images.unsplash.com/photo-1573164574511-73c773193279",
-    scope: "17 HR modules · 1,000+ API endpoints · Nigerian payroll (PAYE, pension, NHIS) · Bulk salary via GTBank",
+    title: "Enterprise HR & Payroll Platform",
+    scope: "17 HR modules · 1,000+ API endpoints · Nigerian payroll (PAYE, pension, NHIS) · Bulk salary payments",
     outcome: "Multi-tenant SaaS with 200+ granular permissions",
     url: "",
     stack: ["ASP.NET Core", "Azure SQL", "Azure AD", "SendGrid"]
@@ -116,7 +121,6 @@ const PROJECTS = [
     category: "Logistics",
     tag: "New build",
     title: "E-Waybill System",
-    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492",
     scope: "Multi-tenant waybill creation · Approval workflows · Depot & site tracking",
     outcome: "Replaced paper waybills across multiple depots",
     url: "",
@@ -125,10 +129,9 @@ const PROJECTS = [
   {
     category: "Fintech",
     tag: "Core banking",
-    title: "BankOne Core Banking — Cheque & Customer APIs",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    title: "Core Banking APIs — Cheques & Customers",
     scope: "Cheque lifecycle & clearing · Customer onboarding, KYC, dedup, segmentation",
-    outcome: "Used by 500+ financial institutions in 8 African countries",
+    outcome: "Part of a core banking platform used by 500+ financial institutions in 8 African countries",
     url: "",
     stack: [".NET", "SQL Server", "Microservices"]
   },
@@ -136,7 +139,6 @@ const PROJECTS = [
     category: "SME Tools",
     tag: "Freelance",
     title: "Invoicing & Inventory Systems",
-    image: "https://images.unsplash.com/photo-1687422808311-a776f467a468",
     scope: "Backend systems for SMEs · Invoicing · Stock management",
     outcome: "Automated manual bookkeeping and sped up transactions",
     url: "",
@@ -145,8 +147,7 @@ const PROJECTS = [
   {
     category: "Web",
     tag: "Team build",
-    title: "Reward Your Teachers",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+    title: "Teacher Appreciation Gifting Platform",
     scope: "Students send appreciation gifts to teachers via integrated payments",
     outcome: "Delivered in an Agile, cross-functional team",
     url: "",
@@ -191,138 +192,157 @@ const TESTIMONIALS = [
    "tags" are the sub-services shown as small chips under each card.
    icon: web, cart, mobile, card, plug, layers, cloud, cube, data, ai, shield, flow, wrench, compass, chat */
 const SERVICES = [
-  { group: "Build", icon: "web", title: "Custom web applications",
-    desc: "Business web apps, customer portals and admin dashboards, designed and built end to end with a secure backend.",
-    tags: ["Web portals", "Admin dashboards", "Booking systems", "Landing pages"] },
-  { group: "Build", icon: "cart", title: "E-commerce and marketplaces",
-    desc: "Online stores and multi-vendor marketplaces with catalogue, cart, checkout, payments, inventory and order tracking.",
-    tags: ["Online stores", "Multi-vendor", "Inventory", "Delivery tracking"] },
-  { group: "Build", icon: "mobile", title: "Mobile app backends",
-    desc: "The APIs, authentication, notifications and data layer behind iOS and Android apps, ready to scale with your users.",
-    tags: ["REST APIs", "Push notifications", "OTP & biometrics", "Real-time"] },
-  { group: "Build", icon: "card", title: "Fintech and banking systems",
-    desc: "Wallets, transfers, cards, savings and investment products, KYC and fee engines, built to pass security audits.",
-    tags: ["Wallets", "NIP transfers", "KYC / BVN / NIN", "Core banking"] },
-  { group: "Build", icon: "layers", title: "SaaS and enterprise software",
-    desc: "Multi-tenant platforms for HR and payroll, ERP, CRM, logistics, invoicing and inventory, with role-based access.",
-    tags: ["HR & payroll", "ERP / CRM", "Logistics", "Multi-tenant"] },
+  { group: "Fintech & payments", core: true, icon: "card", title: "Fintech and banking systems",
+    desc: "Wallets, transfers, cards, savings and investment products, fee engines and core-banking work, built to pass security reviews.",
+    tags: ["Wallets", "Transfers", "Cards", "Core banking"] },
+  { group: "Fintech & payments", core: true, icon: "plug", title: "Payment and bank integrations",
+    desc: "Connect your product to payment gateways, inter-bank transfers, bulk payouts and bank APIs, with reconciliation and audit trails.",
+    tags: ["Payment gateways", "NIP transfers", "Bulk payouts", "Reconciliation"] },
+  { group: "Fintech & payments", core: true, icon: "shield", title: "KYC and identity verification",
+    desc: "Customer onboarding with BVN and NIN checks, biometric liveness, duplicate detection and risk segmentation.",
+    tags: ["BVN / NIN", "Biometrics", "Onboarding", "Dedup"] },
 
-  { group: "Integrate", icon: "plug", title: "API development and integrations",
-    desc: "Connect your product to payment gateways, banks, identity providers, SMS, email and any third-party service.",
-    tags: ["Paystack / Flutterwave", "Stripe", "SmileID", "SMS & email"] },
-  { group: "Integrate", icon: "flow", title: "Business process automation",
-    desc: "Replace spreadsheets and paper with approval workflows, scheduled reports and automatic notifications.",
-    tags: ["Approval workflows", "Scheduled reports", "Notifications", "Document generation"] },
-  { group: "Integrate", icon: "ai", title: "AI features and chatbots",
-    desc: "Add AI to your product: customer-support chatbots, document reading, smart search and automated summaries.",
-    tags: ["Chatbots", "Document AI", "Smart search", "Azure AI / OpenAI"] },
+  { group: "E-commerce", core: true, icon: "cart", title: "Online stores and marketplaces",
+    desc: "Stores with catalogue, cart, secure checkout, delivery zones, inventory and an admin dashboard your team can run.",
+    tags: ["Online stores", "Checkout", "Delivery zones", "Admin"] },
+  { group: "E-commerce", icon: "layers", title: "Inventory, invoicing and order systems",
+    desc: "The back office behind a growing business: stock, invoices, orders and reports in one place instead of spreadsheets.",
+    tags: ["Inventory", "Invoicing", "Orders", "Reports"] },
 
-  { group: "Cloud & data", icon: "cloud", title: "Cloud migration and hosting",
-    desc: "Move your apps and data to Azure, set up reliable hosting and backups, and keep cloud costs under control.",
-    tags: ["Azure migration", "Backups & recovery", "Cost optimisation", "Monitoring"] },
-  { group: "Cloud & data", icon: "cube", title: "DevOps and CI/CD",
-    desc: "Automated build, test and release pipelines with Docker and containers, so every release is fast and safe.",
-    tags: ["Azure DevOps", "GitHub Actions", "Docker", "Infrastructure as Code"] },
-  { group: "Cloud & data", icon: "data", title: "Databases, data and reporting",
-    desc: "Database design, performance tuning, migrations and reporting dashboards that turn your data into decisions.",
-    tags: ["SQL Server", "PostgreSQL", "Query tuning", "Dashboards"] },
-  { group: "Cloud & data", icon: "compass", title: "Architecture and modernisation",
-    desc: "Break slow legacy systems into clean, scalable services, with event-driven design where it pays off.",
-    tags: ["Microservices", "API gateways", "Kafka", "Legacy modernisation"] },
+  { group: "Web & business software", icon: "web", title: "Custom web applications",
+    desc: "Business web apps, customer portals and dashboards, designed and built end to end on a secure backend.",
+    tags: ["Portals", "Dashboards", "Booking", "Admin panels"] },
+  { group: "Web & business software", icon: "layers", title: "SaaS and enterprise systems",
+    desc: "Multi-tenant platforms for HR and payroll, logistics and operations, with role-based access and approvals.",
+    tags: ["HR & payroll", "Logistics", "Multi-tenant", "RBAC"] },
+  { group: "Web & business software", icon: "mobile", title: "Mobile app backends",
+    desc: "The APIs, authentication, OTP and notifications behind iOS and Android apps, ready to scale with your users.",
+    tags: ["REST APIs", "OTP", "Notifications", "Auth"] },
+  { group: "Web & business software", icon: "flow", title: "Workflow automation",
+    desc: "Replace paper and spreadsheets with approval workflows, scheduled reports and automatic notifications.",
+    tags: ["Approvals", "Reports", "Notifications"] },
 
-  { group: "Secure & support", icon: "shield", title: "Security and compliance",
-    desc: "Close penetration-test (VAPT) findings and add encryption, access control, audit trails and OWASP protections.",
-    tags: ["VAPT remediation", "OWASP", "RBAC & SSO", "Audit trails"] },
-  { group: "Secure & support", icon: "wrench", title: "Rescue, maintenance and support",
+  { group: "Cloud, security & support", icon: "cloud", title: "Cloud and DevOps",
+    desc: "Hosting on Azure, Docker containers and automated build-and-release pipelines, so every release is fast and safe.",
+    tags: ["Azure", "Docker", "CI/CD", "Monitoring"] },
+  { group: "Cloud, security & support", core: true, icon: "shield", title: "Security and compliance",
+    desc: "Encryption, access control, audit trails and OWASP protections, and fixes for findings from penetration tests.",
+    tags: ["OWASP", "Pen-test fixes", "RBAC & SSO", "Audit trails"] },
+  { group: "Cloud, security & support", icon: "wrench", title: "Rescue, maintenance and support",
     desc: "I take over existing codebases, trace production failures, fix them in priority order and keep things running.",
     tags: ["Code audits", "Bug fixing", "Performance", "Monthly support"] },
-  { group: "Secure & support", icon: "chat", title: "Technical consulting",
-    desc: "Architecture reviews, code reviews, technology choices and a fractional tech lead for founders without a CTO.",
-    tags: ["Code review", "Tech strategy", "Fractional CTO", "Team mentoring"] }
+  { group: "Cloud, security & support", icon: "chat", title: "Code and architecture reviews",
+    desc: "An experienced second opinion on your code, architecture or technology choices before you scale or raise money.",
+    tags: ["Code review", "Architecture", "Tech choices"] }
 ];
 
 /* The four focus areas (the big accordion). Each name must match a "group" in SERVICES. */
 const FOCUS = {
-  "Build": "New products built end to end: web apps, online stores, fintech and SaaS platforms, designed to handle real users and real money from day one.",
-  "Integrate": "Connect your product to payment gateways, banks, identity checks and AI, and automate the manual work slowing your team down.",
-  "Cloud & data": "Reliable hosting on Azure, automated releases, fast databases and architecture that scales as you grow.",
-  "Secure & support": "Pass security audits, rescue failing systems and keep everything running with ongoing support and expert advice."
+  "Fintech & payments": "My speciality. Banking, wallets, transfers and payment integrations, built by someone who has shipped them for live banks.",
+  "E-commerce": "Online stores and the systems behind them, with checkout, delivery and inventory that hold up on your busiest sales day.",
+  "Web & business software": "Custom web apps, SaaS platforms and mobile backends that replace spreadsheets and paperwork.",
+  "Cloud, security & support": "Reliable hosting, safe releases, security fixes and ongoing support once your product is live."
 };
 
-/* Background photo for each focus area (free photos from Unsplash; swap for your own any time) */
+/* Background photo for each focus area (illustrative photos from Unsplash) */
 const FOCUS_IMAGES = {
-  "Build": "https://images.unsplash.com/photo-1531482615713-2afd69097998",
-  "Integrate": "https://images.unsplash.com/photo-1533234944761-2f5337579079",
-  "Cloud & data": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31",
-  "Secure & support": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7"
+  "Fintech & payments": "https://images.unsplash.com/photo-1677058870677-8f50eb20aff5",
+  "E-commerce": "https://images.unsplash.com/photo-1687422808311-a776f467a468",
+  "Web & business software": "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+  "Cloud, security & support": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
 };
-const COMMIT_IMAGE = "https://images.unsplash.com/photo-1604145559206-e3bce0040e2d";  // photo in the stats section
 const ECOSYSTEM_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b";
+
+/* Starting prices (shown under services). Keep these in line with your proposals. Leave [] to hide. */
+const PRICING = [
+  { name: "Online store", from: "₦850,000", note: "Catalogue, checkout, payments, delivery zones and admin. Live in 3–5 weeks." },
+  { name: "Business web app", from: "₦1,500,000", note: "Portals, dashboards, HR, inventory or workflow systems, built around how you work." },
+  { name: "Fintech and payments", from: "₦2,500,000", note: "Wallets, transfers, KYC and payment integrations, security-reviewed." },
+  { name: "Support and maintenance", from: "₦150,000/mo", note: "Fixes, updates, monitoring and small features for live products." }
+];
+
+/* Analytics: paste ONE id to start counting visitors. Leave "" to switch off.
+   Google Analytics 4: "G-XXXXXXXXXX"  ·  Cloudflare Web Analytics: the token from your Cloudflare dashboard */
+const ANALYTICS = { ga4: "", cloudflare: "" };
 
 /* Industries you serve (shown as a strip under services) */
 const INDUSTRIES = ["Banking & fintech", "Retail & e-commerce", "HR & payroll", "Logistics", "Education", "SMEs & startups"];
 
 /* Technologies & platforms (the "ecosystem" wall) */
 const TECH = ["C# / .NET", "ASP.NET Core", "Microsoft Azure", "SQL Server", "PostgreSQL", "MySQL", "Redis", "Kafka",
-  "Docker", "Azure DevOps", "GitHub Actions", "Azure AD", "Paystack", "Flutterwave", "Stripe", "SmileID", "NIP", "SendGrid", "REST APIs", "Microservices"];
+  "Docker", "Azure DevOps", "Azure AD", "EF Core", "NIP transfers", "CoralPay", "Biometric KYC", "SendGrid", "REST APIs", "Microservices", "Clean Architecture", "Serilog"];
 
-/* Case studies — opened from the "Read case study" button on a project card (matched by title) */
+/* Case studies — opened from the "Read the case study" button (matched by project title) */
 const CASES = {
-  "Ahead Digital Banking Platform": {
-    client: "Lotus Bank · live digital banking platform",
-    role: "Senior Backend Engineer — owner of 5 microservices",
-    problem: "A live banking platform with real customers was hitting identity-verification outages, card-issuance failures, investment-calculation bugs and an open penetration-test (VAPT) finding set.",
+  "Digital Banking Platform for a Commercial Bank": {
+    client: "A Nigerian commercial bank · live mobile banking platform",
+    role: "Senior backend engineer, owner of 5 microservices",
+    problem: "A bank's live digital platform needed its identity verification, card issuance and investment services to be reliable at scale and ready for security review.",
     did: [
-      "Traced a production BVN/NIN verification outage to its root cause through log analysis and fixed it",
-      "Redesigned SmileID biometric liveness checks into a stateless, mobile-owned flow",
-      "Fixed Blusalt card-issuance failures and built a self-healing recovery flow for orphaned cardholders",
-      "Enforced JWT validation on card endpoints and fixed Mudarabah profit-ratio and liquidation logic",
-      "Built Beneficiary V2 end to end",
-      "Closed the staff-auth VAPT findings: token hashing, audit persistence and injection fixes"
+      "Stabilised BVN/NIN identity verification through careful log analysis and root-cause fixes",
+      "Redesigned biometric liveness checks into a simpler, stateless mobile flow",
+      "Built a self-healing recovery flow for card issuance",
+      "Hardened card endpoints with strict token validation",
+      "Corrected Islamic investment (Mudarabah) profit and liquidation logic",
+      "Built beneficiary management end to end and implemented security-review recommendations for staff authentication"
     ],
-    result: "Verification and card issuance stabilised, investment logic corrected, and a full security audit finding set closed on a live bank."
+    result: "Reliable onboarding and card issuance, correct investment calculations, and services ready for the bank's security standards."
   },
-  "wBiz HR — Enterprise HRMS": {
-    client: "Wragby Business Solutions · multi-tenant SaaS",
+  "Enterprise HR & Payroll Platform": {
+    client: "An enterprise software company · multi-tenant SaaS",
     role: "Backend lead",
     problem: "Organisations needed one secure system for HR, payroll and approvals instead of spreadsheets, with each company's data strictly isolated.",
     did: [
-      "Architected a multi-tenant platform with JWT-scoped tenant isolation on Azure SQL",
+      "Architected a multi-tenant platform with tenant isolation on Azure SQL",
       "Built JWT (RS256) auth, Azure AD single sign-on and hierarchical RBAC with 200+ permissions",
       "Delivered 17 HR modules and 1,000+ API endpoints: payroll, recruitment, performance, leave, disciplinary",
       "Engineered a Nigerian payroll engine (PAYE, pension, NHIS) with payslips and approval workflows",
-      "Integrated GTBank GAPS for bulk salary payments with signed requests and audit trails",
-      "Added OWASP-grade security: rate limiting, security headers, SHA-512 signing, full audit logging"
+      "Integrated bank bulk-payment APIs for salary runs, with signed requests and audit trails",
+      "Added rate limiting, security headers, request signing and full audit logging"
     ],
     result: "A complete HR and payroll platform companies can run end to end, from hiring to paying salaries into bank accounts."
   },
   "Agent Wallet & Transfer Platform": {
-    client: "Money Master PSB · agent banking",
+    client: "A payment service bank · agent banking",
     role: "Backend engineer",
     problem: "Agents needed secure wallets to move money (P2P, inter-bank, cash-out) with correct fees and a full audit trail for compliance.",
     did: [
       "Built a 4-layer Clean Architecture .NET 9 backend following SOLID principles",
       "Implemented PIN security with PBKDF2-SHA256, lockout and constant-time comparison",
       "Added OTP verification over SMS, email and voice call",
-      "Integrated BankOne core banking and NIP for real-time lookups and inter-bank transfers",
+      "Integrated core banking and NIP for real-time lookups and inter-bank transfers",
       "Engineered a fee engine supporting flat, percentage and capped charges per transaction type",
-      "Added Serilog request/response logging for observability and compliance"
+      "Added structured request/response logging for observability and compliance"
     ],
     result: "Agents can manage wallets and send money across banks securely, with every transaction auditable."
   },
   "Digital Banking & Investment Platform": {
-    client: "Uridium Technology · fintech",
+    client: "A Lagos fintech company",
     role: "Backend engineer",
     problem: "One platform had to combine digital banking, stock trading and investments, and stay reliable as each part scaled.",
     did: [
-      "Built 11 microservices behind an Ocelot API gateway, each with its own database",
+      "Built 11 microservices behind an API gateway, each with its own database",
       "Designed event-driven communication with Kafka",
       "Developed onboarding with BVN/NIN and facial biometrics",
-      "Integrated real-time NGX stock trading via Zanibal, plus transfers and bill payments via CoralPay",
+      "Integrated real-time NGX stock trading, transfers and bill payments through partner APIs",
       "Implemented JWT, MFA, biometric login and RBAC with 45+ permissions",
-      "Shipped on Docker and Azure Container Apps with Azure DevOps CI/CD and centralised logging"
+      "Shipped on Docker and Azure Container Apps with CI/CD and centralised logging"
     ],
     result: "Banking, trading and investing on one loosely coupled platform, deployable and observable in the cloud."
+  },
+  "Adire & Co. — Demo Online Store": {
+    client: "SmilesPay Solutions · demo project",
+    role: "Designed and built end to end",
+    problem: "Clients want to see an online store working before they commit. This demo shows the shopping and checkout experience I build for Nigerian businesses.",
+    did: [
+      "Mobile-first catalogue with categories, search and product details",
+      "Cart that remembers items between visits",
+      "Checkout with Lagos and nationwide delivery zones and automatic delivery fees",
+      "Payment step ready for a real gateway (runs in safe demo mode here)",
+      "Order confirmation with an order number and status tracking",
+      "A simple admin view of orders and revenue"
+    ],
+    result: "A working store you can try in your browser. Your real store gets your brand, your products, live payments and a secure backend."
   }
 };
 </script>
@@ -838,6 +858,50 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
 .reg span{font-size:13px;color:var(--ink-2);line-height:1.35}
 .reg b{display:block;color:var(--ink);font-size:14.5px}
 #uReg{display:inline-flex;gap:7px;align-items:center;font-weight:500;color:var(--ink)}
+.founder{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:#c6d4f5;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:7px 14px 7px 8px;border-radius:999px;margin-bottom:24px}
+.fd-ic{width:26px;height:26px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff}
+.fd-ic svg{width:15px;height:15px}
+.hero .lead strong{color:#fff;font-weight:600}
+.tile{display:grid;place-items:center}
+.tile .t-ic{position:static;padding:0;font-size:0;color:#fff;width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.14);display:grid;place-items:center;color:#fff}
+.tile .t-ic svg{width:28px;height:28px}
+.t-fintech{background:linear-gradient(140deg,#2563eb,#0b1220)}
+.t-e-commerce{background:linear-gradient(140deg,#0ea5a4,#0b3b4a)}
+.t-saas{background:linear-gradient(140deg,#6d5dfc,#1e1b4b)}
+.t-logistics{background:linear-gradient(140deg,#f59e0b,#7c2d12)}
+.t-sme-tools{background:linear-gradient(140deg,#16a34a,#14532d)}
+.t-web{background:linear-gradient(140deg,#ec4899,#4a044e)}
+.row:hover .tile .t-ic{transform:scale(1.08)}
+.tile .t-ic{transition:transform .3s;background:rgba(255,255,255,.14)!important}
+.brandtile{background:linear-gradient(150deg,#0b1220 0%,#15254a 60%,#2563eb 140%);color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:280px}
+.brandtile .bt-ic{width:58px;height:58px;border-radius:14px}
+.brandtile ul{list-style:none;display:grid;gap:10px;margin:18px 0}
+.brandtile li{font-size:16px;font-weight:600;display:flex;gap:10px;align-items:center}
+.brandtile li::before{content:"";width:8px;height:8px;border-radius:2px;background:#5b8cff;transform:rotate(45deg);flex:none}
+.brandtile .bt-f{font-size:12.5px;color:#9fb0cc;letter-spacing:.08em;text-transform:uppercase}
+i.core{font-style:normal;color:#9fc0ff;font-weight:700}
+.core-pill{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:6px}
+.prices{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.price{border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.price:first-child{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.price h3{font-size:16px;font-weight:700}
+.price .from{font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+.price .from small{display:block;font-size:12.5px;font-weight:500;color:var(--ink-3);letter-spacing:0}
+.price p{font-size:14.5px;color:var(--ink-2)}
+.price .textbtn{margin-top:auto}
+.pnote{font-size:14px;color:var(--ink-3);margin-top:18px}
+.pnote a{color:var(--accent);font-weight:600}
+@media (max-width:1080px){.prices{grid-template-columns:1fr 1fr}}
+@media (max-width:680px){.prices{grid-template-columns:1fr}.founder{font-size:12.5px}}
+.post{display:grid;grid-template-columns:300px 1fr;gap:32px;align-items:center;border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:32px;transition:box-shadow .2s,transform .2s}
+.post:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.post-art{aspect-ratio:16/10;border-radius:14px;background:linear-gradient(140deg,#0b1220,#1d3a8a 70%,#2563eb);display:grid;place-items:center;position:relative;overflow:hidden}
+.post-art img{width:64px;height:64px;border-radius:16px;position:relative;z-index:1}
+.post-art span{position:absolute;right:-10px;bottom:-40px;font-size:180px;font-weight:800;color:rgba(255,255,255,.08);line-height:1}
+.post-meta{font-size:13px;font-weight:600;color:var(--accent)}
+.post h3{font-size:24px;letter-spacing:-.02em;line-height:1.25;margin:6px 0 8px}
+.post p{color:var(--ink-2);margin-bottom:12px}
+@media (max-width:680px){.post{grid-template-columns:1fr;gap:16px}.post h3{font-size:20px}}
 </style>
 </head>
 <body>
@@ -884,7 +948,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
         <button aria-expanded="false" aria-controls="mega">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="mega" id="mega"><h4>What I can do for you</h4><div class="mega-cols" id="megaCols"></div></div>
       </div>
-      <a href="#work">Work</a><a href="#stories">Case studies</a><a href="#about">About</a><a href="#faq">FAQ</a>
+      <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a>
     </nav>
     <div class="nav-r">
       <a class="btn btn-primary btn-sm" href="#contact">Start a project <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m9 6 6 6-6 6"/></svg></a>
@@ -893,7 +957,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
   </div>
   <div class="mob" id="mob"><div class="wrap">
     <div class="sg">Services</div><div class="sl" id="mobSvc"></div>
-    <a href="#work">Work</a><a href="#stories">Case studies</a><a href="#about">About</a><a href="#faq">FAQ</a>
+    <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a>
     <a class="btn btn-primary" href="#contact" style="color:#fff;border:0">Start a project</a>
   </div></div>
 </header>
@@ -904,8 +968,9 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
     <svg class="waves" id="heroWaves" preserveAspectRatio="none" viewBox="0 0 1440 760" aria-hidden="true"></svg>
     <div class="wrap hero-in">
       <div>
+        <p class="founder"><span class="fd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span>Founder, SmilesPay Solutions Ltd · Senior software engineer</p>
         <h1>Secure software that runs <span class="hl">your business.</span></h1>
-        <p class="lead">I'm Johnson, a senior software engineer. For six years I've built banking, payment, e-commerce and SaaS platforms that handle real money, and I'll build yours to the same standard.</p>
+        <p class="lead">I'm Johnson. I specialise in <strong>fintech, payments and e-commerce</strong>: the systems that move real money. I've spent six years building them for banks and fintechs, and through SmilesPay Solutions I build them for growing businesses too.</p>
         <div class="ctas">
           <a class="btn btn-primary" href="#contact">Start a project <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m9 6 6 6-6 6"/></svg></a>
           <a class="btn btn-white" href="#services"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Explore my services</a>
@@ -924,7 +989,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
     </div>
   </section>
 
-  <div class="built"><div class="wrap"><span class="lb">Trusted to build for</span><div class="marq"><div class="track" id="builtFor"></div></div></div></div>
+  <div class="built"><div class="wrap"><span class="lb">Engineering experience at</span><div class="marq"><div class="track" id="builtFor"></div></div></div></div>
 
   <!-- CREDENTIALS -->
   <section class="sec" style="isolation:isolate">
@@ -954,12 +1019,22 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
   <section class="sec" id="services" style="padding-top:0">
     <div class="wrap">
       <div class="rv"><span class="label">What I do</span><h2>Software engineering, end to end</h2>
-        <p class="sub">15 services across the full journey: build, integrate, scale and secure. Pick an area, then tap any service for details.</p></div>
+        <p class="sub">Specialist in fintech, payments and e-commerce, with the full journey covered: build, integrate, host, secure and support. Pick an area, then tap any service for details.</p></div>
       <div class="focus rv" id="focus">
         <div class="ftabs" id="ftabs"></div>
         <div class="fview" id="fview"><div class="fbg" id="fbg"></div><div class="grid-bg"></div><div id="fviewIn" style="display:flex;flex-direction:column;flex:1"></div></div>
       </div>
       <div class="inds rv"><span class="lb">Industries I build for</span><div class="chips" id="inds"></div></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="sec" id="pricing" style="padding-top:0">
+    <div class="wrap">
+      <div class="rv"><span class="label">Starting prices</span><h2>Clear pricing, no surprises</h2>
+        <p class="sub">Every project gets a fixed written quote after a short call. These are typical starting points so you can plan your budget.</p></div>
+      <div class="prices rv" id="prices"></div>
+      <p class="pnote rv">Prices exclude third-party costs such as hosting, domain and payment-gateway fees. Paid in milestones, not all upfront. <a href="insights/online-store-cost-nigeria/">What does an online store really cost? →</a></p>
     </div>
   </section>
 
@@ -1011,7 +1086,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
       <div class="cgrid">
         <div class="stat rv"><svg class="si" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 40V28M18 40V20M28 40V24M38 40V10"/><path d="M6 40h36"/></svg><div><b data-count="6">6+</b><span>Years building production systems</span></div></div>
         <div class="ctext rv"><h3>Trusted on systems that can't afford to fail</h3><p>Live banks, payment service banks and a core banking platform used across Africa: when the stakes are real money, I build for reliability, security and audit from day one.</p></div>
-        <div class="cphoto rv" id="cphoto"></div>
+        <div class="cphoto brandtile rv" id="cphoto"><img src="assets/brand/smilespay-icon.svg" alt="" class="bt-ic"><ul><li>Secure by default</li><li>Documented and handed over</li><li>Fixed quote, clear milestones</li></ul><span class="bt-f">SmilesPay Solutions Ltd</span></div>
         <div class="stat rv"><svg class="si" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="16"/><path d="M8 24h32M24 8c5 5 5 27 0 32M24 8c-5 5-5 27 0 32"/></svg><div><b data-count="500">500+</b><span>Financial institutions on APIs I built</span></div></div>
         <div class="stat rv"><svg class="si" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="14" height="14" rx="2"/><rect x="28" y="6" width="14" height="14" rx="2"/><rect x="6" y="28" width="14" height="14" rx="2"/><rect x="28" y="28" width="14" height="14" rx="2"/></svg><div><b data-count="16">16+</b><span>Microservices shipped to production</span></div></div>
       </div>
@@ -1050,6 +1125,19 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
     </div>
   </section>
 
+  <!-- INSIGHTS -->
+  <section class="sec" id="insights" style="padding-top:0">
+    <div class="wrap">
+      <div class="rv"><span class="label">Insights</span><h2>Straight answers for business owners</h2></div>
+      <a class="post rv" href="insights/online-store-cost-nigeria/">
+        <div class="post-art"><img src="assets/brand/smilespay-icon.svg" alt=""><span>₦</span></div>
+        <div><span class="post-meta">E-commerce · 6 min read</span><h3>How much does an online store cost in Nigeria in 2026?</h3>
+          <p>Build costs by store size, the running costs most quotes leave out, payment gateway fees, and how to avoid paying twice.</p>
+          <span class="textbtn">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg></span></div>
+      </a>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="sec" id="faq" style="padding-top:0">
     <div class="wrap">
@@ -1059,7 +1147,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
         <details><summary>How long does it take?</summary><p>It depends on scope. After our call you get a written timeline with dated milestones, plus regular demo links so you can see it taking shape.</p></details>
         <details><summary>Can you build the whole website, not just the backend?</summary><p>Yes. I deliver complete web applications end to end. My specialty is the hard part underneath: payments, security, data and integrations that have to work every time.</p></details>
         <details><summary>Can you take over or fix an existing product?</summary><p>Yes. I start with an audit of the code and production logs, tell you plainly what's wrong, then fix it in priority order.</p></details>
-        <details><summary>Which payment providers can you integrate?</summary><p>I've integrated NIP inter-bank transfers, CoralPay, GTBank GAPS bulk payments and core banking systems. For online stores I set up whichever gateway fits your market, such as Paystack, Flutterwave or Stripe.</p></details>
+        <details><summary>Which payment providers can you integrate?</summary><p>I've integrated NIP inter-bank transfers, CoralPay, bank bulk-payment APIs, identity-verification providers and core banking systems. For online stores I integrate the payment gateway that fits your market and customers.</p></details>
         <details><summary>Are you a registered company?</summary><p id="faqReg">Yes. SmilesPay Solutions Ltd is a private limited company registered with the Corporate Affairs Commission (CAC) in Nigeria. You get proper invoices and a written contract with the company.</p></details>
         <details><summary>Will you sign an NDA? Who owns the code?</summary><p>Yes, I'm happy to sign an NDA, and much of my work is confidential. You own the code and everything built for you once the project is paid in full.</p></details>
         <details><summary>Do you work with clients outside Nigeria?</summary><p>Yes. I work remotely from Lagos (WAT, UTC+1), which overlaps fully with UK and European working hours and partly with the US.</p></details>
@@ -1126,7 +1214,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
 <path transform="translate(326.23 64.00) scale(0.044800000000000006 -0.044800000000000006)" class="lg-s" d="M311 -12Q258 -12 212.0 1.0Q166 14 130.0 37.5Q94 61 70.5 90.0Q47 119 40 151L174 191Q187 157 220.0 132.5Q253 108 303 107Q356 106 389.5 130.0Q423 154 423 192Q423 225 396.5 247.5Q370 270 324 282L233 306Q182 319 143.0 345.5Q104 372 82.0 411.0Q60 450 60 502Q60 601 125.5 656.5Q191 712 311 712Q378 712 428.5 692.5Q479 673 513.0 637.0Q547 601 565 552L432 511Q420 545 388.0 569.0Q356 593 307 593Q257 593 228.5 570.0Q200 547 200 505Q200 472 222.5 453.0Q245 434 284 424L376 401Q466 379 516.0 322.0Q566 265 566 195Q566 133 536.0 86.5Q506 40 449.0 14.0Q392 -12 311 -12Z"/></svg></a>
         <p class="tagline">Secure software for banks, fintechs, online stores and growing businesses. Built in Lagos, delivered worldwide.</p>
       </div>
-      <nav class="flinks" aria-label="Footer"><a href="#services">Services</a><a href="#work">Work</a><a href="#stories">Case studies</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a id="fCv" download>Download CV</a></nav>
+      <nav class="flinks" aria-label="Footer"><a href="#services">Services</a><a href="#work">Work</a><a href="#work">Case studies</a><a href="#pricing">Pricing</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a id="fCv" download>Download CV</a></nav>
       <div class="fsoc">
         <a id="fLi" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
         <a id="fGh" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
@@ -1216,7 +1304,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[k]||ICON_PATHS.web}</svg>`;
   const pic = (u, w) => !u ? "" : /images\.unsplash\.com/.test(u) ? `${u}?w=${w}&q=72&auto=format&fit=crop` : u;
-  if (typeof COMMIT_IMAGE !== "undefined" && COMMIT_IMAGE) $("#cphoto").innerHTML = `<img src="${pic(COMMIT_IMAGE,900)}" alt="Software engineer at work" loading="lazy">`;
+  const CAT_ICON = {"Fintech":"card","E-commerce":"cart","SaaS":"layers","Logistics":"flow","SME Tools":"data","Web":"web"};
   const chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>';
   const groups = [...new Set(SERVICES.map(s => s.group))];
 
@@ -1242,7 +1330,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
     $("#svcBody").innerHTML = `
       <div class="case-top"><span class="cat">${esc(sv.group)}</span>
         <button class="xbtn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-      <div class="sic">${icon(sv.icon)}</div>
+      <div class="sic">${icon(sv.icon)}</div>${sv.core ? '<span class="core-pill">One of my specialities</span>' : ""}
       <h3>${esc(sv.title)}</h3>
       <p>${esc(sv.desc)}</p>
       <h4>Includes</h4><div class="stg">${(sv.tags||[]).map(t => `<span>${esc(t)}</span>`).join("")}</div>
@@ -1252,7 +1340,17 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
   sdlg.addEventListener("click", e => {
     const p = e.target.closest("[data-pick]"); if (p) $('#brief select[name="type"]').value = p.dataset.pick;
     if (e.target === sdlg || e.target.closest("[data-close]")) sdlg.close(); });
+  const PRICE_MAP = {"Online store":"Online stores and marketplaces","Business web app":"Custom web applications","Fintech and payments":"Fintech and banking systems","Support and maintenance":"Rescue, maintenance and support"};
+  document.addEventListener("click", e => { const q = e.target.closest("[data-pick-type]"); if (q && PRICE_MAP[q.dataset.pickType]) $('#brief select[name="type"]').value = PRICE_MAP[q.dataset.pickType]; });
   document.addEventListener("click", e => { const a = e.target.closest("[data-svc]"); if (!a) return; e.preventDefault(); openSvc(a.dataset.svc); });
+  if (typeof PRICING !== "undefined" && PRICING.length){
+    $("#prices").innerHTML = PRICING.map(p => `<div class="price"><h3>${esc(p.name)}</h3><p class="from"><small>from</small>${esc(p.from)}</p><p>${esc(p.note)}</p><a class="textbtn" href="#contact" data-pick-type="${esc(p.name)}">Get a quote ${chev}</a></div>`).join("");
+  } else $("#pricing").remove();
+  if (typeof ANALYTICS !== "undefined"){
+    if (ANALYTICS.ga4){ const g = document.createElement("script"); g.async = true; g.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ANALYTICS.ga4)}`; document.head.append(g);
+      window.dataLayer = window.dataLayer || []; window.gtag = function(){ dataLayer.push(arguments); }; gtag("js", new Date()); gtag("config", ANALYTICS.ga4); }
+    if (ANALYTICS.cloudflare){ const c = document.createElement("script"); c.defer = true; c.src = "https://static.cloudflareinsights.com/beacon.min.js"; c.dataset.cfBeacon = JSON.stringify({token: ANALYTICS.cloudflare}); document.head.append(c); }
+  }
   $("#inds").innerHTML = INDUSTRIES.map(i => `<span>${esc(i)}</span>`).join("");
 
   /* focus accordion (auto-rotates, pauses on hover) */
@@ -1267,7 +1365,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
     fbg.style.backgroundImage = u ? `url("${pic(u,1400)}")` : ""; fbg.classList.remove("swap"); void fbg.offsetWidth; fbg.classList.add("swap");
     $("#fviewIn").innerHTML = `<div class="swap" style="display:flex;flex-direction:column;flex:1"><h3>${esc(g)} · ${list.length} services</h3>
       <p class="big">${esc(FOC[g]||"")}</p>
-      <div class="fcards">${list.map(s => `<button class="fcard" data-svc="${esc(slug(s.title))}" data-g="${esc(g)}"><span class="ic">${icon(s.icon)}</span><b>${esc(s.title)}</b><span>${esc((s.tags||[]).slice(0,3).join(" · "))}</span></button>`).join("")}</div></div>`;
+      <div class="fcards">${list.map(s => `<button class="fcard" data-svc="${esc(slug(s.title))}" data-g="${esc(g)}"><span class="ic">${icon(s.icon)}</span><b>${esc(s.title)}</b><span>${s.core ? '<i class="core">Speciality</i> ' : ""}${esc((s.tags||[]).slice(0,3).join(" · "))}</span></button>`).join("")}</div></div>`;
   }
   const next = () => { fi = (fi + 1) % groups.length; drawFocus(); };
   const startF = () => { if (reduce) return; clearInterval(fTimer); fTimer = setInterval(next, DUR); };
@@ -1289,11 +1387,11 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
     const mb = $("#moreWork"); mb.hidden = full.length <= 4; mb.textContent = showAll ? "Show fewer projects" : `Show all ${full.length} projects`;
     $("#rows").innerHTML = list.length ? list.map(p => `
       <article class="row">
-        <div class="thumb">${p.image ? `<img src="${esc(pic(p.image,480))}" alt="" loading="lazy">` : ""}<span>${esc(p.category)}</span></div>
+        <div class="thumb ${p.image ? "" : "tile t-" + slug(p.category)}">${p.image ? `<img src="${esc(pic(p.image,480))}" alt="Screenshot of ${esc(p.title)}" loading="lazy">` : `<span class="t-ic">${icon(CAT_ICON[p.category] || "web")}</span>`}<span>${esc(p.category)}</span></div>
         <div><h3>${esc(p.title)}</h3><p class="scope">${esc(dots(p.scope))}</p></div>
         <div><p class="res">${esc(p.outcome)}</p><p class="stack">${(p.stack||[]).map(esc).join(", ")}</p></div>
         <div class="act">
-          ${p.url ? `<a class="btn btn-primary btn-sm" href="${esc(p.url)}" target="_blank" rel="noopener">Visit live site</a>` : `<span class="lock">${lock}Private client work</span>`}
+          ${p.url ? `<a class="btn btn-primary btn-sm" href="${esc(p.url)}" target="_blank" rel="noopener">${p.tag === "Live demo" ? "Try the live demo" : "Visit live site"}</a>` : `<span class="lock">${lock}Private client work</span>`}
           ${CASES[p.title] ? `<button class="textbtn" data-case="${esc(p.title)}">Read the case study ${chev}</button>` : ""}
         </div>
       </article>`).join("") : `<p class="empty">No projects in this category yet.</p>`;
