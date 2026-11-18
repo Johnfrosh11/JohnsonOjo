@@ -82,6 +82,15 @@ const PROJECTS = [
     stack: ["JavaScript", "Payments-ready checkout", "Mobile-first"]
   },
   {
+    category: "AI",
+    tag: "Live demo",
+    title: "AI Shopping Assistant — Demo",
+    scope: "Natural-language product search · Price filters · Delivery quotes by area · Order tracking · Add to cart from chat · Human handover",
+    outcome: "Ask it \"kaftans under 50k\" or \"delivery to Lekki\" and it answers instantly, around the clock",
+    url: "demo/store/?assistant=1",
+    stack: ["Conversational UI", "Intent detection", "Store & order data"]
+  },
+  {
     category: "Fintech",
     tag: "Live platform",
     title: "Digital Banking Platform for a Commercial Bank",
@@ -202,6 +211,25 @@ const SERVICES = [
     desc: "Customer onboarding with BVN and NIN checks, biometric liveness, duplicate detection and risk segmentation.",
     tags: ["BVN / NIN", "Biometrics", "Onboarding", "Dedup"] },
 
+  { group: "AI solutions", core: true, icon: "ai", title: "AI customer support assistants",
+    desc: "A 24/7 assistant on your website or WhatsApp that answers questions, finds products, tracks orders and hands over to your team when needed.",
+    tags: ["Website chat", "WhatsApp", "Order tracking", "Human handover"] },
+  { group: "AI solutions", icon: "data", title: "AI document reading",
+    desc: "Pull data out of invoices, receipts, bank statements and KYC documents automatically, so your team stops typing it in by hand.",
+    tags: ["Invoices", "Receipts", "Statements", "KYC documents"] },
+  { group: "AI solutions", icon: "chat", title: "Chat with your business knowledge",
+    desc: "A private assistant that answers staff questions from your policies, manuals and reports, with links to the source.",
+    tags: ["Policies & SOPs", "Internal docs", "Cited answers", "Private data"] },
+  { group: "AI solutions", icon: "cart", title: "AI search and recommendations",
+    desc: "Store search that understands what customers mean, like \"red dress under 20k\", plus product recommendations that lift order value.",
+    tags: ["Smart search", "Recommendations", "Upsell", "E-commerce"] },
+  { group: "AI solutions", icon: "flow", title: "AI workflow automation",
+    desc: "Turn emails, WhatsApp orders and voice notes into tasks, orders and summaries automatically, connected to the tools you already use.",
+    tags: ["Email triage", "Order capture", "Voice notes", "Summaries"] },
+  { group: "AI solutions", icon: "shield", title: "Fraud and risk alerts",
+    desc: "Flag unusual transactions and suspicious sign-ups early, combining clear business rules with AI scoring, for fintechs and online stores.",
+    tags: ["Transaction monitoring", "Risk scoring", "Alerts", "Fintech"] },
+
   { group: "E-commerce", core: true, icon: "cart", title: "Online stores and marketplaces",
     desc: "Stores with catalogue, cart, secure checkout, delivery zones, inventory and an admin dashboard your team can run.",
     tags: ["Online stores", "Checkout", "Delivery zones", "Admin"] },
@@ -239,6 +267,7 @@ const SERVICES = [
 /* The four focus areas (the big accordion). Each name must match a "group" in SERVICES. */
 const FOCUS = {
   "Fintech & payments": "My speciality. Banking, wallets, transfers and payment integrations, built by someone who has shipped them for live banks.",
+  "AI solutions": "Practical AI that saves time and wins sales: assistants that answer customers 24/7, read documents, and automate busywork, built safely on your own data.",
   "E-commerce": "Online stores and the systems behind them, with checkout, delivery and inventory that hold up on your busiest sales day.",
   "Web & business software": "Custom web apps, SaaS platforms and mobile backends that replace spreadsheets and paperwork.",
   "Cloud, security & support": "Reliable hosting, safe releases, security fixes and ongoing support once your product is live."
@@ -247,6 +276,7 @@ const FOCUS = {
 /* Background photo for each focus area (illustrative photos from Unsplash) */
 const FOCUS_IMAGES = {
   "Fintech & payments": "https://images.unsplash.com/photo-1677058870677-8f50eb20aff5",
+  "AI solutions": "https://images.unsplash.com/photo-1604145559206-e3bce0040e2d",
   "E-commerce": "https://images.unsplash.com/photo-1687422808311-a776f467a468",
   "Web & business software": "https://images.unsplash.com/photo-1531482615713-2afd69097998",
   "Cloud, security & support": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31"
@@ -256,6 +286,7 @@ const ECOSYSTEM_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f5
 /* Starting prices (shown under services). Keep these in line with your proposals. Leave [] to hide. */
 const PRICING = [
   { name: "Online store", from: "₦850,000", note: "Catalogue, checkout, payments, delivery zones and admin. Live in 3–5 weeks." },
+  { name: "AI assistant or automation", from: "₦1,200,000", note: "A website or WhatsApp assistant, document reading or workflow automation on your data." },
   { name: "Business web app", from: "₦1,500,000", note: "Portals, dashboards, HR, inventory or workflow systems, built around how you work." },
   { name: "Fintech and payments", from: "₦2,500,000", note: "Wallets, transfers, KYC and payment integrations, security-reviewed." },
   { name: "Support and maintenance", from: "₦150,000/mo", note: "Fixes, updates, monitoring and small features for live products." }
@@ -270,7 +301,7 @@ const INDUSTRIES = ["Banking & fintech", "Retail & e-commerce", "HR & payroll", 
 
 /* Technologies & platforms (the "ecosystem" wall) */
 const TECH = ["C# / .NET", "ASP.NET Core", "Microsoft Azure", "SQL Server", "PostgreSQL", "MySQL", "Redis", "Kafka",
-  "Docker", "Azure DevOps", "Azure AD", "EF Core", "NIP transfers", "CoralPay", "Biometric KYC", "SendGrid", "REST APIs", "Microservices", "Clean Architecture", "Serilog"];
+  "Docker", "Azure DevOps", "Azure AD", "EF Core", "NIP transfers", "CoralPay", "Biometric KYC", "SendGrid", "REST APIs", "Microservices", "AI / LLM APIs", "Azure AI", "Clean Architecture", "Serilog"];
 
 /* Case studies — opened from the "Read the case study" button (matched by project title) */
 const CASES = {
@@ -329,6 +360,20 @@ const CASES = {
       "Shipped on Docker and Azure Container Apps with CI/CD and centralised logging"
     ],
     result: "Banking, trading and investing on one loosely coupled platform, deployable and observable in the cloud."
+  },
+  "AI Shopping Assistant — Demo": {
+    client: "SmilesPay Solutions · demo project",
+    role: "Designed and built end to end",
+    problem: "Online shops lose sales when customers can't get quick answers about products, prices and delivery, especially at night and on weekends.",
+    did: [
+      "A chat assistant that understands everyday questions like \"show me shirts under 40k\"",
+      "Product answers with prices and an Add to cart button inside the chat",
+      "Instant delivery quotes by Lagos area or state",
+      "Order tracking by order number, connected to the store's orders",
+      "Answers on returns, payment options and pickup",
+      "Clear handover to a human on WhatsApp when the assistant can't help"
+    ],
+    result: "Customers get answers in seconds at any hour. In client projects the assistant runs on an AI model connected to your products, policies and order data, on your website and WhatsApp."
   },
   "Adire & Co. — Demo Online Store": {
     client: "SmilesPay Solutions · demo project",
@@ -871,6 +916,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
 .t-logistics{background:linear-gradient(140deg,#f59e0b,#7c2d12)}
 .t-sme-tools{background:linear-gradient(140deg,#16a34a,#14532d)}
 .t-web{background:linear-gradient(140deg,#ec4899,#4a044e)}
+.t-ai{background:linear-gradient(140deg,#8b5cf6,#2563eb 55%,#0b1220)}
 .row:hover .tile .t-ic{transform:scale(1.08)}
 .tile .t-ic{transition:transform .3s;background:rgba(255,255,255,.14)!important}
 .brandtile{background:linear-gradient(150deg,#0b1220 0%,#15254a 60%,#2563eb 140%);color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:280px}
@@ -881,17 +927,17 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
 .brandtile .bt-f{font-size:12.5px;color:#9fb0cc;letter-spacing:.08em;text-transform:uppercase}
 i.core{font-style:normal;color:#9fc0ff;font-weight:700}
 .core-pill{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:6px}
-.prices{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.prices{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:36px}
 .price{border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
 .price:first-child{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .price h3{font-size:16px;font-weight:700}
-.price .from{font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+.price .from{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
 .price .from small{display:block;font-size:12.5px;font-weight:500;color:var(--ink-3);letter-spacing:0}
 .price p{font-size:14.5px;color:var(--ink-2)}
 .price .textbtn{margin-top:auto}
 .pnote{font-size:14px;color:var(--ink-3);margin-top:18px}
 .pnote a{color:var(--accent);font-weight:600}
-@media (max-width:1080px){.prices{grid-template-columns:1fr 1fr}}
+@media (max-width:1180px){.prices{grid-template-columns:repeat(3,1fr)}}@media (max-width:1080px){.prices{grid-template-columns:1fr 1fr}}
 @media (max-width:680px){.prices{grid-template-columns:1fr}.founder{font-size:12.5px}}
 .post{display:grid;grid-template-columns:300px 1fr;gap:32px;align-items:center;border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:32px;transition:box-shadow .2s,transform .2s}
 .post:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
@@ -970,7 +1016,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
       <div>
         <p class="founder"><span class="fd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span>Founder, SmilesPay Solutions Ltd · Senior software engineer</p>
         <h1>Secure software that runs <span class="hl">your business.</span></h1>
-        <p class="lead">I'm Johnson. I specialise in <strong>fintech, payments and e-commerce</strong>: the systems that move real money. I've spent six years building them for banks and fintechs, and through SmilesPay Solutions I build them for growing businesses too.</p>
+        <p class="lead">I'm Johnson. I specialise in <strong>fintech, payments, e-commerce and practical AI</strong>: the systems that move real money and save real time. I've spent six years building them for banks and fintechs, and through SmilesPay Solutions I build them for growing businesses too.</p>
         <div class="ctas">
           <a class="btn btn-primary" href="#contact">Start a project <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m9 6 6 6-6 6"/></svg></a>
           <a class="btn btn-white" href="#services"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Explore my services</a>
@@ -1019,7 +1065,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
   <section class="sec" id="services" style="padding-top:0">
     <div class="wrap">
       <div class="rv"><span class="label">What I do</span><h2>Software engineering, end to end</h2>
-        <p class="sub">Specialist in fintech, payments and e-commerce, with the full journey covered: build, integrate, host, secure and support. Pick an area, then tap any service for details.</p></div>
+        <p class="sub">Specialist in fintech, payments, e-commerce and AI, with the full journey covered: build, integrate, host, secure and support. Pick an area, then tap any service for details.</p></div>
       <div class="focus rv" id="focus">
         <div class="ftabs" id="ftabs"></div>
         <div class="fview" id="fview"><div class="fbg" id="fbg"></div><div class="grid-bg"></div><div id="fviewIn" style="display:flex;flex-direction:column;flex:1"></div></div>
@@ -1146,6 +1192,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
         <details><summary>How much will my project cost?</summary><p>Every project gets a fixed quote after a short scope call, broken into milestones. You see the full price before any work starts, and you pay as milestones are delivered, not all upfront.</p></details>
         <details><summary>How long does it take?</summary><p>It depends on scope. After our call you get a written timeline with dated milestones, plus regular demo links so you can see it taking shape.</p></details>
         <details><summary>Can you build the whole website, not just the backend?</summary><p>Yes. I deliver complete web applications end to end. My specialty is the hard part underneath: payments, security, data and integrations that have to work every time.</p></details>
+        <details><summary>Can you add AI to my business?</summary><p>Yes, where it genuinely saves time or wins sales: a customer-support assistant on your website or WhatsApp, reading invoices and documents automatically, or a private assistant for your team's knowledge. Your data stays private, the assistant only answers from information you approve, and it hands over to a human when it isn't sure. Try the AI shopping assistant in my demo store to see one working.</p></details>
         <details><summary>Can you take over or fix an existing product?</summary><p>Yes. I start with an audit of the code and production logs, tell you plainly what's wrong, then fix it in priority order.</p></details>
         <details><summary>Which payment providers can you integrate?</summary><p>I've integrated NIP inter-bank transfers, CoralPay, bank bulk-payment APIs, identity-verification providers and core banking systems. For online stores I integrate the payment gateway that fits your market and customers.</p></details>
         <details><summary>Are you a registered company?</summary><p id="faqReg">Yes. SmilesPay Solutions Ltd is a private limited company registered with the Corporate Affairs Commission (CAC) in Nigeria. You get proper invoices and a written contract with the company.</p></details>
@@ -1304,7 +1351,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[k]||ICON_PATHS.web}</svg>`;
   const pic = (u, w) => !u ? "" : /images\.unsplash\.com/.test(u) ? `${u}?w=${w}&q=72&auto=format&fit=crop` : u;
-  const CAT_ICON = {"Fintech":"card","E-commerce":"cart","SaaS":"layers","Logistics":"flow","SME Tools":"data","Web":"web"};
+  const CAT_ICON = {"AI":"ai","Fintech":"card","E-commerce":"cart","SaaS":"layers","Logistics":"flow","SME Tools":"data","Web":"web"};
   const chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>';
   const groups = [...new Set(SERVICES.map(s => s.group))];
 
@@ -1340,7 +1387,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
   sdlg.addEventListener("click", e => {
     const p = e.target.closest("[data-pick]"); if (p) $('#brief select[name="type"]').value = p.dataset.pick;
     if (e.target === sdlg || e.target.closest("[data-close]")) sdlg.close(); });
-  const PRICE_MAP = {"Online store":"Online stores and marketplaces","Business web app":"Custom web applications","Fintech and payments":"Fintech and banking systems","Support and maintenance":"Rescue, maintenance and support"};
+  const PRICE_MAP = {"Online store":"Online stores and marketplaces","Business web app":"Custom web applications","Fintech and payments":"Fintech and banking systems","Support and maintenance":"Rescue, maintenance and support","AI assistant or automation":"AI customer support assistants"};
   document.addEventListener("click", e => { const q = e.target.closest("[data-pick-type]"); if (q && PRICE_MAP[q.dataset.pickType]) $('#brief select[name="type"]').value = PRICE_MAP[q.dataset.pickType]; });
   document.addEventListener("click", e => { const a = e.target.closest("[data-svc]"); if (!a) return; e.preventDefault(); openSvc(a.dataset.svc); });
   if (typeof PRICING !== "undefined" && PRICING.length){

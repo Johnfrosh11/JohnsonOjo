@@ -170,6 +170,38 @@ footer a{font-weight:700;color:var(--indigo)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 @media (max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.hero .art{min-height:160px}.pd,.ck{grid-template-columns:1fr}.ck .s{border-left:0;border-top:1px solid var(--line)}}
 @media (max-width:680px){.grid{grid-template-columns:1fr 1fr;gap:12px}.bar{flex-wrap:wrap;height:auto;padding:12px 0;gap:10px}.search{order:3;flex-basis:100%;max-width:none}.hero .t{padding:30px 24px}.nav .lbl{display:none}.two,.kpis{grid-template-columns:1fr}.card .b{padding:12px}.card h3{font-size:14.5px}}
+/* AI assistant */
+.ai-fab{position:fixed;right:20px;bottom:20px;z-index:40;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#6d28d9,#1e3a8a);color:#fff;border:0;border-radius:999px;padding:12px 18px 12px 12px;font-weight:700;box-shadow:0 14px 34px rgba(30,58,138,.35)}
+.ai-fab .o{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.ai-fab svg{width:20px;height:20px}
+.ai-fab .pulse{position:absolute;top:6px;left:38px;width:10px;height:10px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px #1e3a8a}
+.ai{position:fixed;right:20px;bottom:20px;z-index:80;width:min(400px,calc(100% - 24px));height:min(640px,calc(100vh - 40px));background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(15,23,42,.3);display:flex;flex-direction:column;overflow:hidden;transform:translateY(16px) scale(.98);opacity:0;visibility:hidden;transition:.22s}
+.ai.on{transform:none;opacity:1;visibility:visible}
+.ai-h{background:linear-gradient(135deg,#6d28d9,#1e3a8a);color:#fff;padding:16px 16px 14px;display:flex;gap:12px;align-items:center}
+.ai-h .av{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;flex:none}
+.ai-h .av svg{width:22px;height:22px}
+.ai-h b{display:block;font-size:16px}.ai-h small{color:#ddd6fe;font-size:12.5px;display:flex;gap:6px;align-items:center}
+.ai-h small i{width:8px;height:8px;border-radius:50%;background:#4ade80}
+.ai-h .x{margin-left:auto;background:rgba(255,255,255,.15);border:0;color:#fff}
+.ai-b{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f8fafc}
+.msg{max-width:88%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.45;white-space:pre-line}
+.msg.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.me{background:#1e3a8a;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.typing{display:inline-flex;gap:4px}.typing i{width:7px;height:7px;border-radius:50%;background:#94a3b8;animation:bl 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,80%,100%{opacity:.3}40%{opacity:1}}
+.pcards{display:grid;gap:8px;align-self:stretch}
+.pc{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px}
+.pc .th{width:52px;height:52px;border-radius:10px;overflow:hidden}.pc .th svg{width:100%;height:100%;display:block}
+.pc b{font-size:13.5px;line-height:1.3;display:block}.pc span{font-size:13px;color:var(--ink-2)}
+.pc button{border:0;background:#1e3a8a;color:#fff;font-weight:700;font-size:13px;border-radius:9px;padding:8px 10px}
+.sugs{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px 0;background:#fff;border-top:1px solid var(--line)}
+.sugs button{border:1px solid #c7d2fe;background:#eef2ff;color:#3730a3;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:600}
+.ai-f{display:flex;gap:8px;padding:10px 12px 12px;background:#fff}
+.ai-f input{flex:1;height:44px;border-radius:999px;padding:0 16px}
+.ai-f button{width:44px;height:44px;border-radius:50%;border:0;background:#1e3a8a;color:#fff;display:grid;place-items:center;flex:none}
+.ai-f button svg{width:18px;height:18px}
+.ai-note{font-size:11.5px;color:var(--ink-3);text-align:center;padding:0 12px 10px;background:#fff}
+@media (max-width:680px){.ai{right:0;bottom:0;width:100%;height:100%;border-radius:0}.ai-fab .t{display:none}.ai-fab{padding:12px}}
 </style>
 </head>
 <body>
@@ -206,6 +238,14 @@ footer a{font-weight:700;color:var(--indigo)}
 </aside>
 <div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
 <div class="toast" id="toast"></div>
+<button class="ai-fab" id="aiFab" aria-label="Chat with our shopping assistant"><span class="o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></span><span class="pulse"></span><span class="t">Ask our AI assistant</span></button>
+<section class="ai" id="ai" aria-label="AI shopping assistant">
+  <div class="ai-h"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span><span><b>Ada, shopping assistant</b><small><i></i>Online · replies instantly</small></span><button class="x" id="aiX" aria-label="Close assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="ai-b" id="aiB" aria-live="polite"></div>
+  <div class="sugs" id="aiS"></div>
+  <form class="ai-f" id="aiF"><input id="aiI" placeholder="Ask about products, delivery, orders…" autocomplete="off" aria-label="Message"><button aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></form>
+  <p class="ai-note">Demo assistant running in your browser. Client versions use an AI model on your own data.</p>
+</section>
 
 <script>
 (function(){
@@ -379,6 +419,86 @@ footer a{font-weight:700;color:var(--indigo)}
     const c = $("#clr"); if (c) c.onclick = () => { store.set("orders", []); admin(); };
   }
   $("#adminBtn").onclick = admin;
+
+  /* ===== AI shopping assistant (demo: runs fully in the browser) ===== */
+  const AREAS = { island:["lekki","ajah","vi","victoria island","ikoyi","island","chevron","sangotedo","oniru"], mainland:["yaba","ikeja","surulere","mainland","gbagada","maryland","ogba","ikorodu","festac","oshodi","agege","magodo","ojota","ketu"],
+    abuja:["abuja","fct","wuse","garki","maitama","gwarinpa","kubwa"], pickup:["pickup","pick up","pick-up","collect"] };
+  const STATES = ["ibadan","oyo","ogun","abeokuta","port harcourt","rivers","enugu","kano","kaduna","benin","edo","delta","warri","asaba","owerri","imo","calabar","uyo","jos","ilorin","akure","ondo","osun","ekiti","anambra","onitsha","awka","kogi","kwara","sokoto","bauchi","plateau"];
+  const SYN = { kaftan:["kaftan","caftan","kaftans"], shirt:["shirt","shirts","top"], fabric:["fabric","fabrics","material","yards","adire","kampala","ankara"], hat:["hat","cap"], bag:["bag","tote","handbag"],
+    pillow:["pillow","cushion"], wrap:["wrap","gele","head wrap","headwrap","scarf"], agbada:["agbada","owambe","wedding","native","senator"], home:["home","decor","table","coaster","runner","pillow"], gift:["gift","present"] };
+  const ai = { open:false, started:false };
+  const B = $("#aiB");
+  function say(html, who="bot"){ const d = document.createElement("div"); d.className = "msg " + who; d.innerHTML = html; B.append(d); B.scrollTop = B.scrollHeight; return d; }
+  function cards(list){ const d = document.createElement("div"); d.className = "pcards";
+    d.innerHTML = list.map(p => `<div class="pc"><div class="th">${art(p,"ai"+p.id+Math.random().toString(36).slice(2,5))}</div><div><b>${esc(p.name)}</b><span>${N(p.price)}${p.sizes.length>1 ? " · sizes " + p.sizes.join(", ") : ""}</span></div><button data-aiadd="${p.id}">${p.sizes.length>1 ? "View" : "Add"}</button></div>`).join("");
+    B.append(d); B.scrollTop = B.scrollHeight; }
+  function sugs(list){ $("#aiS").innerHTML = list.map(t => `<button type="button">${esc(t)}</button>`).join(""); }
+  function money(t){ const m = t.replace(/,/g,"").match(/(?:₦|n|naira\s*)?(\d+(?:\.\d+)?)\s*(k|thousand)?/i); if (!m) return null; let v = parseFloat(m[1]); if (m[2]) v *= 1000; return v >= 500 ? v : null; }
+  function reply(raw){
+    const t = " " + raw.toLowerCase().replace(/[?!.]/g," ") + " ";
+    const has = arr => arr.some(w => t.includes(" " + w + " ") || t.includes(" " + w + "s ") || (w.includes(" ") && t.includes(w)));
+    const ord = raw.toUpperCase().match(/AD-[A-Z0-9]{4,8}/);
+    if (ord){ const o = store.get("orders", []).find(x => x.no === ord[0]);
+      if (!o) return [`I couldn't find order <b>${esc(ord[0])}</b>. Please check the number in your confirmation message.`, null, ["Talk to a human","Show bestsellers"]];
+      const mins = (Date.now()-o.at)/60000, st = mins<2 ? "confirmed and being prepared" : mins<10 ? "packed and waiting for the rider" : mins<60 ? "out for delivery" : "delivered";
+      return [`Order <b>${o.no}</b> for ${esc(o.name.split(" ")[0])} is <b>${st}</b>.\nDelivery: ${esc(o.zone)} · Total ${N(o.total)}`, null, ["Delivery fees","Returns policy"]]; }
+    if (has(["track","order status","where is my order","my order"])){ const last = store.get("orders", [])[0];
+      return [last ? `Sure! Your latest order is <b>${last.no}</b>. Send me the order number to check its status, or tap it below.` : "Send me your order number (it looks like AD-XXXXXX) and I'll check it for you.", null, last ? [last.no] : ["Show bestsellers"]]; }
+    if (has(["hi","hello","hey","good morning","good afternoon","good evening","howfa","how far"]) && t.trim().split(" ").length <= 4)
+      return ["Hello! 👋 I'm Ada. I can help you find something, check delivery fees or track an order. What are you looking for today?", null, ["Kaftans under 50k","Delivery to Lekki","Gift ideas"]];
+    if (has(["human","agent","person","customer care","call","whatsapp","speak to"]))
+      return ["No problem. In a live store I'd pass this chat, with everything you've told me, to the team on WhatsApp so you don't repeat yourself. 🙂\nOur team is available Mon–Sat, 9am–6pm.", null, ["Delivery fees","Show bestsellers"]];
+    if (has(["return","refund","exchange","change size"]))
+      return ["You can return or exchange unworn items within <b>7 days</b> of delivery. Custom-made agbada sets can't be returned, but we'll fix any fitting issues free.", null, ["Delivery fees","Payment options"]];
+    if (has(["pay","payment","transfer","card","ussd","pay on delivery","cash"]))
+      return ["You can pay by <b>card, bank transfer or USSD</b> at checkout. <b>Pay on delivery</b> is available within Lagos.", null, ["Delivery fees","Show bestsellers"]];
+    if (has(["size","sizes","measurement","fit","custom"]))
+      return ["Clothing comes in S to XL (some up to XXL). The Ankara Fusion Agbada Set can be made to your measurements: choose <b>Custom</b> and we'll contact you.", null, ["Show clothing","Returns policy"]];
+    let zone = null, place = "";
+    const hit = ws => ws.find(w => t.includes(" " + w + " ") || (w.includes(" ") && t.includes(w)));
+    for (const [z, words] of Object.entries(AREAS)){ const w = hit(words); if (w){ zone = z; place = w; } }
+    if (!zone){ const w = hit(STATES); if (w){ zone = "states"; place = w; } }
+    const cap = w => w.replace(/\b\w/g, c => c.toUpperCase()).replace(/^Vi$/,"VI").replace(/^Fct$/,"FCT");
+    if (zone || has(["delivery","deliver","shipping","ship","how long"])){
+      if (!zone) return ["Where should we deliver to? Tell me your area or state, like <i>Yaba</i>, <i>Lekki</i>, <i>Abuja</i> or <i>Ibadan</i>.", null, ["Lekki","Ikeja","Abuja","Port Harcourt"]];
+      const z = ZONES.find(x => x.id === zone);
+      return [z.id === "pickup" ? "You can pick up for <b>free</b> at our Yaba store, usually the same day you order." : `Delivery to <b>${esc(place && !["island","mainland","abuja"].includes(place) ? cap(place) + " (" + z.name + ")" : z.name)}</b> costs <b>${N(z.fee)}</b> and takes about <b>${esc(z.eta)}</b>.`, null, ["Show bestsellers","Payment options"]]; }
+    // product search
+    const max = /(under|below|less than|max|not more than|budget|within)/.test(t) ? money(t) : null;
+    const min = /(above|over|more than|from)/.test(t) && !max ? money(t) : null;
+    let list = PRODUCTS.slice(), matched = false;
+    for (const [k, words] of Object.entries(SYN)) if (has(words)){ matched = true;
+      list = list.filter(p => { const h = (p.name + " " + p.cat + " " + p.desc).toLowerCase();
+        return k==="home" ? p.cat==="Home" : k==="gift" ? p.price <= 15000 : k==="fabric" ? p.cat==="Fabrics" : words.some(w => h.includes(w.replace(/s$/,""))); }); }
+    for (const c of ["clothing","accessories","fabrics"]) if (t.includes(c.slice(0,-1))){ matched = true; list = list.filter(p => p.cat.toLowerCase() === c); }
+    if (has(["bestseller","popular","best","trending","new","more"])){ matched = true; list = list.slice().sort((a,b) => b.price - a.price).slice(0,4); }
+    if (has(["cheap","cheapest","affordable","lowest"])){ matched = true; list = list.slice().sort((a,b) => a.price - b.price).slice(0,4); }
+    for (const col of ["blue","indigo","green","purple","orange","red","navy"]) if (t.includes(col)){ matched = true;
+      const map = {blue:["#1e3a8a","#1e40af","#075985","#172554","#3730a3"],indigo:["#1e3a8a","#3730a3","#1e1b4b","#172554"],green:["#065f46","#0f766e"],purple:["#4c1d95","#1e1b4b"],orange:["#9a3412","#7c2d12"],red:["#9a3412","#7c2d12"],navy:["#172554","#1e1b4b"]};
+      list = list.filter(p => map[col].includes(p.pal[0])); }
+    if (max){ matched = true; list = list.filter(p => p.price <= max); }
+    if (min){ matched = true; list = list.filter(p => p.price >= min); }
+    if (matched){
+      if (!list.length) return [`I couldn't find anything matching that${max ? " under " + N(max) : ""}. Here are some popular picks instead:`, PRODUCTS.slice(0,3), ["Cheapest items","Show fabrics"]];
+      const show = list.slice(0,4);
+      return [`Here ${show.length === 1 ? "is 1 option" : "are " + show.length + " options"}${max ? " under " + N(max) : ""}${list.length > 4 ? " (showing the top 4)" : ""}:`, show, ["Delivery fees","Returns policy","Gift ideas"]]; }
+    return ["I'm not sure I got that. I can help with <b>products</b> (e.g. <i>kaftans under 50k</i>), <b>delivery fees</b>, <b>payments</b>, <b>returns</b> or <b>tracking an order</b>.", null, ["Kaftans under 50k","Delivery to Ikeja","Talk to a human"]];
+  }
+  function ask(text){
+    text = text.trim(); if (!text) return; say(esc(text), "me"); $("#aiS").innerHTML = "";
+    const typing = say('<span class="typing"><i></i><i></i><i></i></span>');
+    setTimeout(() => { typing.remove(); const [msg, list, next] = reply(text); say(msg); if (list) cards(list); if (next) sugs(next); }, 650 + Math.min(900, text.length * 18));
+  }
+  function openAI(){ $("#ai").classList.add("on"); $("#aiFab").style.display = "none"; ai.open = true;
+    if (!ai.started){ ai.started = true; say("Hi, I'm Ada 👋 I can find products, quote delivery to your area, and track your order. What can I help you with?"); sugs(["Kaftans under 50k","Delivery to Lekki","Gift ideas under 15k","Track my order"]); }
+    setTimeout(() => $("#aiI").focus(), 200); }
+  $("#aiFab").onclick = openAI;
+  $("#aiX").onclick = () => { $("#ai").classList.remove("on"); $("#aiFab").style.display = ""; };
+  $("#aiF").onsubmit = e => { e.preventDefault(); ask($("#aiI").value); $("#aiI").value = ""; };
+  $("#aiS").onclick = e => { const b = e.target.closest("button"); if (b) ask(b.textContent); };
+  B.onclick = e => { const b = e.target.closest("[data-aiadd]"); if (!b) return; const p = PRODUCTS.find(x => x.id === +b.dataset.aiadd);
+    if (p.sizes.length > 1){ view(p.id); return; } add(p.id, p.sizes[0] || ""); say(`Added <b>${esc(p.name)}</b> to your cart 🛒`); sugs(["Delivery fees","Payment options","Show more"]); };
+  if (/[?&]assistant=1/.test(location.search)) setTimeout(openAI, 500);
 
   drawGrid(); drawCart();
 })();
