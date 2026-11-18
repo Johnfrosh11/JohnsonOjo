@@ -344,7 +344,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .on-dark .label::before{box-shadow:0 0 0 4px var(--dark),0 0 0 5.5px var(--accent)}
 h2{font-size:clamp(30px,3.6vw,46px);line-height:1.12;letter-spacing:-.025em;font-weight:700}
 .sub{color:var(--ink-2);font-size:17.5px;max-width:40em;margin-top:16px}
-.sec{padding:110px 0;position:relative}
+.sec{padding:84px 0;position:relative}
 .center{text-align:center}.center .sub{margin-left:auto;margin-right:auto}
 
 /* utility bar */
@@ -394,7 +394,7 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(11,18
 .hero .waves{position:absolute;inset:0;z-index:-1;opacity:.35}
 .hero::after{content:"";position:absolute;z-index:-1;width:900px;height:900px;right:-200px;top:-300px;border-radius:50%;
   background:radial-gradient(circle,color-mix(in srgb,var(--accent) 45%,transparent),transparent 62%);opacity:.55}
-.hero-in{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center;min-height:min(720px,calc(100vh - 116px));padding:80px 0}
+.hero-in{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center;min-height:min(640px,calc(100vh - 116px));padding:64px 0}
 .hero h1{font-size:clamp(42px,5.4vw,72px);line-height:1.06;letter-spacing:-.035em;font-weight:700;margin-bottom:26px}
 .hero h1 .hl{color:var(--accent);filter:brightness(1.25)}
 .hero p.lead{font-size:clamp(17.5px,1.5vw,19.5px);color:#c6cfdd;max-width:34em;margin-bottom:38px}
@@ -471,8 +471,14 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(11,18
 .ftab.on .bar i{animation:fill var(--dur,7s) linear forwards}
 .focus:hover .ftab.on .bar i{animation-play-state:paused}
 @keyframes fill{to{width:100%}}
+.fcard{cursor:pointer}
+.more{display:flex;justify-content:center;margin-top:24px}
+.sic{width:52px;height:52px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin:18px 0 14px}
+.sic svg{width:26px;height:26px}
+.stg{display:flex;flex-wrap:wrap;gap:8px}
+.stg span{font-size:14px;font-weight:500;padding:6px 12px;border-radius:8px;background:var(--surface)}
 .fview{border-radius:24px;overflow:hidden;position:relative;background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--accent) 55%,#0a0f1a) 0%,#0a0f1a 60%);
-  color:#fff;padding:36px;display:flex;flex-direction:column;min-height:460px;isolation:isolate}
+  color:#fff;padding:36px;display:flex;flex-direction:column;min-height:420px;isolation:isolate}
 .fview .grid-bg{position:absolute;inset:0;z-index:-1;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:44px 44px;
   mask-image:radial-gradient(circle at 70% 20%,#000,transparent 75%);-webkit-mask-image:radial-gradient(circle at 70% 20%,#000,transparent 75%)}
 .fview h3{font-size:14px;font-weight:600;color:#9fb6ff;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
@@ -519,7 +525,7 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(11,18
 .eco{border-radius:24px;overflow:hidden;position:relative;background:#0c111b;color:#fff;isolation:isolate}
 .eco .glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 90% at 85% 10%,color-mix(in srgb,var(--accent) 60%,transparent),transparent 70%),radial-gradient(50% 70% at 0% 100%,rgba(255,255,255,.08),transparent 70%)}
 .eco .grid-bg{position:absolute;inset:0;z-index:-1;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:56px 56px}
-.eco .in{padding:96px 96px 80px}
+.eco .in{padding:64px 80px 52px}
 .eco .label{color:#8fb0ff}
 .eco h2{max-width:13em}
 .eco .sub{color:#b8c2d4}
@@ -546,7 +552,7 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(11,18
 .empty{padding:48px 0;color:var(--ink-3)}
 
 /* success stories */
-.stories{position:relative;height:500px;margin-top:20px}
+.stories{position:relative;height:430px;margin-top:0}
 .stories svg.net{position:absolute;inset:0;width:100%;height:100%;color:var(--ink-3)}
 .node{position:absolute;transform:translate(-50%,-50%);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;
   box-shadow:var(--shadow);white-space:nowrap;color:var(--ink)}
@@ -567,14 +573,14 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(11,18
 .cgrid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px;isolation:isolate}
 .cgrid::before{content:"";position:absolute;z-index:-1;left:calc(-50vw + 50%);right:calc(-50vw + 50%);top:22%;bottom:12%;
   background:linear-gradient(100deg,#05070c 0%,#0e1b3d 38%,var(--accent) 100%);clip-path:polygon(0 62%,100% 0,100% 72%,0 100%)}
-.stat{background:var(--bg);border:2px solid var(--accent);border-radius:6px;padding:26px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
+.stat{background:var(--bg);border:2px solid var(--accent);border-radius:6px;padding:24px;min-height:210px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
 .stat .si{align-self:flex-end;width:54px;height:54px;color:var(--ink)}
 .stat b{font-size:clamp(42px,4.4vw,56px);font-weight:700;color:var(--accent);letter-spacing:-.03em;line-height:1}
 .stat span{display:block;font-size:16px;margin-top:6px;font-weight:500}
 .ctext{grid-column:span 2;align-self:center;padding:0 0 0 16px;border-left:3px solid var(--accent)}
 .ctext h3{font-size:clamp(24px,2.6vw,32px);line-height:1.2;letter-spacing:-.02em;margin-bottom:12px}
 .ctext p{color:var(--ink-2);font-size:16px;max-width:32em}
-.cphoto{border-radius:6px;overflow:hidden;min-height:340px;box-shadow:var(--shadow-lg);background:#1b2436;grid-row:span 1}
+.cphoto{border-radius:6px;overflow:hidden;min-height:280px;box-shadow:var(--shadow-lg);background:#1b2436;grid-row:span 1}
 .cphoto img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 
 /* process */
@@ -606,7 +612,7 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(11,18
 .tests small{color:var(--ink-2);font-size:14px}
 
 /* launch cta */
-.launch{border-radius:24px;overflow:hidden;position:relative;background:#000;color:#fff;padding:90px 96px;min-height:360px;display:flex;align-items:center;isolation:isolate}
+.launch{border-radius:24px;overflow:hidden;position:relative;background:#000;color:#fff;padding:64px 80px;min-height:300px;display:flex;align-items:center;isolation:isolate}
 .stars{position:absolute;inset:0;z-index:-1}
 .launch h2{margin-bottom:14px}
 .launch p{color:#c9d1de;max-width:28em;margin-bottom:30px}
@@ -744,14 +750,19 @@ dialog.case[open]{animation:pop .22s ease-out}
   .wrap{padding-left:18px;padding-right:18px}
   .util .l .hide-s{display:none}
   .nav{height:68px}
-  .sec{padding:80px 0}
+  .sec{padding:60px 0}
   .hero h1{font-size:40px}
   .chip.c1{left:-8px;bottom:22px}
   .chip.c2{right:-6px;top:18px}
   .built .wrap{height:auto;padding:22px 18px;flex-direction:column;align-items:flex-start;gap:12px}
   .marq{width:100%}
   .svc-grid,.promises,.steps,.brief,.fgrid{grid-template-columns:1fr}
-  .fcards{grid-template-columns:1fr}
+  .fcards{grid-template-columns:1fr 1fr;gap:10px}
+  .fcard{padding:14px}
+  .fcard span:not(.ic){display:none}
+  .fcard .ic{width:32px;height:32px;margin-bottom:10px}
+  .fcard b{font-size:14px}
+  .fview h3{margin-bottom:14px}
   .fview .big{display:none}
   .fview{padding:26px;min-height:0}
   .eco .in{padding:48px 24px 40px}
@@ -862,32 +873,16 @@ dialog.case[open]{animation:pop .22s ease-out}
     </div>
   </section>
 
-  <!-- FOCUS -->
-  <section class="sec" style="padding-top:0">
+  <!-- SERVICES (focus accordion) -->
+  <section class="sec" id="services" style="padding-top:0">
     <div class="wrap">
-      <div class="rv"><span class="label">My focus</span><h2>Accelerate your digital product</h2>
-        <p class="sub">Whether you're launching something new or fixing what's slowing you down, I cover the full journey: build, integrate, scale and secure.</p></div>
+      <div class="rv"><span class="label">What I do</span><h2>Software engineering, end to end</h2>
+        <p class="sub">15 services across the full journey: build, integrate, scale and secure. Pick an area, then tap any service for details.</p></div>
       <div class="focus rv" id="focus">
         <div class="ftabs" id="ftabs"></div>
         <div class="fview" id="fview"><div class="grid-bg"></div><div id="fviewIn" style="display:flex;flex-direction:column;flex:1"></div></div>
       </div>
-    </div>
-  </section>
-
-  <!-- SERVICES CATALOGUE -->
-  <section class="sec" id="services" style="padding-top:0">
-    <div class="wrap">
-      <div class="rv"><span class="label">What I do</span><h2>Software engineering, end to end</h2>
-        <p class="sub">From a first idea to a secure, live product, and the support that keeps it running. Fixed-scope projects with a written quote and clear milestones.</p></div>
-      <div class="tabs" id="svcTabs" role="tablist"></div>
-      <div class="svc-grid" id="svcGrid"></div>
       <div class="inds rv"><span class="lb">Industries I build for</span><div class="chips" id="inds"></div></div>
-      <div class="promises rv">
-        <div><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>You talk to me</h4><p>The person writing your code, not an account manager.</p></div>
-        <div><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Security built in</h4><p>Encryption, audit trails and access control from day one.</p></div>
-        <div><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>No surprise invoices</h4><p>A fixed quote and milestone payments, agreed upfront.</p></div>
-        <div><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Proper handover</h4><p>Clean code and documentation so you're never stuck.</p></div>
-      </div>
     </div>
   </section>
 
@@ -909,6 +904,7 @@ dialog.case[open]{animation:pop .22s ease-out}
         <p class="sub">Banking work is under NDA, so some names are general. The scope and results are real.</p></div>
       <div class="tabs" id="tabs" role="tablist"></div>
       <div class="rows" id="rows"></div>
+      <div class="more"><button class="btn btn-line btn-sm" id="moreWork" hidden></button></div>
     </div>
   </section>
 
@@ -969,11 +965,10 @@ dialog.case[open]{animation:pop .22s ease-out}
         <p>I started out in IT support, which taught me that <strong>the job isn't done until the person using it is happy</strong>. So I explain things in plain language, show progress early and document everything. I'm based in Lagos and work with clients anywhere.</p>
       </div>
       <div class="rv">
-        <div class="side"><h3>Experience</h3><ul class="xp" id="xpList"></ul></div>
+        <div class="side"><h3>Experience</h3><ul class="xp" id="xpList"></ul><button class="textbtn" id="moreXp" style="margin-top:12px">Show full history</button></div>
         <div class="side"><h3>Education</h3>
           <ul class="xp"><li><div><b>B.Sc. Computer Science</b><small>Adekunle Ajasin University, Akungba Akoko, Ondo State</small></div><span>2016–2021</span></li></ul></div>
-        <div class="side"><h3>Tools I use</h3>
-          <div class="chips"><span>C#</span><span>ASP.NET Core</span><span>.NET 9</span><span>EF Core</span><span>SQL Server</span><span>PostgreSQL</span><span>MySQL</span><span>Redis</span><span>Kafka</span><span>Azure</span><span>Docker</span><span>Azure DevOps</span><span>Microservices</span><span>REST APIs</span></div></div>
+
       </div>
     </div>
   </section>
@@ -1084,6 +1079,7 @@ dialog.case[open]{animation:pop .22s ease-out}
 <button class="fab top" id="toTop" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <a class="fab wa" id="waFloat" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5v-.5c0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.8.6-.1 1.8-.7 2-1.5.2-.7.2-1.3.2-1.5-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8m8.4-18.2A11.8 11.8 0 0 0 1.7 17.9L0 24l6.3-1.7A11.8 11.8 0 0 0 23.8 12c0-3.2-1.2-6.1-3.4-8.4"/></svg></a>
 
+<dialog class="case" id="svcDlg" aria-label="Service details"><div class="case-in" id="svcBody"></div></dialog>
 <dialog class="case" id="caseDlg" aria-labelledby="caseTitle"><div class="case-in" id="caseBody"></div></dialog>
 
 <script>
@@ -1171,22 +1167,24 @@ dialog.case[open]{animation:pop .22s ease-out}
   $("#burger").onclick = () => $("#mob").classList.toggle("open");
   $$("#mob a").forEach(a => a.addEventListener("click", () => $("#mob").classList.remove("open")));
 
-  /* service catalogue */
-  let sActive = "All";
-  function drawSvc(){
-    $("#svcTabs").innerHTML = ["All", ...groups].map(g => `<button role="tab" aria-selected="${g===sActive}" class="${g===sActive?"on":""}" data-g="${esc(g)}">${esc(g)}</button>`).join("");
-    $("#svcGrid").innerHTML = SERVICES.filter(s => sActive==="All" || s.group===sActive).map(s => `
-      <article class="scard" id="svc-${esc(slug(s.title))}"><div class="ic">${icon(s.icon)}</div><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p>
-        <div class="tg">${(s.tags||[]).map(t => `<span>${esc(t)}</span>`).join("")}</div></article>`).join("");
+  /* service details dialog (opened from focus cards, mega menu, mobile menu) */
+  const sdlg = $("#svcDlg");
+  function openSvc(id){
+    const sv = SERVICES.find(x => slug(x.title) === id); if (!sv) return; openDD(false);
+    $("#svcBody").innerHTML = `
+      <div class="case-top"><span class="cat">${esc(sv.group)}</span>
+        <button class="xbtn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="sic">${icon(sv.icon)}</div>
+      <h3>${esc(sv.title)}</h3>
+      <p>${esc(sv.desc)}</p>
+      <h4>Includes</h4><div class="stg">${(sv.tags||[]).map(t => `<span>${esc(t)}</span>`).join("")}</div>
+      <div class="case-cta"><span style="color:var(--ink-2)">Fixed quote, clear milestones.</span><a class="btn btn-primary btn-sm" href="#contact" data-close data-pick="${esc(sv.title)}">Start this project</a></div>`;
+    sdlg.showModal();
   }
-  $("#svcTabs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; sActive = b.dataset.g; drawSvc(); });
-  drawSvc();
-  function goSvc(id, g){
-    sActive = g || "All"; drawSvc(); openDD(false);
-    const el = document.getElementById("svc-" + id); if (!el) return;
-    setTimeout(() => { el.scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"center"}); el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1800); }, 30);
-  }
-  document.addEventListener("click", e => { const a = e.target.closest("[data-svc]"); if (!a) return; e.preventDefault(); goSvc(a.dataset.svc, a.dataset.g); });
+  sdlg.addEventListener("click", e => {
+    const p = e.target.closest("[data-pick]"); if (p) $('#brief select[name="type"]').value = p.dataset.pick;
+    if (e.target === sdlg || e.target.closest("[data-close]")) sdlg.close(); });
+  document.addEventListener("click", e => { const a = e.target.closest("[data-svc]"); if (!a) return; e.preventDefault(); openSvc(a.dataset.svc); });
   $("#inds").innerHTML = INDUSTRIES.map(i => `<span>${esc(i)}</span>`).join("");
 
   /* focus accordion (auto-rotates, pauses on hover) */
@@ -1199,7 +1197,7 @@ dialog.case[open]{animation:pop .22s ease-out}
     const g = groups[fi], list = SERVICES.filter(s => s.group===g);
     $("#fviewIn").innerHTML = `<div class="swap" style="display:flex;flex-direction:column;flex:1"><h3>${esc(g)} · ${list.length} services</h3>
       <p class="big">${esc(FOC[g]||"")}</p>
-      <div class="fcards">${list.map(s => `<button class="fcard" data-svc="${esc(slug(s.title))}" data-g="${esc(g)}"><span class="ic">${icon(s.icon)}</span><b>${esc(s.title)}</b><span>${esc((s.tags||[]).slice(0,2).join(" · "))}</span></button>`).join("")}</div></div>`;
+      <div class="fcards">${list.map(s => `<button class="fcard" data-svc="${esc(slug(s.title))}" data-g="${esc(g)}"><span class="ic">${icon(s.icon)}</span><b>${esc(s.title)}</b><span>${esc((s.tags||[]).slice(0,3).join(" · "))}</span></button>`).join("")}</div></div>`;
   }
   const next = () => { fi = (fi + 1) % groups.length; drawFocus(); };
   const startF = () => { if (reduce) return; clearInterval(fTimer); fTimer = setInterval(next, DUR); };
@@ -1212,9 +1210,12 @@ dialog.case[open]{animation:pop .22s ease-out}
   const cats = ["All", ...new Set(PROJECTS.map(p => p.category))].sort((a,b) => (a==="All"?0:a==="E-commerce"?1:2) - (b==="All"?0:b==="E-commerce"?1:2));
   let active = "All";
   const lock = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+  let showAll = false;
   function drawWork(){
     $("#tabs").innerHTML = cats.map(c => `<button role="tab" aria-selected="${c===active}" class="${c===active?"on":""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
-    const list = PROJECTS.filter(p => active==="All" || p.category===active).sort((a,b) => (b.url?1:0)-(a.url?1:0));
+    const full = PROJECTS.filter(p => active==="All" || p.category===active).sort((a,b) => (b.url?1:0)-(a.url?1:0));
+    const list = showAll ? full : full.slice(0,4);
+    const mb = $("#moreWork"); mb.hidden = full.length <= 4; mb.textContent = showAll ? "Show fewer projects" : `Show all ${full.length} projects`;
     $("#rows").innerHTML = list.length ? list.map(p => `
       <article class="row">
         <div class="cat">${esc(p.category)}</div>
@@ -1227,6 +1228,7 @@ dialog.case[open]{animation:pop .22s ease-out}
       </article>`).join("") : `<p class="empty">No projects in this category yet.</p>`;
   }
   $("#tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; active = b.dataset.c; drawWork(); });
+  $("#moreWork").onclick = () => { showAll = !showAll; drawWork(); if (!showAll) $("#work").scrollIntoView({behavior: reduce ? "auto" : "smooth"}); };
   drawWork();
 
   /* case study dialog */
@@ -1293,7 +1295,10 @@ dialog.case[open]{animation:pop .22s ease-out}
   }
 
   /* experience + certs */
-  $("#xpList").innerHTML = EXPERIENCE.map(x => `<li><div><b>${esc(x.role)}</b><small>${esc(dots(x.org))}</small></div><span>${esc(x.when.replace(" — ","–"))}</span></li>`).join("");
+  let xpAll = false;
+  const drawXp = () => { $("#xpList").innerHTML = (xpAll ? EXPERIENCE : EXPERIENCE.slice(0,4)).map(x => `<li><div><b>${esc(x.role)}</b><small>${esc(dots(x.org))}</small></div><span>${esc(x.when.replace(" — ","–"))}</span></li>`).join("");
+    $("#moreXp").hidden = EXPERIENCE.length <= 4; $("#moreXp").textContent = xpAll ? "Show less" : `Show full history (${EXPERIENCE.length} roles)`; };
+  $("#moreXp").onclick = () => { xpAll = !xpAll; drawXp(); }; drawXp();
   const tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>';
   const order = ["Microsoft Azure Developer Associate","Microsoft DevOps Engineer Expert (AZ-400)","Certified Scrum Developer (CSD)","Google Data Analytics Professional"];
   const certNames = [...order.filter(n => n in CERT_LINKS), ...Object.keys(CERT_LINKS).filter(n => !order.includes(n))];
