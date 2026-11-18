@@ -284,13 +284,12 @@ const FOCUS_IMAGES = {
 const ECOSYSTEM_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b";
 
 /* Starting prices (shown under services). Keep these in line with your proposals. Leave [] to hide. */
-const PRICING = [
-  { name: "Online store", from: "₦1,500,000", note: "Up to 200 products, card/transfer/USSD checkout, delivery zones and an admin dashboard. Live in 4–6 weeks. Growth stores with branches and courier integration from ₦7,500,000." },
-  { name: "AI assistant or automation", from: "₦2,000,000", note: "A website or WhatsApp assistant that knows your products and policies, or document and workflow automation. Live in 3–5 weeks. AI usage fees are billed by the provider." },
-  { name: "Business web app", from: "₦4,000,000", note: "A custom portal, dashboard, HR, inventory or workflow system with user roles and reports. Typically 6–10 weeks." },
-  { name: "Fintech and payments", from: "₦8,000,000", note: "Wallets, transfers, KYC and payment integrations with audit trails and a security review. Typically 10–16 weeks." },
-  { name: "Support and maintenance", from: "₦500,000/mo", note: "Updates, security patches, monitoring, backup checks and fixes for live products. Cancel any time." }
-];
+/* Starting prices: leave [] to keep the price cards hidden (enterprise style).
+   To show them again, paste the list back in, e.g.
+   { name: "Online store", from: "₦1,500,000", note: "..." }, */
+const PRICING = [];
+/* One-line price guide shown under the services. Leave "" to hide it. */
+const PRICE_LINE = "Projects typically start from ₦1.5M. Every quote is fixed, written and paid in milestones.";
 
 /* Analytics: paste ONE id to start counting visitors. Leave "" to switch off.
    Google Analytics 4: "G-XXXXXXXXXX"  ·  Cloudflare Web Analytics: the token from your Cloudflare dashboard */
@@ -948,6 +947,11 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
 .post h3{font-size:24px;letter-spacing:-.02em;line-height:1.25;margin:6px 0 8px}
 .post p{color:var(--ink-2);margin-bottom:12px}
 @media (max-width:680px){.post{grid-template-columns:1fr;gap:16px}.post h3{font-size:20px}}
+.pline{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:22px;padding:16px 20px;border-radius:14px;background:var(--accent-soft);font-size:15.5px}
+.pline .pl-t{font-weight:600;color:var(--ink);margin-right:auto}
+.pline .pl-l{display:flex;gap:22px;flex-wrap:wrap}
+.pline a{color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.pline a svg{width:14px;height:14px}
 </style>
 </head>
 <body>
@@ -994,7 +998,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
         <button aria-expanded="false" aria-controls="mega">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="mega" id="mega"><h4>What I can do for you</h4><div class="mega-cols" id="megaCols"></div></div>
       </div>
-      <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a>
+      <a href="#work">Work</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a>
     </nav>
     <div class="nav-r">
       <a class="btn btn-primary btn-sm" href="#contact">Start a project <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m9 6 6 6-6 6"/></svg></a>
@@ -1003,7 +1007,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
   </div>
   <div class="mob" id="mob"><div class="wrap">
     <div class="sg">Services</div><div class="sl" id="mobSvc"></div>
-    <a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a>
+    <a href="#work">Work</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a>
     <a class="btn btn-primary" href="#contact" style="color:#fff;border:0">Start a project</a>
   </div></div>
 </header>
@@ -1071,6 +1075,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
         <div class="fview" id="fview"><div class="fbg" id="fbg"></div><div class="grid-bg"></div><div id="fviewIn" style="display:flex;flex-direction:column;flex:1"></div></div>
       </div>
       <div class="inds rv"><span class="lb">Industries I build for</span><div class="chips" id="inds"></div></div>
+      <p class="pline rv" id="pline"></p>
     </div>
   </section>
 
@@ -1261,7 +1266,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
 <path transform="translate(326.23 64.00) scale(0.044800000000000006 -0.044800000000000006)" class="lg-s" d="M311 -12Q258 -12 212.0 1.0Q166 14 130.0 37.5Q94 61 70.5 90.0Q47 119 40 151L174 191Q187 157 220.0 132.5Q253 108 303 107Q356 106 389.5 130.0Q423 154 423 192Q423 225 396.5 247.5Q370 270 324 282L233 306Q182 319 143.0 345.5Q104 372 82.0 411.0Q60 450 60 502Q60 601 125.5 656.5Q191 712 311 712Q378 712 428.5 692.5Q479 673 513.0 637.0Q547 601 565 552L432 511Q420 545 388.0 569.0Q356 593 307 593Q257 593 228.5 570.0Q200 547 200 505Q200 472 222.5 453.0Q245 434 284 424L376 401Q466 379 516.0 322.0Q566 265 566 195Q566 133 536.0 86.5Q506 40 449.0 14.0Q392 -12 311 -12Z"/></svg></a>
         <p class="tagline">Secure software for banks, fintechs, online stores and growing businesses. Built in Lagos, delivered worldwide.</p>
       </div>
-      <nav class="flinks" aria-label="Footer"><a href="#services">Services</a><a href="#work">Work</a><a href="#work">Case studies</a><a href="#pricing">Pricing</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a id="fCv" download>Download CV</a></nav>
+      <nav class="flinks" aria-label="Footer"><a href="#services">Services</a><a href="#work">Work</a><a href="#work">Case studies</a><a href="#insights">Insights</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a id="fCv" download>Download CV</a></nav>
       <div class="fsoc">
         <a id="fLi" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
         <a id="fGh" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
@@ -1390,6 +1395,9 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
   const PRICE_MAP = {"Online store":"Online stores and marketplaces","Business web app":"Custom web applications","Fintech and payments":"Fintech and banking systems","Support and maintenance":"Rescue, maintenance and support","AI assistant or automation":"AI customer support assistants"};
   document.addEventListener("click", e => { const q = e.target.closest("[data-pick-type]"); if (q && PRICE_MAP[q.dataset.pickType]) $('#brief select[name="type"]').value = PRICE_MAP[q.dataset.pickType]; });
   document.addEventListener("click", e => { const a = e.target.closest("[data-svc]"); if (!a) return; e.preventDefault(); openSvc(a.dataset.svc); });
+  if (typeof PRICE_LINE !== "undefined" && PRICE_LINE){
+    $("#pline").innerHTML = `<span class="pl-t">${esc(PRICE_LINE)}</span><span class="pl-l"><a href="insights/online-store-cost-nigeria/">What does an online store cost? ${chev}</a><a href="#contact">Get a fixed quote ${chev}</a></span>`;
+  } else $("#pline").remove();
   if (typeof PRICING !== "undefined" && PRICING.length){
     $("#prices").innerHTML = PRICING.map(p => `<div class="price"><h3>${esc(p.name)}</h3><p class="from"><small>from</small>${esc(p.from)}</p><p>${esc(p.note)}</p><a class="textbtn" href="#contact" data-pick-type="${esc(p.name)}">Get a quote ${chev}</a></div>`).join("");
   } else $("#pricing").remove();
