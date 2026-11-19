@@ -841,7 +841,7 @@ dialog.case[open]{animation:pop .22s ease-out}
 @media (max-width:680px){
   body{font-size:16px}
   .wrap{padding-left:18px;padding-right:18px}
-  .util .l .hide-s{display:none}
+  .util .l .hide-s,#uReg{display:none}
   .nav{height:68px}
   .sec{padding:60px 0}
   .hero h1{font-size:40px}
@@ -902,6 +902,7 @@ footer .lg-b{fill:#5b8cff}footer .lg-t{stroke:#5b8cff}
 .reg span{font-size:13px;color:var(--ink-2);line-height:1.35}
 .reg b{display:block;color:var(--ink);font-size:14.5px}
 #uReg{display:inline-flex;gap:7px;align-items:center;font-weight:500;color:var(--ink)}
+@media (max-width:680px){#uReg{display:none}}
 .founder{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:#c6d4f5;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:7px 14px 7px 8px;border-radius:999px;margin-bottom:24px}
 .fd-ic{width:26px;height:26px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff}
 .fd-ic svg{width:15px;height:15px}
@@ -959,8 +960,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
 <div class="util">
   <div class="wrap">
     <div class="l">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="uLoc">Lagos, Nigeria</span></span>
-      <span class="hide-s"><span class="live"></span><span id="availText">Taking on new projects</span></span>
+      <span><span class="live"></span><span id="availText">Taking on new projects</span></span>
       <span class="hide-s" id="uReg"></span>
     </div>
     <button class="switch" id="themeBtn" aria-label="Switch light or dark mode">
@@ -1303,7 +1303,7 @@ i.core{font-style:normal;color:#9fc0ff;font-weight:700}
 
   /* profile */
   document.title = `${P.short} — ${P.role}`;
-  $("#uLoc").textContent = P.location || "Lagos, Nigeria";
+  
   $("#copy").textContent = `© ${new Date().getFullYear()} ${P.company || "SmilesPay Solutions"}${P.rc ? ` · RC ${P.rc}` : ""} · Registered with the Corporate Affairs Commission, Nigeria`;
   if (P.rc){
     $("#uReg").innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>${esc(P.company)} · RC ${esc(P.rc)}`;
